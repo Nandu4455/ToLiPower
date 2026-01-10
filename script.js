@@ -3,12 +3,15 @@
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeToggle');
 const savedTheme = localStorage.getItem('tolipower-theme');
-if (savedTheme) html.setAttribute('data-theme', savedTheme);
+if (savedTheme) {
+  html.setAttribute('data-theme', savedTheme);
+  themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+}
 themeBtn.addEventListener('click', () => {
-  const current = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', current);
-  localStorage.setItem('tolipower-theme', current);
-  themeBtn.textContent = current === 'dark' ? '☀️' : '🌙';
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('tolipower-theme', next);
+  themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
 });
 
 // ===== Mobile Menü =====
@@ -32,7 +35,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 
-// ===== Reveal on Scroll (IntersectionObserver) =====
+// ===== Reveal on Scroll =====
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if (entry.isIntersecting){
@@ -43,9 +46,9 @@ const io = new IntersectionObserver((entries)=>{
 },{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
 
-// ===== Counter Animation, sobald Stats sichtbar sind =====
+// ===== Counter Animation =====
 function animateCounter(el, to, duration=1200){
-  let start = 0; const t0 = performance.now();
+  const t0 = performance.now();
   function tick(t){
     const p = Math.min(1, (t - t0) / duration);
     const val = Math.floor(p * to);
@@ -76,7 +79,7 @@ sendBtn?.addEventListener('click', ()=>{
   }, 800);
 });
 
-// ===== Parallax kleiner Effekt auf Hero-Bild =====
+// ===== Kleiner Parallax-Effekt auf Hero-Bild =====
 const heroImg = document.querySelector('.hero__image img');
 let rafId = null;
 window.addEventListener('scroll', ()=>{
