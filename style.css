@@ -1,23 +1,31 @@
 
-/* ====== Grund-Setup ====== */
+/* ====== Farb- & Spacing-System ====== */
 :root{
-  --bg: #0b1113;
-  --card: #111a1d;
+  --bg: #0b1113;              /* Canvas */
+  --surface: #0f171a;         /* Oberfläche */
+  --glass: rgba(17, 26, 29, .55);
   --text: #e9f1f3;
   --muted:#a6bcc3;
-  --primary:#29c26a;
-  --primary-2:#3fe58a;
-  --accent:#6ae3ff;
-  --shadow: 0 10px 30px rgba(0,0,0,.25);
+  --primary:#29c26a;          /* Grün */
+  --primary-2:#3fe58a;        /* Verlauf */
+  --accent:#6ae3ff;           /* Teal */
+  --ring:#84f5c0;             /* Fokus-Ring */
+  --shadow: 0 10px 30px rgba(0,0,0,.30);
+
+  /* Typo / Layout */
+  --radius: 14px;
+  --s-1: .5rem; --s0: .75rem; --s1: 1rem; --s2: 1.25rem; --s3: 1.6rem; --s4: 2.2rem;
 }
 :root[data-theme="light"]{
   --bg: #f7fbfd;
-  --card: #ffffff;
+  --surface: #ffffff;
+  --glass: rgba(255,255,255, .6);
   --text: #0b1113;
   --muted:#50656c;
   --primary:#199e57;
   --primary-2:#2fcd74;
   --accent:#107da0;
+  --ring:#2fcd74;
 }
 
 *{box-sizing:border-box}
@@ -25,51 +33,57 @@ html,body{height:100%}
 body{
   margin:0;
   font: 16px/1.6 "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: radial-gradient(1200px 800px at 80% -10%, rgba(41,194,106,.15), transparent 60%),
-              radial-gradient(900px 600px at -10% 20%, rgba(106,227,255,.12), transparent 55%),
-              var(--bg);
   color:var(--text);
+  background:
+    radial-gradient(1200px 800px at 80% -10%, rgba(41,194,106,.18), transparent 60%),
+    radial-gradient(900px 600px at -10% 20%, rgba(106,227,255,.15), transparent 55%),
+    var(--bg);
   overflow-x:hidden;
+}
+
+/* ====== Motion Respect ====== */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important}
 }
 
 /* ====== Deko-Blobs ====== */
 .blob{
   position:fixed; inset:auto auto -30% -20%;
   width:55vmax; height:55vmax; border-radius:50%;
-  background: radial-gradient(circle at 30% 30%, rgba(63,229,138,.35), rgba(41,194,106,.05) 60%, transparent 70%);
+  background: radial-gradient(circle at 30% 30%, rgba(63,229,138,.35), rgba(41,194,106,.08) 60%, transparent 70%);
   filter: blur(40px);
   z-index:-2; animation: float 16s ease-in-out infinite;
 }
 .blob--2{ inset: -20% -15% auto auto; width:50vmax; height:50vmax;
-  background: radial-gradient(circle at 60% 50%, rgba(106,227,255,.30), rgba(16,125,160,.07) 60%, transparent 70%);
+  background: radial-gradient(circle at 60% 50%, rgba(106,227,255,.30), rgba(16,125,160,.09) 60%, transparent 70%);
   animation-duration: 20s;
 }
-@keyframes float{
-  0%,100%{transform: translate3d(0,0,0) scale(1)}
-  50%{transform: translate3d(2%, -2%, 0) scale(1.03)}
-}
+@keyframes float{ 0%,100%{transform:translate3d(0,0,0)} 50%{transform:translate3d(2%,-2%,0)} }
 
 /* ====== Navigation ====== */
 .nav{
   position:sticky; top:0; z-index:1000;
   display:flex; align-items:center; justify-content:space-between;
-  padding:14px 22px; background: color-mix(in oklab, var(--bg), transparent 35%);
-  backdrop-filter: blur(10px); border-bottom: 1px solid color-mix(in oklab, var(--text), transparent 92%);
+  padding:14px 22px;
+  background: var(--glass);
+  backdrop-filter: saturate(1.15) blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 .brand{display:flex; align-items:center; gap:.4rem; color:var(--text); text-decoration:none; font-weight:800}
-.brand__logo{background:linear-gradient(135deg,var(--primary),var(--primary-2)); color:#091012;
-  padding:.2rem .5rem; border-radius:.5rem; font-family:"Poppins",sans-serif; letter-spacing:.3px}
-.brand__accent{opacity:.9}
+.brand__logo{background:linear-gradient(135deg,var(--primary),var(--primary-2)); color:#07130a;
+  padding:.25rem .6rem; border-radius:.6rem; font-family:"Poppins",sans-serif; letter-spacing:.3px}
+.brand__accent{opacity:.92}
 
 .nav__links{display:flex; gap:1rem}
 .nav__links a{color:var(--muted); text-decoration:none; font-weight:600}
 .nav__links a:hover{color:var(--text)}
+.nav__links a:focus-visible{outline: 3px solid var(--ring); border-radius:.5rem}
 
 .nav__actions{display:flex; align-items:center; gap:.6rem}
 .btn, .nav__menu{
-  border:1px solid color-mix(in oklab, var(--text), transparent 85%);
-  background: color-mix(in oklab, var(--card), transparent 10%);
-  color:var(--text); padding:.6rem .9rem; border-radius:.7rem; cursor:pointer
+  border:1px solid rgba(255,255,255,.14);
+  background: color-mix(in oklab, var(--surface), transparent 6%);
+  color:var(--text); padding:.6rem .9rem; border-radius:.8rem; cursor:pointer
 }
 .btn--primary{
   border:none;
@@ -77,22 +91,24 @@ body{
   color:#03140a; font-weight:800; box-shadow: var(--shadow);
 }
 .btn--secondary{
-  background: transparent; border-color: color-mix(in oklab, var(--primary), transparent 60%);
+  background: transparent;
+  border-color: color-mix(in oklab, var(--primary), transparent 60%);
 }
 .btn--ghost{background:transparent}
+.btn:focus-visible{outline: 3px solid var(--ring)}
 
 .nav__menu{display:none; flex-direction:column; gap:4px; padding:.5rem .6rem}
 .nav__menu span{display:block; width:20px; height:2px; background:var(--text)}
 
 /* ====== Hero ====== */
 .hero{
-  display:grid; grid-template-columns: 1.2fr .8fr; gap:2rem;
-  align-items:center; padding: clamp(2rem, 4vw, 4rem) 22px 3rem;
+  display:grid; grid-template-columns: 1.15fr .85fr; gap:2rem;
+  align-items:center; padding: clamp(2rem, 5vw, 4rem) 22px 3rem;
 }
 .hero__content h1{
   font-family:"Poppins", system-ui, sans-serif;
-  font-size: clamp(2.4rem, 6vw, 4.2rem);
-  line-height:1.08; margin:.2rem 0 1rem;
+  font-size: clamp(2.6rem, 6.8vw, 4.6rem);
+  line-height:1.05; margin:.2rem 0 1rem;
 }
 .accent{background:linear-gradient(135deg,var(--primary-2),var(--accent));
   -webkit-background-clip:text; background-clip:text; color:transparent}
@@ -102,31 +118,41 @@ body{
 
 .stats{display:flex; gap:1rem; flex-wrap:wrap}
 .stat{
-  background: color-mix(in oklab, var(--card), transparent 10%);
-  border:1px solid color-mix(in oklab, var(--text), transparent 90%);
-  padding:.9rem 1.1rem; border-radius:.9rem; min-width: 180px
+  background: color-mix(in oklab, var(--surface), transparent 8%);
+  border:1px solid rgba(255,255,255,.12);
+  padding:.95rem 1.2rem; border-radius:var(--radius); min-width: 180px
 }
-.stat__num{display:block; font-size:1.8rem; font-weight:800; color:var(--primary-2)}
+.stat__num{display:block; font-size:clamp(1.6rem, 4vw, 2rem); font-weight:800; color:var(--primary-2)}
 .stat__label{color:var(--muted); font-size:.95rem}
 
 .hero__image{
-  position:relative; border-radius:1.2rem; overflow:hidden;
+  position:relative; border-radius:var(--radius); overflow:hidden;
   box-shadow: var(--shadow); transform: translateZ(0);
 }
-.hero__image img{display:block; width:100%; height:auto; transform: scale(1.04); transition: transform .6s ease}
-.hero__image:hover img{transform: scale(1.08)}
+.hero__image img{display:block; width:100%; height:auto; transform: scale(1.02); transition: transform .6s ease}
+.hero__image:hover img{transform: scale(1.06)}
 
-/* ====== Sektionen ====== */
+/* ====== Skeleton für images ====== */
+.skeleton{position:relative; overflow:hidden}
+.skeleton::before{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.08), rgba(255,255,255,0));
+  transform: translateX(-100%); animation: shimmer 1.8s infinite;
+}
+@keyframes shimmer{ 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
+.skeleton.loaded::before{display:none}
+
+/* ====== Sections ====== */
 .section{padding: clamp(2rem, 5vw, 4rem) 22px}
-.section--alt{background: color-mix(in oklab, var(--card), transparent 92%)}
+.section--alt{background: color-mix(in oklab, var(--surface), transparent 93%)}
 .section--highlight{
-  border:1px solid color-mix(in oklab, var(--primary), transparent 60%);
-  background: color-mix(in oklab, var(--primary), transparent 93%);
-  border-radius: 1rem; margin: 1rem 22px;
+  border:1px solid color-mix(in oklab, var(--primary), transparent 55%);
+  background: color-mix(in oklab, var(--primary), transparent 92%);
+  border-radius: var(--radius); margin: 1rem 22px;
 }
 .section__lead{max-width:70ch; color:var(--muted)}
 .section--split{display:grid; grid-template-columns: 1.1fr .9fr; gap:2rem; align-items:center}
-.section__media img{width:100%; border-radius:1rem; box-shadow: var(--shadow)}
+.section__media img{width:100%; border-radius:var(--radius); box-shadow: var(--shadow)}
 
 .bullets{margin:1rem 0; padding-left:1.1rem}
 .bullets li{margin:.4rem 0}
@@ -138,34 +164,34 @@ body{
 .grid--4{grid-template-columns: repeat(4, minmax(0,1fr))}
 
 .card{
-  background: color-mix(in oklab, var(--card), transparent 8%);
-  border:1px solid color-mix(in oklab, var(--text), transparent 90%);
-  border-radius:1rem; overflow:hidden; box-shadow: var(--shadow);
-  transform: translateY(0); transition: transform .25s ease, box-shadow .25s ease;
+  background: color-mix(in oklab, var(--surface), transparent 6%);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius); overflow:hidden; box-shadow: var(--shadow);
+  transform: translateY(0); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-.card:hover{transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.3)}
-.card__img{width:100%; height:180px; object-fit:cover; display:block}
+.card:hover{transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.35); border-color: color-mix(in oklab, var(--accent), transparent 50%)}
+.card__img{width:100%; height:200px; object-fit:cover; display:block}
 .card__body{padding:1rem}
 
 /* ====== Pillars (3 Spalten) ====== */
 .pillars{display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:1rem}
 .pillar{
-  background: color-mix(in oklab, var(--card), transparent 5%);
-  border:1px solid color-mix(in oklab, var(--text), transparent 90%);
-  border-radius:1rem; padding:1rem
+  background: color-mix(in oklab, var(--surface), transparent 5%);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius); padding:1rem
 }
 
 /* ====== Ziele-Kacheln ====== */
 .goals .goal{
-  background: color-mix(in oklab, var(--card), transparent 6%);
-  border:1px solid color-mix(in oklab, var(--text), transparent 90%);
-  border-radius:1rem; padding:1rem
+  background: color-mix(in oklab, var(--surface), transparent 7%);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius); padding:1rem
 }
 
 /* ====== Timeline ====== */
 .timeline{
   list-style:none; margin:1rem 0; padding:0;
-  border-left: 3px solid color-mix(in oklab, var(--primary), transparent 20%);
+  border-left: 3px solid color-mix(in oklab, var(--primary), transparent 22%);
 }
 .timeline li{position:relative; padding: .4rem 0 .8rem 1rem}
 .timeline li::before{
@@ -181,10 +207,11 @@ body{
 .contact__row{display:grid; grid-template-columns: 1fr 1fr; gap:1rem}
 .contact label{display:block}
 .contact input, .contact textarea{
-  width:100%; padding:.8rem 1rem; border-radius:.7rem;
-  border:1px solid color-mix(in oklab, var(--text), transparent 90%);
-  background: color-mix(in oklab, var(--card), transparent 5%); color:var(--text)
+  width:100%; padding:.9rem 1rem; border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,.12);
+  background: color-mix(in oklab, var(--surface), transparent 5%); color:var(--text)
 }
+.contact input:focus-visible, .contact textarea:focus-visible{outline:3px solid var(--ring)}
 .contact__actions{display:flex; align-items:center; gap:.9rem; margin-top:.6rem}
 .form__status{color:var(--muted)}
 
@@ -195,7 +222,6 @@ body{
 .reveal{opacity:0; transform: translateY(14px); transition: all .6s ease}
 .reveal.is-visible{opacity:1; transform: translateY(0)}
 
-/* ====== Responsive ====== */
 @media (max-width: 980px){
   .hero{grid-template-columns: 1fr; padding-top: 1rem}
   .section--split{grid-template-columns: 1fr}
@@ -209,11 +235,12 @@ body{
   .grid--3, .grid--4{grid-template-columns: 1fr}
   .contact__row{grid-template-columns: 1fr}
 }
+/* Mobile Overlay-Menü */
 .nav--open .nav__links{
   position:fixed; inset:58px 10px auto 10px; z-index:900;
   display:flex; flex-direction:column; gap:.6rem;
-  background: color-mix(in oklab, var(--bg), transparent 10%);
+  background: var(--glass);
   backdrop-filter: blur(10px);
-  border:1px solid color-mix(in oklab, var(--text), transparent 90%);
-  border-radius:.9rem; padding:.9rem;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius); padding:.9rem;
 }
