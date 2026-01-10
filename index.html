@@ -5,13 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ToLi Power – Natur & Energie</title>
-  <meta name="description" content="ToLi Power verbindet Profit & Nachhaltigkeit: Solar, Wind, Wasser, Speicher, Smart Grids – für eine grüne Zukunft und Energieautonomie bis 2050." />
+  <meta name="description" content="ToLi Power verbindet Profit & Nachhaltigkeit: Solar, Wind, Wasser, Speicher und Smart Grids – für eine grüne Zukunft und Energieautonomie bis 2050." />
   <meta name="color-scheme" content="light dark" />
 
   <!-- Schriften -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
@@ -23,10 +23,11 @@
   <div class="blob blob--2" aria-hidden="true"></div>
 
   <!-- Navigation -->
-  <header class="nav">
-    <a href="#start" class="brand" aria-label="Zur Startseite">
+  <header class="nav" role="banner">
+    <a class="brand" href="#start" aria-label="Startseite">
       <span class="brand__logo">ToLi</span><span class="brand__accent">Power</span>
     </a>
+
     <nav class="nav__links" aria-label="Hauptnavigation">
       <a href="#vision">Vision</a>
       <a href="#tech">Technologie</a>
@@ -36,6 +37,7 @@
       <a href="#vision2050">2050</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
+
     <div class="nav__actions">
       <button id="themeToggle" class="btn btn--ghost" aria-label="Designmodus umschalten">🌙</button>
       <button id="menuToggle" class="nav__menu" aria-label="Navigation öffnen/schließen">
@@ -51,8 +53,8 @@
       <p class="subtitle">Wir sorgen für eine <strong>grüne Zukunft</strong><br>— Kimo • Levin • Livio</p>
 
       <div class="hero__cta">
-        <a href="#vision" class="btn btn--primary">Mehr erfahren</a>
-        <a href="#kontakt" class="btn btn--secondary">Kontakt</a>
+        <a class="btn btn--primary" href="#vision">Mehr erfahren</a>
+        <a class="btn btn--secondary" href="#kontakt">Kontakt</a>
       </div>
 
       <div class="stats">
@@ -71,8 +73,8 @@
       </div>
     </div>
 
-    <figure class="hero__image">
-      <img src="bilder/hero.png" alt="PV-Module vor Bergkulisse bei Sonnenschein" />
+    <figure class="hero__image skeleton">
+      <img src="bilder/hero.png" alt="Solarfeld bei Sonnenuntergang – Symbol für grüne Energie" loading="eager" />
     </figure>
   </section>
 
@@ -94,8 +96,8 @@
         <li><strong>Resilient:</strong> regionale Versorgungssicherheit & Netzstabilität</li>
       </ul>
     </div>
-    <figure class="section__media">
-      <img src="bilder/speicher.png" alt="Batteriespeicher-Container mit Energie-Monitoring" />
+    <figure class="section__media skeleton">
+      <img src="bilder/speicher.png" alt="Batteriespeicher-Container (BESS) – flexible Energieversorgung" loading="lazy" />
     </figure>
   </section>
 
@@ -110,7 +112,7 @@
     <div class="grid grid--3">
       <!-- Solar (nur PV-Module) -->
       <article class="card">
-        <img class="card__img" src="bilder/solar.png" alt="Großflächige PV-Module bei Sonnenuntergang – Solarenergie" />
+        <img class="card__img skeleton" src="bilder/solar.png" alt="Solarenergie – PV-Module auf einer Fläche" loading="lazy" />
         <div class="card__body">
           <h3>Solarenergie</h3>
           <p>PV-Module auf Dächern & Freiflächen, kombiniert mit Heimspeichern und Lastmanagement.</p>
@@ -119,7 +121,7 @@
 
       <!-- Wind (nur Windräder) -->
       <article class="card">
-        <img class="card__img" src="bilder/wind.png" alt="Onshore-Windräder in weiter Landschaft – Windenergie" />
+        <img class="card__img skeleton" src="bilder/wind.png" alt="Windenergie – Onshore-Windräder in Landschaft" loading="lazy" />
         <div class="card__body">
           <h3>Windenergie</h3>
           <p>Onshore‑Turbinen mit hoher Flächenleistung – ideal in Kombination mit Wasserkraft.</p>
@@ -128,7 +130,7 @@
 
       <!-- Wasser (nur Wasserkraft-Motiv) -->
       <article class="card">
-        <img class="card__img" src="bilder/wasser.png" alt="Staumauer und Stausee – Wasserkraft" />
+        <img class="card__img skeleton" src="bilder/wasser.png" alt="Wasserkraft – Staumauer und Speicherseen" loading="lazy" />
         <div class="card__body">
           <h3>Wasserkraft</h3>
           <p>Verlässliche Grundlast; Speicherseen & Laufwasserkraft stabilisieren das Gesamtsystem.</p>
@@ -239,12 +241,12 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <p>© 2026 ToLi Power – Natur & Energie</p>
     <p class="small">Website von Kimo • Levin • Livio</p>
   </footer>
 
   <!-- Scripts -->
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
