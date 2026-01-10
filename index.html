@@ -6,39 +6,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ToLi Power – Natur & Energie</title>
   <meta name="description" content="ToLi Power verbindet Profit & Nachhaltigkeit: Solar, Wind, Wasser, Speicher, Smart Grids – für eine grüne Zukunft und Energieautonomie bis 2050." />
+  <meta name="color-scheme" content="light dark" />
+
+  <!-- Schriften -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Du kannst die Schriftart gern ändern -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="data:," /> <!-- einfacher Favicon-Placeholder -->
-  <meta name="color-scheme" content="light dark">
 </head>
 <body>
 
-  <!-- ===== Dekorative animierte Blobs ===== -->
+  <!-- Deko-Blobs -->
   <div class="blob blob--1" aria-hidden="true"></div>
   <div class="blob blob--2" aria-hidden="true"></div>
 
-  <!-- ===== Navigation ===== -->
+  <!-- Navigation -->
   <header class="nav">
-    <a href="#" class="brand" aria-label="Startseite">
+    <a href="#start" class="brand" aria-label="Zur Startseite">
       <span class="brand__logo">ToLi</span><span class="brand__accent">Power</span>
     </a>
     <nav class="nav__links" aria-label="Hauptnavigation">
       <a href="#vision">Vision</a>
       <a href="#tech">Technologie</a>
+      <a href="#region">Region</a>
       <a href="#ziele">Ziele</a>
       <a href="#politik">Politik</a>
-      <a href="#partner">Partner</a>
+      <a href="#vision2050">2050</a>
+      <a href="#kontakt">Kontakt</a>
     </nav>
     <div class="nav__actions">
       <button id="themeToggle" class="btn btn--ghost" aria-label="Designmodus umschalten">🌙</button>
-      <button id="menuToggle" class="nav__menu" aria-label="Navigation öffnen/schließen"><span></span><span></span><span></span></button>
+      <button id="menuToggle" class="nav__menu" aria-label="Navigation öffnen/schließen">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <!-- ===== Hero ===== -->
+  <!-- Hero -->
   <section class="hero" id="start" aria-labelledby="hero-title">
     <div class="hero__content">
       <h1 id="hero-title"><span class="accent">Natur</span> & Energie</h1>
@@ -64,12 +70,13 @@
         </div>
       </div>
     </div>
+
     <figure class="hero__image">
-      <img src="bilder/hero.jpg" alt="Erneuerbare Energie in der Natur – Symbolbild" />
+      <img src="bilder/hero.png" alt="PV-Module vor Bergkulisse bei Sonnenschein" />
     </figure>
   </section>
 
-  <!-- ===== Vision / Profit & Nachhaltigkeit ===== -->
+  <!-- Vision / Profit & Nachhaltigkeit -->
   <section class="section section--split reveal" id="vision" aria-labelledby="vision-title">
     <div class="section__content">
       <h2 id="vision-title">Unsere Vision: Profit & Nachhaltigkeit</h2>
@@ -88,43 +95,49 @@
       </ul>
     </div>
     <figure class="section__media">
-      <img src="bilder/speicher.jpg" alt="Batteriespeicher und intelligentes Netz – Illustration" />
+      <img src="bilder/speicher.png" alt="Batteriespeicher-Container mit Energie-Monitoring" />
     </figure>
   </section>
 
-  <!-- ===== Technologie & Innovation ===== -->
+  <!-- Technologie & Innovation -->
   <section class="section reveal" id="tech" aria-labelledby="tech-title">
     <h2 id="tech-title">Technologie & Innovation</h2>
     <p class="section__lead">
       Wir setzen auf <strong>Solar‑, Wind‑ und Wasserkraft</strong> – ergänzt durch Speicher und smarte Steuerung.
       So entsteht eine <em>zukunftssichere</em> Energieversorgung mit niedriger Umweltbelastung.
     </p>
+
     <div class="grid grid--3">
+      <!-- Solar (nur PV-Module) -->
       <article class="card">
-        <img src="bilder/solar.jpg" alt="Photovoltaik-Module" class="card__img" />
+        <img class="card__img" src="bilder/solar.png" alt="Großflächige PV-Module bei Sonnenuntergang – Solarenergie" />
         <div class="card__body">
           <h3>Solarenergie</h3>
           <p>PV-Module auf Dächern & Freiflächen, kombiniert mit Heimspeichern und Lastmanagement.</p>
         </div>
       </article>
+
+      <!-- Wind (nur Windräder) -->
       <article class="card">
-        <img src="bilder/wind.jpg" alt="Windkraftanlagen" class="card__img" />
+        <img class="card__img" src="bilder/wind.png" alt="Onshore-Windräder in weiter Landschaft – Windenergie" />
         <div class="card__body">
           <h3>Windenergie</h3>
           <p>Onshore‑Turbinen mit hoher Flächenleistung – ideal in Kombination mit Wasserkraft.</p>
         </div>
       </article>
+
+      <!-- Wasser (nur Wasserkraft-Motiv) -->
       <article class="card">
-        <img src="bilder/wasser.jpg" alt="Wasserkraftwerk" class="card__img" />
+        <img class="card__img" src="bilder/wasser.png" alt="Staumauer und Stausee – Wasserkraft" />
         <div class="card__body">
           <h3>Wasserkraft</h3>
-          <p>Verlässliche Grundlast, Speicherseen & Laufwasserkraft stabilisieren das Gesamtsystem.</p>
+          <p>Verlässliche Grundlast; Speicherseen & Laufwasserkraft stabilisieren das Gesamtsystem.</p>
         </div>
       </article>
     </div>
   </section>
 
-  <!-- ===== Regionale Stärke ===== -->
+  <!-- Regionale Stärke -->
   <section class="section section--alt reveal" id="region" aria-labelledby="region-title">
     <h2 id="region-title">Regionale Stärke</h2>
     <p class="section__lead">
@@ -146,7 +159,7 @@
     </div>
   </section>
 
-  <!-- ===== Unsere Ziele ===== -->
+  <!-- Unsere Ziele -->
   <section class="section reveal" id="ziele" aria-labelledby="ziele-title">
     <h2 id="ziele-title">Unsere Ziele</h2>
     <div class="goals grid grid--4">
@@ -156,7 +169,7 @@
       </div>
       <div class="goal">
         <h3>CO₂ reduzieren</h3>
-        <p>Fossile Brennstoffe gezielt substituieren und Effizienzpotenziale heben.</p>
+        <p>Fossile Brennstoffe substituieren und Effizienzpotenziale heben.</p>
       </div>
       <div class="goal">
         <h3>Wirtschaft stärken</h3>
@@ -169,7 +182,7 @@
     </div>
   </section>
 
-  <!-- ===== Politische Forderungen ===== -->
+  <!-- Politische Forderungen -->
   <section class="section section--highlight reveal" id="politik" aria-labelledby="politik-title">
     <h2 id="politik-title">Politische Forderungen</h2>
     <ul class="bullets bullets--check">
@@ -178,10 +191,10 @@
       <li>Netzausbau & Digitalisierung priorisieren</li>
       <li>Bildungsinitiativen & Forschung stärken</li>
     </ul>
-    <p class="note">Politische Rahmenbedingungen beschleunigen die Energiewende und erhöhen die regionale Wettbewerbsfähigkeit.</p>
+    <p class="note">Rahmenbedingungen beschleunigen die Energiewende und erhöhen die regionale Wettbewerbsfähigkeit.</p>
   </section>
 
-  <!-- ===== Vision 2050 (Timeline) ===== -->
+  <!-- Vision 2050 (Timeline) -->
   <section class="section reveal" id="vision2050" aria-labelledby="vision2050-title">
     <h2 id="vision2050-title">Langfristige Vision – Energieautonomie bis 2050</h2>
     <ol class="timeline">
@@ -200,19 +213,7 @@
     </ol>
   </section>
 
-  <!-- ===== Partner ===== -->
-  <section class="section section--alt reveal" id="partner" aria-labelledby="partner-title">
-    <h2 id="partner-title">Partnerschaften stärken</h2>
-    <p class="section__lead">Gemeinden, Unternehmen & Forschungseinrichtungen treiben gemeinsam Innovationen voran.</p>
-    <div class="partners">
-      <img src="bilder/partner1.png" alt="Partner 1" />
-      <img src="bilder/partner2.png" alt="Partner 2" />
-      <img src="bilder/partner3.png" alt="Partner 3" />
-      <img src="bilder/partner4.png" alt="Partner 4" />
-    </div>
-  </section>
-
-  <!-- ===== Kontakt ===== -->
+  <!-- Kontakt -->
   <section class="section reveal" id="kontakt" aria-labelledby="kontakt-title">
     <h2 id="kontakt-title">Kontakt</h2>
     <form class="contact" onsubmit="return false" aria-label="Kontaktformular">
@@ -237,13 +238,13 @@
     </form>
   </section>
 
-  <!-- ===== Footer ===== -->
+  <!-- Footer -->
   <footer class="footer">
     <p>© 2026 ToLi Power – Natur & Energie</p>
     <p class="small">Website von Kimo • Levin • Livio</p>
   </footer>
 
-  <script defer src="script.js"></script>
+  <!-- Scripts -->
+  <script src="script.js"></script>
 </body>
 </html>
-
