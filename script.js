@@ -69,24 +69,30 @@ const statsObserver = new IntersectionObserver((entries)=>{
 },{threshold:0.5});
 stats.forEach(el=> statsObserver.observe(el));
 
+// ===== Skeleton-Loading: entferne Overlay, wenn Bild geladen =====
+document.querySelectorAll('.skeleton img').forEach(img => {
+  if (img.complete) img.parentElement.classList.add('loaded');
+  img.addEventListener('load', () => img.parentElement.classList.add('loaded'));
+});
+
+// ===== Parallax-Effekt auf Hero-Bild (deaktiviert bei reduced motion) =====
+const heroImg = document.querySelector('.hero__image img');
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let rafId = null;
+if (!prefersReduced && heroImg){
+  window.addEventListener('scroll', ()=>{
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(()=>{
+      const y = window.scrollY;
+      heroImg.style.transform = `scale(1.02) translateY(${Math.min(36, y*0.04)}px)`;
+    });
+  });
+}
+
 // ===== Fake Kontakt-Submit (Frontend-Demo) =====
 const sendBtn = document.getElementById('sendBtn');
 const statusEl = document.querySelector('.form__status');
 sendBtn?.addEventListener('click', ()=>{
   statusEl.textContent = 'Sende …';
-  setTimeout(()=>{
-    statusEl.textContent = 'Danke! Wir melden uns in Kürze.';
-  }, 800);
-});
-
-// ===== Kleiner Parallax-Effekt auf Hero-Bild =====
-const heroImg = document.querySelector('.hero__image img');
-let rafId = null;
-window.addEventListener('scroll', ()=>{
-  if (!heroImg) return;
-  if (rafId) cancelAnimationFrame(rafId);
-  rafId = requestAnimationFrame(()=>{
-    const y = window.scrollY;
-    heroImg.style.transform = `scale(1.04) translateY(${Math.min(40, y*0.04)}px)`;
-  });
+  setTimeout(()=>{ statusEl.textContent = 'Danke! Wir melden uns in Kürze.'; }, 800);
 });
