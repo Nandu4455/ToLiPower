@@ -9,13 +9,13 @@ const savedContrast = localStorage.getItem('tolipower-contrast');
 if (savedTheme) { html.setAttribute('data-theme', savedTheme); themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙'; }
 if (savedContrast === 'on') { html.classList.add('contrast'); }
 
-themeBtn.addEventListener('click', () => {
+themeBtn?.addEventListener('click', () => {
   const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   html.setAttribute('data-theme', next);
   localStorage.setItem('tolipower-theme', next);
   themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
 });
-contrastBtn.addEventListener('click', () => {
+contrastBtn?.addEventListener('click', () => {
   html.classList.toggle('contrast');
   localStorage.setItem('tolipower-contrast', html.classList.contains('contrast') ? 'on' : 'off');
 });
@@ -64,7 +64,7 @@ const revealIO = new IntersectionObserver((entries)=>{
 },{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=> revealIO.observe(el));
 
-// ===== Counters (Hero + Impact) — starten zuverlässig =====
+// ===== Counters (Hero + Impact) =====
 function animateCounter(el, to, duration=1300){
   const t0 = performance.now();
   function tick(t){
@@ -111,7 +111,7 @@ const toTop = document.getElementById('toTop');
 window.addEventListener('scroll', () => {
   toTop.classList.toggle('is-show', (window.scrollY || document.documentElement.scrollTop) > 600);
 });
-toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 // ===== Parallax Hero (respect reduced motion) =====
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -127,12 +127,31 @@ if (!prefersReduced && heroImg){
   });
 }
 
-// ===== Kontakt: visuelles Feedback (Formspree sendet serverseitig) =====
-const sendBtn = document.getElementById('sendBtn');
-const statusEl = document.querySelector('.form__status');
-sendBtn?.addEventListener('click', ()=>{
-  statusEl.textContent = 'Sende …';
-  setTimeout(()=>{ statusEl.textContent = 'Danke! Wir melden uns in Kürze.'; }, 900);
+// ===== Kontakt (Formspree) – echtes Senden via Fetch =====
+const form = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+form?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (formStatus) formStatus.textContent = 'Sende …';
+
+  const data = new FormData(form);
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      if (formStatus) formStatus.textContent = 'Danke! Wir melden uns in Kürze.';
+      form.reset();
+    } else {
+      const err = await res.json().catch(() => ({}));
+      const msg = err?.errors?.[0]?.message || 'Fehler beim Senden. Bitte später erneut versuchen.';
+      if (formStatus) formStatus.textContent = msg;
+    }
+  } catch {
+    if (formStatus) formStatus.textContent = 'Netzwerkfehler. Bitte später erneut versuchen.';
+  }
 });
 
 // ===== Roadmap Zahlenstrahl: Fortschritt folgt Scroll =====
@@ -171,15 +190,12 @@ sendBtn?.addEventListener('click', ()=>{
   if (!lb || !frame || !caption || !closeBtn) return;
 
   function open(src, title){
-    frame.src = src;
-    frame.alt = title || '';
+    frame.src = src; frame.alt = title || '';
     caption.textContent = title || '';
-    lb.classList.add('is-open');
-    lb.setAttribute('aria-hidden','false');
+    lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false');
   }
   function close(){
-    lb.classList.remove('is-open');
-    lb.setAttribute('aria-hidden','true');
+    lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true');
     frame.src = ''; caption.textContent = '';
   }
   document.querySelectorAll('.gallery .item').forEach(a=>{
@@ -204,6 +220,7 @@ sendBtn?.addEventListener('click', ()=>{
   if (!svg || !tip) return;
 
   function showTip(el, clientX, clientY){
+    if (!tipName || !tipMeta) return;
     tipName.textContent = el.dataset.name || 'Projekt';
     tipMeta.textContent = el.dataset.output || '';
     tip.style.left = `${clientX}px`;
@@ -213,31 +230,28 @@ sendBtn?.addEventListener('click', ()=>{
   function hideTip(){ tip.setAttribute('aria-hidden','true'); }
 
   areas.forEach(el=>{
-    el.addEventListener('mousemove', e=>{
-      const c = e.clientX, y = e.clientY;
-      showTip(el, c, y);
-    });
+    el.addEventListener('mousemove', e=> showTip(el, e.clientX, e.clientY));
     el.addEventListener('mouseenter', e=> showTip(el, e.clientX, e.clientY));
     el.addEventListener('mouseleave', hideTip);
-    el.addEventListener('focus', e=>{
+    el.addEventListener('focus', ()=>{
       const rect = svg.getBoundingClientRect();
       showTip(el, rect.left + rect.width/2, rect.top + 40);
     });
     el.addEventListener('blur', hideTip);
     el.addEventListener('keydown', e=>{
       if (e.key === 'Enter' || e.key === ' '){
-        alert(`${el.dataset.name}\n${el.dataset.output}`); // hier später Detailseite öffnen
+        alert(`${el.dataset.name}\n${el.dataset.output}`); // später: echte Detailseite öffnen
         e.preventDefault();
       }
     });
   });
 
-  // Filter
   function applyFilters(){
     const active = filters.filter(f=>f.checked).map(f=>f.value);
     areas.forEach(el=>{
-      el.style.opacity = active.includes(el.dataset.type) ? '1' : '0.18';
-      el.style.pointerEvents = active.includes(el.dataset.type) ? 'auto' : 'none';
+      const on = active.includes(el.dataset.type);
+      el.style.opacity = on ? '1' : '0.18';
+      el.style.pointerEvents = on ? 'auto' : 'none';
     });
   }
   filters.forEach(f=> f.addEventListener('change', applyFilters));
@@ -246,7 +260,6 @@ sendBtn?.addEventListener('click', ()=>{
 
 // ===== Daten-Widgets (Demo: synthetische Live-Werte) =====
 (function(){
-  // Hinweis: Hier werden Demo-Werte simuliert. Für echte Daten bitte ein API anbinden.
   function updateGauges(){
     document.querySelectorAll('.gauge__ring').forEach(r=>{
       const base = parseInt(r.dataset.value || '50', 10);
@@ -260,7 +273,7 @@ sendBtn?.addEventListener('click', ()=>{
     document.querySelectorAll('.bar__fill').forEach(f=>{
       const w = Math.max(5, Math.min(95, Math.random()*100));
       f.style.width = `${Math.round(w)}%`;
-      const label = f.closest('.widget').querySelector('.bar__label');
+      const label = f.closest('.widget')?.querySelector('.bar__label');
       if (label) label.textContent = `${Math.round(w)}%`;
     });
   }
