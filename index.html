@@ -1,374 +1,343 @@
 
-<!DOCTYPE html>
-<html lang="de" data-theme="light">
+<!doctype html>
+<html lang="de" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ToLi Power – Natur & Energie</title>
-
-  <meta name="description" content="ToLi Power verbindet Profit & Nachhaltigkeit: Solar, Wind, Wasser, Speicher und Smart Grids – für eine grüne Zukunft." />
-  <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#29c26a" />
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="ToLi Power – Natur & Energie" />
-  <meta property="og:description" content="Profit & Nachhaltigkeit mit Solar, Wind, Wasser und Speicher – Energieautonomie mit Smart Grids." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/bilder/hero.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
-
-  <!-- Performance -->
-  <link rel="preload" as="image" href="/bilder/hero.png" imagesrcset="/bilder/hero.png 1x">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="/style.css" />
+  <meta name="description" content="ToLi Power – Natur & Energie: Vision, Technologien (Solar, Wind, Wasser, Speicher), Karte mit CSV-Daten, Roadmap, Kontakt.">
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/bilder/hero.png" type="image/png">
+  <meta name="color-scheme" content="dark light">
+  <meta property="og:title" content="ToLi Power – Natur & Energie">
+  <meta property="og:description" content="Moderne, performante Single-Page mit Dark‑Mode, Karte & CSV‑Join, KPI‑Animationen und A11y.">
+  <meta property="og:type" content="website">
 </head>
+
 <body>
-
   <!-- Skip-Links -->
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
-  <a class="skip-link" href="#kontakt">Direkt zum Kontakt</a>
+  <a class="skip" href="#main">Zum Inhalt springen</a>
+  <a class="skip" href="#kontakt">Zum Kontakt springen</a>
 
-  <!-- Deko-Gradients -->
-  <div class="blob blob--1" aria-hidden="true"></div>
-  <div class="blob blob--2" aria-hidden="true"></div>
+  <!-- Dekorative Blobs -->
+  <div class="blob"></div>
+  <div class="blob blob--2"></div>
 
-  <!-- ===== Navigation ===== -->
+  <!-- Header / Navigation -->
   <header class="nav" role="banner">
-    <a class="brand" href="#start" aria-label="Startseite">
-      <span class="brand__logo">ToLi</span><span class="brand__accent">Power</span>
-    </a>
+    <div class="nav__inner">
+      <a class="brand" href="#top" aria-label="ToLi Power – Start">
+        <span class="brand__logo">ToLi</span><span class="brand__accent">Power</span>
+      </a>
 
-    <nav class="nav__links" aria-label="Hauptnavigation">
-      <a class="spy" href="#vision">Vision</a>
-      <a class="spy" href="#tech">Technologie</a>
-      <a class="spy" href="#usecases">Use‑Cases</a>
-      <a class="spy" href="#impact">Impact</a>
-      <a class="spy" href="#politik">Politik</a>
-      <a class="spy" href="#vision2050">2050</a>
-      <a class="spy" href="#roadmap">Roadmap</a>
-      <a class="spy" href="#projekte">Projekte</a>
-      <a class="spy" href="#karte">Karte</a>
-      <a class="spy" href="#daten">Daten</a>
-      <a class="spy" href="#faq">FAQ</a>
-      <a class="spy" href="#team">Team</a>
-      <a class="spy" href="#kontakt">Kontakt</a>
-    </nav>
+      <nav class="nav__desktop" aria-label="Hauptnavigation">
+        <ul class="nav__links">
+          <li><a href="#vision">Vision</a></li>
+          <li><a href="#tech">Technologie</a></li>
+          <li><a href="#usecases">Use‑Cases</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#politik">Politik</a></li>
+          <li><a href="#vision2050">Vision 2050</a></li>
+          <li><a href="#roadmap">Roadmap</a></li>
+          <li><a href="#karte">Karte</a></li>
+          <li><a href="#daten">Daten</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
 
-    <div class="nav__actions">
-      <button id="contrastToggle" class="btn btn--ghost" aria-label="Kontrastmodus umschalten">⛶</button>
-      <button id="themeToggle" class="btn btn--ghost" aria-label="Designmodus umschalten">🌙</button>
-      <button id="menuToggle" class="nav__menu" aria-label="Navigation öffnen/schließen">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav__tools">
+        <button id="contrastToggle" aria-pressed="false" aria-label="Kontrastmodus umschalten">Kontrast</button>
+        <button id="themeToggle" aria-pressed="true" aria-label="Theme umschalten">Dark/Light</button>
+        <button id="menuToggle" class="only-mobile" aria-controls="mobileMenu" aria-expanded="false" aria-label="Menü öffnen">Menü</button>
+      </div>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div id="mobileMenu" class="nav__mobile" hidden>
+      <ul>
+        <li><a href="#vision">Vision</a></li>
+        <li><a href="#tech">Technologie</a></li>
+        <li><a href="#usecases">Use‑Cases</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#politik">Politik</a></li>
+        <li><a href="#vision2050">Vision 2050</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#karte">Karte</a></li>
+        <li><a href="#daten">Daten</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
     </div>
   </header>
 
-  <!-- Divider -->
-  <svg class="divider divider--top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0,64 C240,0 480,0 720,64 C960,128 1200,128 1440,64 L1440,80 L0,80 Z" fill="currentColor" opacity=".07"></path>
-  </svg>
+  <main id="main" class="container">
+    <!-- HERO -->
+    <section id="top" class="hero reveal">
+      <div class="hero__grid">
+        <div class="hero__content">
+          <h1 class="fx-headline">
+            Natur & Energie <span class="fx-headline__accent">für die Zukunft</span>
+          </h1>
+          <ul class="chips" aria-label="Kategorien">
+            <li class="chip">Erneuerbar</li>
+            <li class="chip">Smart‑Grid</li>
+            <li class="chip">Speicher</li>
+          </ul>
 
-  <main id="main">
-
-    <!-- ===== HERO (Bilderformat wie am Anfang) ===== -->
-    <section class="hero" id="start" aria-labelledby="hero-title">
-      <div class="hero__content">
-        <p class="chips">
-          <span class="chip">Erneuerbar</span>
-          <span class="chip chip--accent">Smart‑Grid</span>
-          <span class="chip">Speicher</span>
-        </p>
-
-        <h1 id="hero-title" class="fx-headline">
-          <span class="accent">Natur</span> &amp; Energie – <span class="ghost">für die Zukunft</span>
-        </h1>
-
-        <p class="subtitle">Wir sorgen für eine <strong>grüne Zukunft</strong> — Kimo • Levin • Livio</p>
-
-        <div class="hero__cta">
-          <a class="btn btn--primary" href="#vision">Mehr erfahren</a>
-          <a class="btn btn--secondary" href="#kontakt">Kontakt</a>
-        </div>
-
-        <div class="stats">
-          <div class="stat">
-            <span class="stat__num" data-count="120">0</span>
-            <span class="stat__label">gemeinsame Projekte</span>
-          </div>
-          <div class="stat">
-            <span class="stat__num" data-count="48">0</span>
-            <span class="stat__label">Gemeinden vernetzt</span>
-          </div>
-          <div class="stat">
-            <span class="stat__num" data-count="85">0</span>
-            <span class="stat__label">kt CO₂ eingespart / Jahr</span>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat__num kpi__num" data-count="320">0</div>
+              <div class="stat__label">MW installierte Leistung</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num kpi__num" data-count="500">0</div>
+              <div class="stat__label">intelligente Sensoren</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num kpi__num" data-count="150">0</div>
+              <div class="stat__label">MWh gespeicherte Energie</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Bild wie vorher: einfaches <img> mit Skeleton-Effekt -->
-      <figure class="hero__image skeleton">
-        <img src="/bilder/hero.png" alt="Erneuerbare Energien: heroisches Landschaftsbild" loading="eager" decoding="async" fetchpriority="high">
-      </figure>
+        <figure class="hero__image skeleton">
+          <img src="/bilder/hero.png" alt="Fotorealistisches Energiefeld: PV, Wind und Speichercontainer" />
+          <figcaption class="sr-only">Energie‑Hero</figcaption>
+        </figure>
+      </div>
     </section>
 
-    <!-- ===== Vision (Design: Boxen + boxed bullets; Inhalt unverändert) ===== -->
-    <section class="section section--split reveal" id="vision" aria-labelledby="vision-title">
-      <div class="section__content">
-        <h2 id="vision-title">Unsere Vision: Profit &amp; Nachhaltigkeit</h2>
-
-        <p class="box box--prose">
-          Wir verbinden <strong>wirtschaftlichen Erfolg</strong> mit <strong>nachhaltigen Praktiken</strong>, um die Bedürfnisse von heute zu decken, ohne Ressourcen der Zukunft zu gefährden.
-        </p>
-        <p class="box box--prose">
-          <strong>Speicherlösungen</strong> und <strong>Smart‑Grids</strong> balancieren Erzeugung &amp; Nachfrage, erhöhen Effizienz und machen die Infrastruktur widerstandsfähig.
-        </p>
-
-        <ul class="bullets bullets--boxed">
-          <li><strong>Wirtschaftlich:</strong> sinkende Energiekosten, lokale Wertschöpfung</li>
-          <li><strong>Ökologisch:</strong> CO₂‑Reduktion, Schutz von Ressourcen &amp; Biodiversität</li>
-          <li><strong>Resilient:</strong> regionale Versorgungssicherheit &amp; Netzstabilität</li>
-        </ul>
+    <!-- Vision -->
+    <section id="vision" class="section reveal">
+      <h2>Unsere Vision</h2>
+      <div class="grid-2">
+        <div class="box box--prose">
+          <p>Wir verbinden Natur und Energie – für die Zukunft. 100 % erneuerbar, regional verankert, digital vernetzt.</p>
+        </div>
+        <div class="box box--prose">
+          <p>Ökonomisch sinnvoll, ökologisch verantwortungsvoll, resilient gegenüber Schwankungen und Ausfällen.</p>
+        </div>
       </div>
 
-      <figure class="section__media skeleton">
-        <img src="/bilder/speicher.png" alt="Moderner Batteriespeicher (BESS) im Freien" loading="lazy">
-      </figure>
+      <div class="bullets bullets--boxed">
+        <div>
+          <h3>Wirtschaftlich</h3>
+          <ul class="ticks">
+            <li>Hohe Eigenverbrauchsquote</li>
+            <li>Geringe OPEX durch Monitoring</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Ökologisch</h3>
+          <ul class="ticks">
+            <li>Emissionen im Betrieb ≈ 0</li>
+            <li>Materialrecycling planbar</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resilient</h3>
+          <ul class="ticks">
+            <li>Dezentrale Erzeugung</li>
+            <li>Speicher & Lastmanagement</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <!-- ===== Technologie ===== -->
-    <section class="section reveal" id="tech" aria-labelledby="tech-title">
-      <h2 id="tech-title">Technologie &amp; Innovation</h2>
-      <p class="section__lead">Solar‑, Wind‑ und Wasserkraft — ergänzt durch Speicher und smarte Steuerung — bilden eine <em>zukunftssichere</em>, umweltfreundliche Energieversorgung.</p>
-
-      <div class="grid grid--4">
+    <!-- Technologie & Innovation -->
+    <section id="tech" class="section reveal">
+      <h2>Technologie & Innovation</h2>
+      <div class="cards">
         <article class="card tilt">
-          <img class="card__img" src="/bilder/solar.png" alt="Solarenergie (PV‑Module)" loading="lazy">
-          <div class="card__body"><h3>Solarenergie</h3><p>PV‑Module auf Dächern &amp; Freiflächen – mit Lastmanagement und Heimspeichern.</p></div>
+          <a href="/solar.html" class="card__link" aria-label="Mehr über Solarenergie">
+            <img class="card__img" src="/bilder/solar.png" alt="Solar‑Symbol / PV" loading="lazy">
+            <div class="card__body">
+              <h3>Solarenergie</h3>
+              <p>Photovoltaik & BIPV – Details, Vorteile, Kennzahlen.</p>
+            </div>
+          </a>
         </article>
 
         <article class="card tilt">
-          <img class="card__img" src="/bilder/wind.png" alt="Windenergie (Windräder)" loading="lazy">
-          <div class="card__body"><h3>Windenergie</h3><p>Onshore‑Turbinen mit hoher Flächenleistung – stabilisiert durch Speicherverbünde.</p></div>
+          <a href="/wind.html" class="card__link" aria-label="Mehr über Windenergie">
+            <img class="card__img" src="/bilder/wind.png" alt="Wind‑Symbol" loading="lazy">
+            <div class="card__body">
+              <h3>Windenergie</h3>
+              <p>Onshore/Offshore, Hybrid und Netzintegration.</p>
+            </div>
+          </a>
         </article>
 
         <article class="card tilt">
-          <img class="card__img" src="/bilder/wasser.png" alt="Wasserkraft (Stausee/Laufwasser)" loading="lazy">
-          <div class="card__body"><h3>Wasserkraft</h3><p>Verlässliche Grundlast: Laufwasser &amp; Speicherseen sichern das Gesamtsystem.</p></div>
+          <a href="/wasser.html" class="card__link" aria-label="Mehr über Wasserenergie">
+            <img class="card__img" src="/bilder/wasser.png" alt="Wasser‑Symbol" loading="lazy">
+            <div class="card__body">
+              <h3>Wasserenergie</h3>
+              <p>Lauf‑, Speicher‑ und Kleinwasserkraft.</p>
+            </div>
+          </a>
         </article>
 
         <article class="card tilt">
-          <img class="card__img" src="/bilder/speicher.png" alt="Speicherlösungen (BESS)" loading="lazy">
-          <div class="card__body"><h3>Speicherlösungen</h3><p>BESS erhöhen Flexibilität &amp; Netzstabilität – Energie, wenn sie gebraucht wird.</p></div>
+          <a href="/speicher.html" class="card__link" aria-label="Mehr über Speicher">
+            <img class="card__img" src="/bilder/speicher.png" alt="Batteriespeicher‑Symbol" loading="lazy">
+            <div class="card__body">
+              <h3>Speicher</h3>
+              <p>Heimspeicher, BESS‑Container, Pumpspeicher.</p>
+            </div>
+          </a>
         </article>
       </div>
     </section>
 
-    <!-- ===== Use-Cases ===== -->
-    <section class="section section--alt reveal" id="usecases" aria-labelledby="usecases-title">
-      <h2 id="usecases-title">Praktische Use‑Cases</h2>
-      <div class="grid grid--3">
-        <article class="tile glow"><h3>Haushalte</h3><p>PV‑Dach + Heimspeicher + dynamische Tarife → Eigenverbrauch steigt, Kosten sinken.</p><ul class="ticks"><li>Autarkie erhöhen</li><li>Lastspitzen glätten</li><li>Smart‑Meter</li></ul></article>
-        <article class="tile glow"><h3>Gemeinden</h3><p>Energiegemeinschaften vernetzen Erzeuger &amp; Verbraucher – fair &amp; transparent.</p><ul class="ticks"><li>Quartierspeicher</li><li>Mikrogrids</li><li>Ladehubs</li></ul></article>
-        <article class="tile glow"><h3>Unternehmen</h3><p>Lastmanagement &amp; Speicher reduzieren Netzentgelte und sichern Prozesse.</p><ul class="ticks"><li>Peak‑Shaving</li><li>Notstrom</li><li>Scope‑2‑Reduktion</li></ul></article>
-      </div>
-    </section>
-
-    <!-- ===== Impact (Boxen + animierte Zahlen) ===== -->
-    <section class="section reveal" id="impact" aria-labelledby="impact-title">
-      <h2 id="impact-title">Unser Impact</h2>
-      <div class="impact">
-        <div class="impact__kpi"><span class="kpi__num" data-count="320">0</span><span class="kpi__label">GWh Jahresproduktion</span></div>
-        <div class="impact__kpi"><span class="kpi__num" data-count="62">0</span><span class="kpi__label">% erneuerbarer Anteil</span></div>
-        <div class="impact__kpi"><span class="kpi__num" data-count="35">0</span><span class="kpi__label">MW installierte Speicher</span></div>
-        <div class="impact__kpi"><span class="kpi__num" data-count="5400">0</span><span class="kpi__label">t CO₂ vermieden</span></div>
-      </div>
-    </section>
-
-    <!-- ===== Politik ===== -->
-    <section class="section section--highlight reveal" id="politik" aria-labelledby="politik-title">
-      <h2 id="politik-title">Politische Forderungen</h2>
-      <ul class="bullets bullets--check">
-        <li>Gezielte Förderungen &amp; Investitionssicherheit</li>
-        <li>Schnelle, transparente Bewilligungsverfahren</li>
-        <li>Netzausbau &amp; Digitalisierung priorisieren</li>
-        <li>Bildungsinitiativen &amp; Forschung stärken</li>
+    <!-- Use-Cases -->
+    <section id="usecases" class="section reveal">
+      <h2>Anwendungen</h2>
+      <ul class="tiles">
+        <li class="tile glow">
+          <h3>Dezentrale Energie</h3>
+          <p>Quartiersnetze, Prosumer‑Modelle, Abregel‑Optimierung.</p>
+        </li>
+        <li class="tile glow">
+          <h3>Integration</h3>
+          <p>Lastverschiebung, Wärmepumpe, Ladeinfrastruktur.</p>
+        </li>
+        <li class="tile glow">
+          <h3>Netzstabilität</h3>
+          <p>Frequenzhaltung, Schwarzstart‑Fähigkeit (mit Speicher).</p>
+        </li>
       </ul>
     </section>
 
-    <!-- ===== Vision 2050 ===== -->
-    <section class="section reveal" id="vision2050" aria-labelledby="vision2050-title">
-      <h2 id="vision2050-title">Langfristige Vision – Energieautonomie bis 2050</h2>
+    <!-- Impact (KPIs) -->
+    <section id="impact" class="impact section reveal">
+      <h2>Unser Impact</h2>
+      <div class="impact__grid">
+        <div class="impact__kpi">
+          <div class="kpi__num" data-count="75">0</div>
+          <div class="kpi__label">Anteil Erneuerbar (%)</div>
+        </div>
+        <div class="impact__kpi">
+          <div class="kpi__num" data-count="40">0</div>
+          <div class="kpi__label">Netzausbau (%)</div>
+        </div>
+        <div class="impact__kpi">
+          <div class="kpi__num" data-count="29">0</div>
+          <div class="kpi__label">Emissionen (Index)</div>
+        </div>
+        <div class="impact__kpi">
+          <div class="kpi__num" data-count="68">0</div>
+          <div class="kpi__label">Zufriedenheit (%)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Politik -->
+    <section id="politik" class="section reveal section--highlight">
+      <h2>Politik & Rahmen</h2>
+      <ul class="ticks">
+        <li>Planungssicherheit und klare Netzkodizes</li>
+        <li>Förderung für Speicher & Sektorkopplung</li>
+        <li>Beschleunigte Genehmigungen</li>
+      </ul>
+    </section>
+
+    <!-- Vision 2050 -->
+    <section id="vision2050" class="section reveal">
+      <h2>Vision 2050</h2>
       <ol class="timeline">
-        <li><time>2026–2030</time><p>PV‑Ausbau auf Dächern, erste Quartierspeicher &amp; Smart‑Meter‑Rollout.</p></li>
-        <li><time>2031–2040</time><p>Wind &amp; Wasser modernisieren, Sektorkopplung (Wärme, Mobilität) skaliert.</p></li>
-        <li><time>2041–2050</time><p>Breiter Einsatz von Speichern, flexiblen Tarifen &amp; Energiegemeinschaften.</p></li>
+        <li><span class="dot"></span><div><strong>2026–2030</strong> Ausbau PV/Heimspeicher</div></li>
+        <li><span class="dot"></span><div><strong>2030–2035</strong> Hybridparks & Flex‑Märkte</div></li>
+        <li><span class="dot"></span><div><strong>2035–2050</strong> Vollständig erneuerbar</div></li>
       </ol>
     </section>
 
-    <!-- ===== Roadmap (Zahlenstrahl: folgt dem Scroll-Fortschritt) ===== -->
-    <section class="section section--alt reveal" id="roadmap" aria-labelledby="roadmap-title">
-      <h2 id="roadmap-title">Zahlenstrahl – Roadmap 2026–2050</h2>
-      <div class="numberline" aria-label="Zeitplan 2026 bis 2050">
+    <!-- Roadmap (Zahlenstrahl) -->
+    <section id="roadmap" class="section reveal">
+      <h2>Roadmap</h2>
+      <div class="numberline">
         <div class="numberline__track"></div>
-        <div class="numberline__progress"></div>
-        <div class="numberline__dot" aria-hidden="true"></div>
+        <div class="numberline__progress" style="width:0%"></div>
+        <div class="numberline__dot" style="left:0%"></div>
         <ul class="numberline__labels">
-          <li data-pos="0">2026</li>
-          <li data-pos="0.2">2030</li>
-          <li data-pos="0.6">2040</li>
-          <li data-pos="1">2050</li>
+          <li data-pos="10">Pilot</li>
+          <li data-pos="35">Roll‑out</li>
+          <li data-pos="65">Skalierung</li>
+          <li data-pos="100">Ziel</li>
         </ul>
       </div>
-      <div class="milestones grid grid--3">
-        <article class="tile"><h3>2026–2030</h3><p>PV‑Dachflächen maximal nutzen, Quartierspeicher piloten, Smart‑Meter ausrollen.</p></article>
-        <article class="tile"><h3>2031–2040</h3><p>Wind &amp; Wasser modernisieren, Sektorkopplung skalieren, Mikrogrids stärken.</p></article>
-        <article class="tile"><h3>2041–2050</h3><p>Speicher breit einsetzen, flexible Tarife etablieren, Energiegemeinschaften verankern.</p></article>
-      </div>
     </section>
 
-    <!-- ===== Projekte: Galerie + Lightbox ===== -->
-    <section class="section reveal" id="projekte" aria-labelledby="proj-title">
-      <h2 id="proj-title">Projekte</h2>
-      <div class="gallery grid grid--3">
-        <a class="item" href="/bilder/solar.png" data-title="Solarpark A"><img src="/bilder/solar.png" alt="Solarpark A" loading="lazy"></a>
-        <a class="item" href="/bilder/wind.png" data-title="Windfeld B"><img src="/bilder/wind.png" alt="Windfeld B" loading="lazy"></a>
-        <a class="item" href="/bilder/wasser.png" data-title="Wasserkraft C"><img src="/bilder/wasser.png" alt="Wasserkraft C" loading="lazy"></a>
-        <a class="item" href="/bilder/speicher.png" data-title="BESS D"><img src="/bilder/speicher.png" alt="Batteriespeicher D" loading="lazy"></a>
-        <a class="item" href="/bilder/hero.png" data-title="Landschaft"><img src="/bilder/hero.png" alt="Landschaft" loading="lazy"></a>
-        <a class="item" href="/bilder/solar.png" data-title="Solarpark E"><img src="/bilder/solar.png" alt="Solarpark E" loading="lazy"></a>
-      </div>
+    <!-- Interaktive Karte -->
+    <section id="karte" class="section reveal">
+      <h2>Karte – Gemeinden & Technologien</h2>
+      <div id="map" class="map" aria-label="Interaktive Karte: 20 Gemeinden" data-svg="/bilder/tolimap.svg" data-csv="/daten/energie.csv"></div>
+      <div id="tooltip" role="tooltip" class="tooltip" hidden></div>
     </section>
 
-    <!-- ===== Interaktive Karte (SVG + CSV) – FUNKTIONIERT wie vorher ===== -->
-    <section class="section reveal" id="karte" aria-labelledby="karte-title">
-      <h2 id="karte-title">Interaktive Karte</h2>
-
-      <div class="mapwrap" role="region" aria-label="Karte der 20 Gemeinden">
-        <!-- Das SVG wird per JS inline hereingeladen -->
-        <div id="tolimap-container" data-src="/bilder/tolimap.svg"></div>
-
-        <!-- Tooltip für Stats (wird per JS befüllt) -->
-        <div id="mapTip" class="maptip" role="tooltip" aria-hidden="true"></div>
-      </div>
-
-      <p class="note">Tipp: Mit <kbd>Tab</kbd> fokussieren, <kbd>Enter</kbd> bzw. <kbd>Space</kbd> aktivieren.</p>
-    </section>
-
-    <!-- ===== Daten (ohne „Demo“-Hinweis) ===== -->
-    <section class="section reveal" id="daten" aria-labelledby="daten-title">
-      <h2 id="daten-title">Daten</h2>
-      <div class="widgets grid grid--4">
-        <article class="widget gauge" aria-label="Erzeugung heute">
-          <h3>Erzeugt heute</h3>
-          <div class="gauge__ring" style="--value:68"><span class="gauge__num">68%</span></div>
-          <p class="widget__sub">Solar/Wind/Wasser</p>
-        </article>
-
-        <article class="widget gauge" aria-label="Verbrauch heute">
-          <h3>Verbraucht heute</h3>
-          <div class="gauge__ring" style="--value:54"><span class="gauge__num">54%</span></div>
-          <p class="widget__sub">Haushalte &amp; Betriebe</p>
-        </article>
-
-        <article class="widget bar" aria-label="Netzzustand">
-          <h3>Netzzustand</h3>
-          <div class="bar__track"><div class="bar__fill" style="width: 40%"></div></div>
-          <p class="widget__sub">Last: <span class="bar__label">40%</span></p>
-        </article>
-
-        <article class="widget bar" aria-label="Speicherstand">
-          <h3>Speicherstand</h3>
-          <div class="bar__track"><div class="bar__fill" style="width: 72%"></div></div>
-          <p class="widget__sub">BESS: <span class="bar__label">72%</span></p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ===== FAQ ===== -->
-    <section class="section section--alt reveal" id="faq" aria-labelledby="faq-title">
-      <h2 id="faq-title">FAQ</h2>
-      <details class="faq"><summary>Warum sind Speicher so wichtig?</summary><p>Sie gleichen Erzeugungsschwankungen aus, stabilisieren Netze und erhöhen die Eigenverbrauchsquote.</p></details>
-      <details class="faq"><summary>Was kostet eine PV‑Anlage mit Speicher?</summary><p>Hängt von Leistung, Dachfläche und gewünschter Autarkie ab – wir kalkulieren projektbezogen.</p></details>
-      <details class="faq"><summary>Funktioniert das im Winter?</summary><p>Ja: Kombination aus PV, Wind &amp; Wasserkraft plus Speicher sorgt saisonal für Versorgungssicherheit.</p></details>
-    </section>
-
-    <!-- ===== Team ===== -->
-    <section class="section reveal" id="team" aria-labelledby="team-title">
-      <h2 id="team-title">Team</h2>
-      <div class="grid grid--3">
-        <article class="person"><div class="avatar" aria-hidden="true">K</div><h3>Kimo</h3><p>Projektleitung &amp; Kommunikation</p></article>
-        <article class="person"><div class="avatar" aria-hidden="true">L</div><h3>Levin</h3><p>Technik &amp; Smart‑Grids</p></article>
-        <article class="person"><div class="avatar" aria-hidden="true">L</div><h3>Livio</h3><p>Design &amp; Visualisierung</p></article>
-      </div>
-    </section>
-
-    <!-- ===== CTA ===== -->
-    <section class="cta reveal" aria-labelledby="cta-title">
-      <h2 id="cta-title">Bereit, loszulegen?</h2>
-      <p>Wir entwickeln mit euch die Energieprojekte von morgen – lokal, smart und nachhaltig.</p>
-      <a class="btn btn--primary pulse" href="#kontakt">Projekt anfragen</a>
-    </section>
-
-    <!-- ===== Kontakt ===== -->
-    <section class="section reveal" id="kontakt" aria-labelledby="kontakt-title">
-      <h2 id="kontakt-title">Kontakt</h2>
-      <form id="contactForm" action="https://formspree.io/f/mlggrvvk" method="POST" aria-label="Kontaktformular">
-        <div class="contact__row">
-          <label>
-            <span>Name</span>
-            <input type="text" name="name" placeholder="Vor- und Nachname" required autocomplete="name" />
-          </label>
-          <label>
-            <span>E‑Mail</span>
-            <input type="email" name="email" placeholder="name@beispiel.ch" required autocomplete="email" />
-          </label>
+    <!-- Daten-Widgets -->
+    <section id="daten" class="section reveal">
+      <h2>Daten</h2>
+      <div class="widgets">
+        <div class="gauge" style="--value:75">
+          <div class="gauge__num">75%</div>
+          <div class="gauge__label">Erneuerbar</div>
         </div>
-        <label>
-          <span>Nachricht</span>
-          <textarea name="message" rows="4" placeholder="Worum geht es?" required></textarea>
-        </label>
-
-        <!-- Spam-Schutz (Honeypot) -->
-        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-
-        <!-- E‑Mail Betreff / Redirect (ohne JS) -->
-        <input type="hidden" name="_subject" value="Neue Nachricht via ToLi Power Website" />
-        <input type="hidden" name="_next" value="https://tolipower.vercel.app/?sent=1" />
-
-        <div class="contact__actions">
-          <button class="btn btn--primary" id="sendBtn" type="submit">Nachricht senden</button>
-          <span class="form__status" id="formStatus" role="status" aria-live="polite"></span>
+        <div class="gauge" style="--value:40">
+          <div class="gauge__num">40%</div>
+          <div class="gauge__label">Netzausbau</div>
         </div>
+        <div class="bar">
+          <div class="bar__label">Speicherabdeckung</div>
+          <div class="bar__track"><div class="bar__fill" style="width:62%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section reveal">
+      <h2>FAQ</h2>
+      <details>
+        <summary>Wie funktioniert der Dark‑Mode?</summary>
+        <p>Automatisch via „prefers‑color‑scheme“, manuell per Toggle; Einstellung wird gespeichert.</p>
+      </details>
+      <details>
+        <summary>Wie pflege ich CSV‑Daten?</summary>
+        <p>In <code>/daten/energie.csv</code>; Spalten: <code>bfs,name,solar_count,wind_count,water_count,majority</code>.</p>
+      </details>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="section reveal">
+      <h2>Team</h2>
+      <p>Digitale Energie‑Crew im Toggenburg–Linthgebiet.</p>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="kontakt" class="section reveal">
+      <h2>Kontakt</h2>
+      <form id="contactForm" action="https://formspree.io/f/xyz" method="POST">
+        <label>Dein Name <input name="name" required></label>
+        <label>E‑Mail <input name="email" type="email" required></label>
+        <label>Nachricht <textarea name="message" required>Hallo ToLi Power, …</textarea></label>
+        <button type="submit">Senden</button>
+        <p id="formStatus" aria-live="polite"></p>
       </form>
     </section>
   </main>
 
-  <!-- Back to Top -->
-  <button id="toTop" class="toTop" aria-label="Nach oben">▲</button>
+  <!-- Back-to-Top -->
+  <button class="toTop" aria-label="Nach oben">▲</button>
 
   <!-- Footer -->
-  <footer class="footer" role="contentinfo">
-    <p>© <span id="year"></span> ToLi Power – Natur &amp; Energie</p>
-    <p class="small">Website von Kimo • Levin • Livio</p>
+  <footer class="footer">
+    <small>© <span id="year"></span> ToLi Power</small>
   </footer>
 
-  <!-- Lightbox Modal -->
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="lightbox__close" aria-label="Schliessen">×</button>
-    <figure class="lightbox__frame">
-      <img alt="">
-      <figcaption class="lightbox__caption"></figcaption>
-    </figure>
-  </div>
-
-  <!-- Scripts -->
   <script src="/script.js" defer></script>
 </body>
 </html>
