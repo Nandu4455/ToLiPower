@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ToLi Power – Natur & Energie</title>
-  <meta name="description" content="Vision, Technologien (Solar, Wind, Wasser, Speicher), interaktive Karte mit CSV-Daten, Roadmap, Kontakt.">
+  <meta name="description" content="Technologien (Solar, Wind, Wasser, Speicher), interaktive Karte mit CSV-Daten, Roadmap und Kontakt.">
   <meta name="color-scheme" content="dark light" />
   <link rel="icon" href="/bilder/hero.png" type="image/png" />
   <link rel="preload" href="/style.css" as="style" />
@@ -30,12 +30,10 @@
 
       <nav class="nav__desktop" aria-label="Hauptnavigation">
         <ul class="nav__links">
-          <li><a href="#vision">Vision</a></li>
           <li><a href="#tech">Technologie</a></li>
           <li><a href="#usecases">Use‑Cases</a></li>
           <li><a href="#impact">Impact</a></li>
           <li><a href="#politik">Politik</a></li>
-          <li><a href="#vision2050">Vision 2050</a></li>
           <li><a href="#roadmap">Roadmap</a></li>
           <li><a href="#karte">Karte</a></li>
           <li><a href="#daten">Daten</a></li>
@@ -55,12 +53,10 @@
     <!-- Mobile Overlay -->
     <div id="mobileMenu" class="nav__mobile" hidden>
       <ul>
-        <li><a href="#vision">Vision</a></li>
         <li><a href="#tech">Technologie</a></li>
         <li><a href="#usecases">Use‑Cases</a></li>
         <li><a href="#impact">Impact</a></li>
         <li><a href="#politik">Politik</a></li>
-        <li><a href="#vision2050">Vision 2050</a></li>
         <li><a href="#roadmap">Roadmap</a></li>
         <li><a href="#karte">Karte</a></li>
         <li><a href="#daten">Daten</a></li>
@@ -105,43 +101,6 @@
           <img src="/bilder/hero.png" alt="Energie‑Hero" loading="lazy" />
           <figcaption class="sr-only">Energie‑Hero</figcaption>
         </figure>
-      </div>
-    </section>
-
-    <!-- Vision -->
-    <section id="vision" class="section reveal">
-      <h2>Unsere Vision</h2>
-      <div class="grid-2">
-        <div class="box box--prose">
-          <p>Wir verbinden Natur und Energie – für die Zukunft. 100 % erneuerbar, regional verankert, digital vernetzt.</p>
-        </div>
-        <div class="box box--prose">
-          <p>Ökonomisch sinnvoll, ökologisch verantwortungsvoll, resilient gegenüber Schwankungen und Ausfällen.</p>
-        </div>
-      </div>
-
-      <div class="bullets bullets--boxed">
-        <div>
-          <h3>Wirtschaftlich</h3>
-          <ul class="ticks">
-            <li>Hohe Eigenverbrauchsquote</li>
-            <li>Geringe OPEX durch Monitoring</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Ökologisch</h3>
-          <ul class="ticks">
-            <li>Emissionen im Betrieb ≈ 0</li>
-            <li>Materialrecycling planbar</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Resilient</h3>
-          <ul class="ticks">
-            <li>Dezentrale Erzeugung</li>
-            <li>Speicher & Lastmanagement</li>
-          </ul>
-        </div>
       </div>
     </section>
 
@@ -243,32 +202,14 @@
       </ul>
     </section>
 
-    <!-- Vision & Roadmap (kombiniert) -->
-    <section class="section reveal">
-      <h2>Vision & Roadmap</h2>
-
-      <!-- Anker bleibt für Menü -->
-      <div id="vision2050">
-        <ol class="timeline">
-          <li><span class="dot"></span><div><strong>2026–2030</strong> Ausbau PV/Heimspeicher</div></li>
-          <li><span class="dot"></span><div><strong>2030–2035</strong> Hybridparks & Flex‑Märkte</div></li>
-          <li><span class="dot"></span><div><strong>2035–2050</strong> Vollständig erneuerbar</div></li>
-        </ol>
-      </div>
-
-      <div id="roadmap" class="roadmap-wrap">
-        <div class="numberline">
-          <div class="numberline__track"></div>
-          <div class="numberline__progress" style="width:0%"></div>
-          <div class="numberline__dot" style="left:0%"></div>
-          <ul class="numberline__labels">
-            <li data-pos="10">Pilot</li>
-            <li data-pos="35">Roll‑out</li>
-            <li data-pos="65">Skalierung</li>
-            <li data-pos="100">Ziel</li>
-          </ul>
-        </div>
-      </div>
+    <!-- Roadmap (Vision entfernt, nur geplante Punkte) -->
+    <section id="roadmap" class="section reveal">
+      <h2>Roadmap</h2>
+      <ul class="roadmap-list">
+        <li><span class="year">2026–2030</span> Ausbau PV/Heimspeicher</li>
+        <li><span class="year">2030–2035</span> Hybridparks & Flex‑Märkte</li>
+        <li><span class="year">bis 2035</span> Netzdienliche Speicher in Betrieb</li>
+      </ul>
     </section>
 
     <!-- Interaktive Karte -->
@@ -280,23 +221,35 @@
       <div id="tooltip" role="tooltip" class="tooltip" hidden></div>
     </section>
 
-    <!-- Daten-Widgets -->
+    <!-- Daten-Widgets – NEUES LAYOUT -->
     <section id="daten" class="section reveal">
       <h2>Daten</h2>
-      <div class="widgets">
-        <div class="gauge" style="--value:75">
-          <div class="gauge__num">75%</div>
-          <div class="gauge__label">Erneuerbar</div>
+
+      <div class="data-grid">
+        <!-- Donut 1 -->
+        <div class="donut" style="--value:74">
+          <div class="donut__ring"></div>
+          <div class="donut__center">
+            <div class="donut__num">74%</div>
+            <div class="donut__label">Erneuerbar</div>
+          </div>
         </div>
-        <div class="gauge" style="--value:40">
-          <div class="gauge__num">40%</div>
-          <div class="gauge__label">Netzausbau</div>
+
+        <!-- Donut 2 -->
+        <div class="donut" style="--value:38">
+          <div class="donut__ring"></div>
+          <div class="donut__center">
+            <div class="donut__num">38%</div>
+            <div class="donut__label">Netzausbau</div>
+          </div>
         </div>
-        <div class="bar">
-          <div class="bar__label">Speicherabdeckung</div>
-          <div class="bar__track">
-            <div class="bar__fill" style="width:62%"></div>
-            <div class="bar__value">62%</div>
+
+        <!-- Meter (mit Bubble) -->
+        <div class="meter" style="--value:62">
+          <div class="meter__label">Speicherabdeckung</div>
+          <div class="meter__track">
+            <div class="meter__fill"></div>
+            <div class="meter__bubble">62%</div>
           </div>
         </div>
       </div>
