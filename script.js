@@ -301,3 +301,109 @@ if ('serviceWorker' in navigator){
       .catch(err => console.warn('SW Registrierung fehlgeschlagen:', err));
   });
 }
+
+
+/* ===== Interaktive Karte (20 Gemeinden) – Loader + Interaktion ===== */
+(() => {
+  // Container finden (hier steht data-src="/bilder/tolimap.svg")
+  const cont = document.getElementById('tolimap-container');
+  if (!cont || !cont.dataset.src) return;
+
+  // SVG-Datei laden und inline einsetzen
+  fetch(cont.dataset.src, { cache: 'no-store' })
+    .then(res => {
+      if (!res.ok) throw new Error('SVG nicht gefunden: ' + cont.dataset.src);
+      return res.text();
+    })
+    .then(svgText => {
+      cont.innerHTML = svgText;
+
+      // Das geladene <svg> markieren und zugänglich machen
+      const svg = cont.querySelector('svg');
+      if (!svg) throw new Error('Kein <svg> im geladenen Dokument');
+
+      // Grund-Attributes ergänzen (falls im SVG nicht vorhanden)
+      svg.classList.add('map');
+      if (!svg.getAttribute('role')) svg.setAttribute('role', 'img');
+      if (!svg.getAttribute('aria-label') && !svg.querySelector('title')) {
+        svg.setAttribute('aria-label', 'ToLi Power – Gemeinden im Toggenburg & Linthgebiet');
+      }
+
+      // Alle Gemeindepfade (Pfad hat id = Gemeindename)
+      const munPaths = svg.querySelectorAll('path[id]');
+      if (!munPaths.length) {
+        console.warn('Keine pfade mit id gefunden – prüfe dein SVG.');
+        return;
+      }
+
+      // Tooltip (optional)
+      const tip = document.getElementById('mapTip');
+      let active = null;
+
+      function showTip(el, x, y){
+        if (!tip) return;
+        const name = el.id || 'Gemeinde';
+        const bfs  = el.getAttribute('data-bfs_nummer');
+        tip.textContent = bfs ? `${name} (BFS ${bfs})` : name;
+        tip.style.left = `${x}px`;
+        tip.style.top  = `${y}px`;
+        tip.classList.add('is-show');
+        tip.setAttribute('aria-hidden','false');
+      }
+      function hideTip(){
+        if (!tip) return;
+        tip.classList.remove('is-show');
+        tip.setAttribute('aria-hidden','true');
+      }
+
+      function select(el){
+        // Toggle: gleiche Gemeinde nochmal -> abwählen
+        if (active === el) {
+          el.classList.remove('is-active');
+          active = null;
+          return;
+        }
+        if (active) active.classList.remove('is-active');
+        el.classList.add('is-active');
+        active = el;
+      }
+
+      // Interaktion für alle Gemeinden
+      munPaths.forEach(p => {
+        // A11y Basics
+        p.setAttribute('tabindex', '0');
+        p.setAttribute('role', 'button');
+        const name = p.id || 'Gemeinde';
+        const bfs  = p.getAttribute('data-bfs_nummer');
+        p.setAttribute('aria-label', bfs ? `${name} (BFS ${bfs})` : name);
+
+        // Pointer
+        p.addEventListener('click', () => select(p));
+        p.addEventListener('mousemove', e => showTip(p, e.clientX, e.clientY));
+        p.addEventListener('mouseleave', hideTip);
+
+        // Keyboard
+        p.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            select(p);
+          }
+        });
+      });
+
+      // Klick außerhalb -> Auswahl + Tooltip schließen
+      document.addEventListener('click', (e) => {
+        const inside = svg.contains(e.target);
+        if (!inside) {
+          hideTip();
+          if (active) { active.classList.remove('is-active'); active = null; }
+        }
+      });
+
+      // Scroll/Resize -> Tooltip sauber ausblenden
+      window.addEventListener('scroll', hideTip, { passive: true });
+      window.addEventListener('resize', hideTip);
+    })
+    .catch(err => console.error('[Karte] Fehler beim Laden der SVG:', err));
+})();
+
