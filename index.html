@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de" data-theme="light">
 <head>
@@ -23,13 +22,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
 
-  <!-- Performance: Hero vorladen -->
+  <!-- Performance: Hero-Bild vorladen -->
   <link rel="preload" as="image" href="/bilder/hero.png" imagesrcset="/bilder/hero.png 1x">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/style.css" />
 
-  <!-- PWA (optional, funktioniert auch ohne) -->
+  <!-- PWA -->
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
@@ -53,11 +52,11 @@
   <a class="skip-link" href="#kontakt">Direkt zum Kontakt</a>
   <a class="skip-link" href="#karte">Direkt zur Karte</a>
 
-  <!-- Hintergrund-Deko -->
+  <!-- Deko-Gradients -->
   <div class="blob blob--1" aria-hidden="true"></div>
   <div class="blob blob--2" aria-hidden="true"></div>
 
-  <!-- ===== Navigation ===== -->
+  <!-- ===== Navigation (Scrollspy + Kontrastmodus) ===== -->
   <header class="nav" role="banner">
     <a class="brand" href="#start" aria-label="Startseite">
       <span class="brand__logo">ToLi</span><span class="brand__accent">Power</span>
@@ -255,6 +254,7 @@
         <a class="item" href="/bilder/hero.png" data-title="Landschaft"><img src="/bilder/hero.png" alt="Landschaft" loading="lazy"></a>
         <a class="item" href="/bilder/solar.png" data-title="Solarpark E"><img src="/bilder/solar.png" alt="Solarpark E" loading="lazy"></a>
       </div>
+
       <p class="note">Detailseiten:
         <a href="/projekt-solarpark.html">Solarpark A</a> ·
         <a href="/projekt-windfeld.html">Windfeld B</a> ·
@@ -263,25 +263,29 @@
       </p>
     </section>
 
-    <!-- ===== Interaktive Karte (20 Gemeinden, anklickbar) ===== -->
-    <section class="section reveal" id="karte" aria-labelledby="karte-title">
-      <h2 id="karte-title">Interaktive Karte</h2>
+    <!-- ===== Interaktive Karte (SVG + Filter) ===== -->
 
-      <div class="mapwrap" role="region" aria-label="Karte der 20 Gemeinden">
-        <!-- Das SVG wird zur Laufzeit inline hereingeladen -->
-        <div id="tolimap-container" data-src="/bilder/tolimap.svg"></div>
+<!-- ===== Interaktive Karte (20 Gemeinden, anklickbar) ===== -->
+<section class="section reveal" id="karte" aria-labelledby="karte-title">
+  <h2 id="karte-title">Interaktive Karte</h2>
 
-        <!-- Tooltip (wird vom Script befüllt) -->
-        <div id="mapTip" class="maptip" role="tooltip" aria-hidden="true"></div>
-      </div>
+  <div class="mapwrap" role="region" aria-label="Karte der 20 Gemeinden">
+    <!-- Das SVG wird zur Laufzeit inline hereingeladen -->
+    <div id="tolimap-container" data-src="/bilder/tolimap.svg"></div>
 
-      <p class="note">Tipp: Mit <kbd>Tab</kbd> fokussieren, <kbd>Enter</kbd> oder <kbd>Space</kbd> aktivieren.</p>
-    </section>
+    <!-- Tooltip (optional, wird vom Script befüllt) -->
+    <div id="mapTip" class="maptip" role="tooltip" aria-hidden="true"></div>
+  </div>
 
-    <!-- ===== Daten-Widgets ===== -->
+  <p class="note">Tipp: Mit <kbd>Tab</kbd> fokussieren, <kbd>Enter</kbd> oder <kbd>Space</kbd> aktivieren.</p>
+</section>
+``
+
+
+    <!-- ===== Daten-Widgets (conic-gradient) ===== -->
     <section class="section reveal" id="daten" aria-labelledby="daten-title">
       <h2 id="daten-title">Live‑Daten (Demo)</h2>
-      <p class="section__lead">Die Werte werden client‑seitig simuliert (Demo). Für echte Kennzahlen einfach eine API nennen – wir binden sie an.</p>
+      <p class="section__lead">Die Werte werden client‑seitig simuliert (Demo). Für echte Kennzahlen einfach eine API nennen – ich binde sie an.</p>
 
       <div class="widgets grid grid--4">
         <article class="widget gauge" aria-label="Erzeugung heute">
@@ -335,7 +339,7 @@
       <a class="btn btn--primary pulse" href="#kontakt">Projekt anfragen</a>
     </section>
 
-    <!-- ===== Kontakt ===== -->
+    <!-- ===== Kontakt (Formspree live) ===== -->
     <section class="section reveal" id="kontakt" aria-labelledby="kontakt-title">
       <h2 id="kontakt-title">Kontakt</h2>
       <form id="contactForm" action="https://formspree.io/f/mlggrvvk" method="POST" aria-label="Kontaktformular">
