@@ -223,15 +223,25 @@ form?.addEventListener('submit', async (e) => {
     if (!tipName || !tipMeta) return;
     tipName.textContent = el.dataset.name || 'Projekt';
     tipMeta.textContent = el.dataset.output || '';
-    tip.style.left = `${clientX}px`;
-    tip.style.top = `${clientY}px`;
-    tip.setAttribute('aria-hidden','false');
+    tip.removeAttribute('aria-hidden');
+
+    // Position + Rand-Clamping
+    const pad = 12;
+    requestAnimationFrame(() => {
+      const vw = window.innerWidth, vh = window.innerHeight;
+      const w = tip.offsetWidth, h = tip.offsetHeight;
+      let x = clientX, y = clientY - 18;
+      x = Math.min(vw - pad - w/2, Math.max(pad + w/2, x));
+      y = Math.min(vh - pad - h, Math.max(pad, y));
+      tip.style.left = `${x}px`;
+      tip.style.top  = `${y}px`;
+    });
   }
   function hideTip(){ tip.setAttribute('aria-hidden','true'); }
 
   areas.forEach(el=>{
-    el.addEventListener('mousemove', e=> showTip(el, e.clientX, e.clientY));
-    el.addEventListener('mouseenter', e=> showTip(el, e.clientX, e.clientY));
+    el.addEventListener('mousemove', e => showTip(el, e.clientX, e.clientY));
+    el.addEventListener('mouseenter', e => showTip(el, e.clientX, e.clientY));
     el.addEventListener('mouseleave', hideTip);
     el.addEventListener('focus', ()=>{
       const rect = svg.getBoundingClientRect();
