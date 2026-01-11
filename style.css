@@ -202,3 +202,14 @@ button:focus-visible, a:focus-visible, .card:focus-visible { outline: 3px solid 
   .hero { padding-top: 56px; }
   .nav__tools button { padding: 8px 10px; }
 }
+
+
+/* Breadcrumb-Stil passend zum Design */
+.breadcrumb { margin: 12px 0 20px; font-size: 14px; color: var(--muted); }
+.breadcrumb a {
+  color: color-mix(in oklab, var(--text), var(--primary) 30%);
+  text-decoration: none; padding: 2px 6px; border-radius: 8px;
+  background: var(--glass); border:1px solid rgba(255,255,255,.08);
+}
+.breadcrumb a:hover { color: var(--text); }
+.breadcrumb ol { list-style: decimal; padding-left: 18px; display: grid; gap: 6px; }
