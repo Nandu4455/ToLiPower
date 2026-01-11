@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ToLi Power – Natur & Energie</title>
+
   <meta name="description" content="ToLi Power verbindet Profit & Nachhaltigkeit: Solar, Wind, Wasser, Speicher und Smart Grids – für eine grüne Zukunft." />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#29c26a" />
@@ -16,11 +17,14 @@
   <meta property="og:image" content="/bilder/hero.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Fonts & Performance -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="bilder/hero.png">
+
+  <!-- Performance: Hero-Bild priorisieren -->
+  <link rel="preload" as="image" href="bilder/hero.png" imagesrcset="bilder/hero.png 1x">
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
@@ -43,6 +47,7 @@
       <a href="#impact" class="spy">Impact</a>
       <a href="#politik" class="spy">Politik</a>
       <a href="#vision2050" class="spy">2050</a>
+      <a href="#roadmap" class="spy">Roadmap</a>
       <a href="#faq" class="spy">FAQ</a>
       <a href="#team" class="spy">Team</a>
       <a href="#kontakt" class="spy">Kontakt</a>
@@ -67,7 +72,7 @@
         <span class="chip">Speicher</span>
       </p>
 
-      <!-- Die Headline wird per JS in Zeichen gesplittet und gestaffelt animiert -->
+      <!-- JS splittet die Headline sowie animiert sie gestaffelt -->
       <h1 id="hero-title" class="fx-headline">
         <span class="accent">Natur</span> & Energie – <span class="ghost">für die Zukunft</span>
       </h1>
@@ -96,7 +101,7 @@
     </div>
 
     <figure class="hero__image skeleton">
-      <img src="bilder/hero.png" alt="Sonnenuntergang über PV‑Feld – ToLi Power" />
+      <img src="bilder/hero.png" alt="Erneuerbare Energie und Natur – Hero-Bild" loading="eager">
     </figure>
   </section>
 
@@ -113,7 +118,7 @@
       </ul>
     </div>
     <figure class="section__media skeleton">
-      <img src="bilder/speicher.png" alt="BESS‑Container – Batteriespeicher im Feld" loading="lazy" />
+      <img src="bilder/speicher.png" alt="Batteriespeicher-Container (BESS) – Vision" loading="lazy">
     </figure>
   </section>
 
@@ -124,35 +129,23 @@
 
     <div class="grid grid--4">
       <article class="card tilt">
-        <img class="card__img" src="bilder/solar.png" alt="Solarenergie – PV‑Module" loading="lazy" />
-        <div class="card__body">
-          <h3>Solarenergie</h3>
-          <p>PV‑Module auf Dächern & Freiflächen – mit Lastmanagement und Heimspeichern.</p>
-        </div>
+        <img class="card__img" src="bilder/solar.png" alt="Solarenergie – PV-Module" loading="lazy">
+        <div class="card__body"><h3>Solarenergie</h3><p>PV‑Module auf Dächern & Freiflächen – mit Lastmanagement und Heimspeichern.</p></div>
       </article>
 
       <article class="card tilt">
-        <img class="card__img" src="bilder/wind.png" alt="Windenergie – Onshore‑Turbinen" loading="lazy" />
-        <div class="card__body">
-          <h3>Windenergie</h3>
-          <p>Onshore‑Turbinen mit hoher Flächenleistung – stabilisiert durch Speicherverbünde.</p>
-        </div>
+        <img class="card__img" src="bilder/wind.png" alt="Windenergie – Onshore-Turbinen" loading="lazy">
+        <div class="card__body"><h3>Windenergie</h3><p>Onshore‑Turbinen mit hoher Flächenleistung – stabilisiert durch Speicherverbünde.</p></div>
       </article>
 
       <article class="card tilt">
-        <img class="card__img" src="bilder/wasser.png" alt="Wasserkraft – Speicherseen & Laufwasser" loading="lazy" />
-        <div class="card__body">
-          <h3>Wasserkraft</h3>
-          <p>Verlässliche Grundlast: Laufwasser & Speicherseen sichern das Gesamtsystem.</p>
-        </div>
+        <img class="card__img" src="bilder/wasser.png" alt="Wasserkraft – Staumauer / Laufwasser" loading="lazy">
+        <div class="card__body"><h3>Wasserkraft</h3><p>Verlässliche Grundlast: Laufwasser & Speicherseen sichern das Gesamtsystem.</p></div>
       </article>
 
       <article class="card tilt">
-        <img class="card__img" src="bilder/speicher.png" alt="Batteriespeicher – BESS" loading="lazy" />
-        <div class="card__body">
-          <h3>Speicherlösungen</h3>
-          <p>BESS erhöhen Flexibilität & Netzstabilität – Energie, wenn sie gebraucht wird.</p>
-        </div>
+        <img class="card__img" src="bilder/speicher.png" alt="Speicherlösungen – Batteriespeicher (BESS)" loading="lazy">
+        <div class="card__body"><h3>Speicherlösungen</h3><p>BESS erhöhen Flexibilität & Netzstabilität – Energie, wenn sie gebraucht wird.</p></div>
       </article>
     </div>
   </section>
@@ -164,22 +157,22 @@
       <article class="tile glow">
         <h3>Haushalte</h3>
         <p>PV‑Dach + Heimspeicher + dynamische Tarife → Eigenverbrauch steigt, Kosten sinken.</p>
-        <ul class="ticks"><li>Autarkie erhöhen</li><li>Lastspitzen glätten</li><li>Smart‑Meter‑Einbindung</li></ul>
+        <ul class="ticks"><li>Autarkie erhöhen</li><li>Lastspitzen glätten</li><li>Smart‑Meter</li></ul>
       </article>
       <article class="tile glow">
         <h3>Gemeinden</h3>
         <p>Energiegemeinschaften vernetzen Erzeuger & Verbraucher – fair & transparent.</p>
-        <ul class="ticks"><li>Quartierspeicher</li><li>Mikrogrids</li><li>Kommunale Ladehubs</li></ul>
+        <ul class="ticks"><li>Quartierspeicher</li><li>Mikrogrids</li><li>Ladehubs</li></ul>
       </article>
       <article class="tile glow">
         <h3>Unternehmen</h3>
         <p>Lastmanagement & Speicher reduzieren Netzentgelte und sichern Prozesse.</p>
-        <ul class="ticks"><li>Peak‑Shaving</li><li>Notstromkonzepte</li><li>Scope‑2‑Reduktion</li></ul>
+        <ul class="ticks"><li>Peak‑Shaving</li><li>Notstrom</li><li>Scope‑2‑Reduktion</li></ul>
       </article>
     </div>
   </section>
 
-  <!-- ===== Impact (mit echten data-count Werten) ===== -->
+  <!-- ===== Impact (Kein Hinweistext mehr, nur KPIs) ===== -->
   <section class="section reveal" id="impact" aria-labelledby="impact-title">
     <h2 id="impact-title">Unser Impact</h2>
     <div class="impact">
@@ -200,7 +193,6 @@
         <span class="kpi__label">t CO₂ vermieden</span>
       </div>
     </div>
-    <p class="impact__note">*Passe die Werte bei Bedarf einfach über die <code>data-count</code>-Attribute an.</p>
   </section>
 
   <!-- ===== Politik ===== -->
@@ -212,7 +204,6 @@
       <li>Netzausbau & Digitalisierung priorisieren</li>
       <li>Bildungsinitiativen & Forschung stärken</li>
     </ul>
-    <p class="note">Rahmenbedingungen beschleunigen die Energiewende und erhöhen die regionale Wettbewerbsfähigkeit.</p>
   </section>
 
   <!-- ===== Vision 2050 ===== -->
@@ -223,6 +214,38 @@
       <li><time>2031–2040</time><p>Wind & Wasser modernisieren, Sektorkopplung (Wärme, Mobilität) skaliert.</p></li>
       <li><time>2041–2050</time><p>Breiter Einsatz von Speichern, flexiblen Tarifen & Energiegemeinschaften.</p></li>
     </ol>
+  </section>
+
+  <!-- ===== Roadmap (Zahlenstrahl 2026–2050, animiert) ===== -->
+  <section class="section section--alt reveal" id="roadmap" aria-labelledby="roadmap-title">
+    <h2 id="roadmap-title">Zahlenstrahl – Roadmap 2026–2050</h2>
+
+    <div class="numberline" aria-label="Zeitplan 2026 bis 2050">
+      <div class="numberline__track"></div>
+      <div class="numberline__progress"></div>
+      <div class="numberline__dot" aria-hidden="true"></div>
+      <ul class="numberline__labels">
+        <li data-pos="0">2026</li>
+        <li data-pos="0.2">2030</li>
+        <li data-pos="0.6">2040</li>
+        <li data-pos="1">2050</li>
+      </ul>
+    </div>
+
+    <div class="milestones grid grid--3">
+      <article class="tile">
+        <h3>2026–2030</h3>
+        <p>PV‑Dachflächen maximal nutzen, Quartierspeicher piloten, Smart‑Meter flächig ausrollen.</p>
+      </article>
+      <article class="tile">
+        <h3>2031–2040</h3>
+        <p>Wind & Wasser modernisieren, Sektorkopplung (Wärme/Mobilität) skalieren, Mikrogrids stärken.</p>
+      </article>
+      <article class="tile">
+        <h3>2041–2050</h3>
+        <p>Speicher breit einsetzen, flexible Tarife etablieren, Energiegemeinschaften verankern.</p>
+      </article>
+    </div>
   </section>
 
   <!-- ===== FAQ ===== -->
@@ -247,7 +270,7 @@
   <section class="cta reveal" aria-labelledby="cta-title">
     <h2 id="cta-title">Bereit, loszulegen?</h2>
     <p>Wir entwickeln mit euch die Energieprojekte von morgen – lokal, smart und nachhaltig.</p>
-    <a href="#kontakt" class="btn btn--primary">Projekt anfragen</a>
+    <a href="#kontakt" class="btn btn--primary pulse">Projekt anfragen</a>
   </section>
 
   <!-- ===== Kontakt ===== -->
@@ -277,18 +300,7 @@
 
   <!-- Scripts -->
   <script src="script.js"></script>
-
-  <!-- Strukturierte Daten (optional) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "ToLi Power",
-    "url": "https://dein-projekt.vercel.app",
-    "description": "ToLi Power: Solar, Wind, Wasser und Speicher mit Smart Grids.",
-    "logo": "https://dein-projekt.vercel.app/bilder/hero.png"
-  }
-  </script>
 </body>
 </html>
 ``
+
