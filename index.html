@@ -18,24 +18,23 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
 
-  <!-- Performance: Hero-Bild priorisieren -->
-  <link rel="preload" href="/bilder/hero.png" as="image" imagesrcset="/bilder/hero.png">
+  <!-- Performance: Hero-Bild vorladen -->
+  <link rel="preload" as="image" href="bilder/hero.png" imagesrcset="bilder/hero.png 1x">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3/svg'">
 </head>
 <body>
 
-  <!-- Skip-Links (Barrierefreiheit+) -->
+  <!-- Skip-Links (A11y+) -->
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
   <a class="skip-link" href="#kontakt">Direkt zum Kontakt</a>
 
@@ -45,30 +44,32 @@
 
   <!-- ===== Navigation (Scrollspy + Kontrastmodus) ===== -->
   <header class="nav" role="banner">
-    <a href="#start" class="brand">
+    <a class="brand" href="#start" aria-label="Startseite">
       <span class="brand__logo">ToLi</span><span class="brand__accent">Power</span>
     </a>
 
     <nav class="nav__links" aria-label="Hauptnavigation">
-      <a href="#vision" class="spy">Vision</a>
-      <a href="#tech" class="spy">Technologie</a>
-      <a href="#usecases" class="spy">Use‑Cases</a>
-      <a href="#impact" class="spy">Impact</a>
-      <a href="#politik" class="spy">Politik</a>
-      <a href="#vision2050" class="spy">2050</a>
-      <a href="#roadmap" class="spy">Roadmap</a>
-      <a href="#projekte" class="spy">Projekte</a>
-      <a href="#karte" class="spy">Karte</a>
-      <a href="#daten" class="spy">Daten</a>
-      <a href="#faq" class="spy">FAQ</a>
-      <a href="#team" class="spy">Team</a>
-      <a href="#kontakt" class="spy">Kontakt</a>
+      <a class="spy" href="#vision">Vision</a>
+      <a class="spy" href="#tech">Technologie</a>
+      <a class="spy" href="#usecases">Use‑Cases</a>
+      <a class="spy" href="#impact">Impact</a>
+      <a class="spy" href="#politik">Politik</a>
+      <a class="spy" href="#vision2050">2050</a>
+      <a class="spy" href="#roadmap">Roadmap</a>
+      <a class="spy" href="#projekte">Projekte</a>
+      <a class="spy" href="#karte">Karte</a>
+      <a class="spy" href="#daten">Daten</a>
+      <a class="spy" href="#faq">FAQ</a>
+      <a class="spy" href="#team">Team</a>
+      <a class="spy" href="#kontakt">Kontakt</a>
     </nav>
 
     <div class="nav__actions">
       <button id="contrastToggle" class="btn btn--ghost" aria-label="Kontrastmodus umschalten">⛶</button>
       <button id="themeToggle" class="btn btn--ghost" aria-label="Designmodus umschalten">🌙</button>
-      <button id="menuToggle" class="nav__menu" aria-label="Navigation öffnen/schließen"><span></span><span></span><span></span></button>
+      <button id="menuToggle" class="nav__menu" aria-label="Navigation öffnen/schließen">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -95,8 +96,8 @@
         <p class="subtitle">Wir sorgen für eine <strong>grüne Zukunft</strong> — Kimo • Levin • Livio</p>
 
         <div class="hero__cta">
-          <a href="#vision" class="btn btn--secondary">Mehr erfahren</a>
-          <a href="#kontakt" class="btn btn--primary">Kontakt</a>
+          <a class="btn btn--primary" href="#vision">Mehr erfahren</a>
+          <a class="btn btn--secondary" href="#kontakt">Kontakt</a>
         </div>
 
         <div class="stats">
@@ -116,7 +117,7 @@
       </div>
 
       <figure class="hero__image skeleton">
-        <img src="bilder/hero.png" alt="Erneuerbare Energie in der Region – Landschaft mit Technologie" loading="eager">
+        <img src="bilder/hero.png" alt="Erneuerbare Energien: heroisches Landschaftsbild" loading="eager">
       </figure>
     </section>
 
@@ -133,7 +134,7 @@
         </ul>
       </div>
       <figure class="section__media skeleton">
-        <img src="bilder/speicher.png" alt="Batteriespeicher-Container (BESS) im Freien" loading="lazy">
+        <img src="bilder/speicher.png" alt="Moderner Batteriespeicher (BESS) im Freien" loading="lazy">
       </figure>
     </section>
 
@@ -144,22 +145,22 @@
 
       <div class="grid grid--4">
         <article class="card tilt">
-          <img class="card__img" src="bilder/solar.png" alt="Solarenergie – PV-Module" loading="lazy">
+          <img class="card__img" src="bilder/solar.png" alt="Solarenergie (PV‑Module)" loading="lazy">
           <div class="card__body"><h3>Solarenergie</h3><p>PV‑Module auf Dächern & Freiflächen – mit Lastmanagement und Heimspeichern.</p></div>
         </article>
 
         <article class="card tilt">
-          <img class="card__img" src="bilder/wind.png" alt="Windenergie – Turbinen" loading="lazy">
+          <img class="card__img" src="bilder/wind.png" alt="Windenergie (Windräder)" loading="lazy">
           <div class="card__body"><h3>Windenergie</h3><p>Onshore‑Turbinen mit hoher Flächenleistung – stabilisiert durch Speicherverbünde.</p></div>
         </article>
 
         <article class="card tilt">
-          <img class="card__img" src="bilder/wasser.png" alt="Wasserkraft – Stausee/Laufwasser" loading="lazy">
+          <img class="card__img" src="bilder/wasser.png" alt="Wasserkraft (Stausee/Laufwasser)" loading="lazy">
           <div class="card__body"><h3>Wasserkraft</h3><p>Verlässliche Grundlast: Laufwasser & Speicherseen sichern das Gesamtsystem.</p></div>
         </article>
 
         <article class="card tilt">
-          <img class="card__img" src="bilder/speicher.png" alt="Speicherlösungen – BESS" loading="lazy">
+          <img class="card__img" src="bilder/speicher.png" alt="Speicherlösungen (BESS)" loading="lazy">
           <div class="card__body"><h3>Speicherlösungen</h3><p>BESS erhöhen Flexibilität & Netzstabilität – Energie, wenn sie gebraucht wird.</p></div>
         </article>
       </div>
@@ -233,18 +234,18 @@
       <h2 id="proj-title">Projekte</h2>
       <div class="gallery grid grid--3">
         <a class="item" href="bilder/solar.png" data-title="Solarpark A"><img src="bilder/solar.png" alt="Solarpark A" loading="lazy"></a>
-        <a class="item" href="bilder/wind.png"  data-title="Windfeld B"><img src="bilder/wind.png" alt="Windfeld B" loading="lazy"></a>
+        <a class="item" href="bilder/wind.png" data-title="Windfeld B"><img src="bilder/wind.png" alt="Windfeld B" loading="lazy"></a>
         <a class="item" href="bilder/wasser.png" data-title="Wasserkraft C"><img src="bilder/wasser.png" alt="Wasserkraft C" loading="lazy"></a>
         <a class="item" href="bilder/speicher.png" data-title="BESS D"><img src="bilder/speicher.png" alt="Batteriespeicher D" loading="lazy"></a>
-        <a class="item" href="bilder/hero.png" data-title="Regionale Landschaft"><img src="bilder/hero.png" alt="Regionale Landschaft" loading="lazy"></a>
+        <a class="item" href="bilder/hero.png" data-title="Landschaft"><img src="bilder/hero.png" alt="Landschaft" loading="lazy"></a>
         <a class="item" href="bilder/solar.png" data-title="Solarpark E"><img src="bilder/solar.png" alt="Solarpark E" loading="lazy"></a>
       </div>
 
-      <!-- Projekt-Detailseiten-Links (Beispiel) -->
-      <p class="note">Detailseiten: 
-        <a href="projekt-solarpark.html">Solarpark A</a> · 
-        <a href="projekt-windfeld.html">Windfeld B</a> · 
-        <a href="projekt-wasserkraft.html">Wasserkraft C</a> · 
+      <!-- Beispiel-Detailseiten -->
+      <p class="note">Detailseiten:
+        <a href="projekt-solarpark.html">Solarpark A</a> ·
+        <a href="projekt-windfeld.html">Windfeld B</a> ·
+        <a href="projekt-wasserkraft.html">Wasserkraft C</a> ·
         <a href="projekt-speicher.html">BESS D</a>
       </p>
     </section>
@@ -262,12 +263,11 @@
         <label><input type="checkbox" name="filter" value="speicher" checked> Speicher</label>
       </fieldset>
 
-      <!-- SVG Karte (stilisiert, Platzhalter-Geometrien) -->
+      <!-- Beispielhafte Karte (Rechtecke als Platzhalter) -->
       <div class="mapwrap" role="region" aria-label="Karte der Projekte">
         <svg class="map" viewBox="0 0 600 340" role="img" aria-labelledby="map-title">
           <title id="map-title">Regionale Projekte – interaktive Karte</title>
 
-          <!-- Regionen/Gemeinden (Beispiele) -->
           <g class="area" tabindex="0" data-type="solar" data-name="Gemeinde Alpha" data-output="5.4 GWh/a">
             <rect x="40" y="60" width="120" height="80" rx="10" ry="10" />
           </g>
@@ -291,13 +291,13 @@
           <div class="maptip__meta"></div>
         </div>
       </div>
-      <p class="note">Tipp: Mit Tab kannst du die Flächen ansteuern, Enter öffnet Details.</p>
+      <p class="note">Tipp: Mit Tab kannst du die Flächen ansteuern, Enter öffnet Details (Demo‑Alert).</p>
     </section>
 
     <!-- ===== Daten-Widgets (conic-gradient) ===== -->
     <section class="section reveal" id="daten" aria-labelledby="daten-title">
       <h2 id="daten-title">Live‑Daten (Demo)</h2>
-      <p class="section__lead">Die Werte werden client‑seitig simuliert (Demo‑Modus). Für echte Kennzahlen bitte an ein API anbinden.</p>
+      <p class="section__lead">Die Werte werden client‑seitig simuliert (Demo). Für echte Kennzahlen einfach eine API nennen – ich binde sie an.</p>
 
       <div class="widgets grid grid--4">
         <article class="widget gauge" aria-label="Erzeugung heute">
@@ -348,37 +348,40 @@
     <section class="cta reveal" aria-labelledby="cta-title">
       <h2 id="cta-title">Bereit, loszulegen?</h2>
       <p>Wir entwickeln mit euch die Energieprojekte von morgen – lokal, smart und nachhaltig.</p>
-      <a href="#kontakt" class="btn btn--primary pulse">Projekt anfragen</a>
+      <a class="btn btn--primary pulse" href="#kontakt">Projekt anfragen</a>
     </section>
 
-    <!-- ===== Kontakt (Formspree) ===== -->
+    <!-- ===== Kontakt (Formspree live) ===== -->
     <section class="section reveal" id="kontakt" aria-labelledby="kontakt-title">
       <h2 id="kontakt-title">Kontakt</h2>
-      <form
-        class="contact"
-        method="POST"
-        action="https://formspree.io/f/DEINE_FORM_ID"
-        aria-label="Kontaktformular"
-      >
+      <form id="contactForm" action="https://formspree.io/f/mlggrvvk" method="POST" aria-label="Kontaktformular">
         <div class="contact__row">
-          <label><span>Name</span><input type="text" name="name" placeholder="Vor- und Nachname" required /></label>
-          <label><span>E‑Mail</span><input type="email" name="email" placeholder="name@beispiel.ch" required /></label>
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" placeholder="Vor- und Nachname" required autocomplete="name" />
+          </label>
+          <label>
+            <span>E‑Mail</span>
+            <input type="email" name="email" placeholder="name@beispiel.ch" required autocomplete="email" />
+          </label>
         </div>
-        <label><span>Nachricht</span><textarea name="message" rows="4" placeholder="Worum geht es?" required></textarea></label>
+        <label>
+          <span>Nachricht</span>
+          <textarea name="message" rows="4" placeholder="Worum geht es?" required></textarea>
+        </label>
 
         <!-- Spam-Schutz (Honeypot) -->
-        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
-        <!-- Redirect / Bestätigung -->
-        <input type="hidden" name="_subject" value="Neue Nachricht via ToLi Power Website">
-        <input type="hidden" name="_next" value="https://dein-projekt.vercel.app/?sent=1">
+        <!-- E‑Mail Betreff / Redirect (ohne JS) -->
+        <input type="hidden" name="_subject" value="Neue Nachricht via ToLi Power Website" />
+        <input type="hidden" name="_next" value="https://dein-projekt.vercel.app/?sent=1" />
 
         <div class="contact__actions">
           <button class="btn btn--primary" id="sendBtn" type="submit">Nachricht senden</button>
-          <span class="form__status" role="status" aria-live="polite"></span>
+          <span class="form__status" id="formStatus" role="status" aria-live="polite"></span>
         </div>
       </form>
-      <p class="note">Formspree‑Hinweis: Ersetze <code>DEINE_FORM_ID</code> durch deine echte ID.</p>
     </section>
 
   </main>
@@ -392,7 +395,7 @@
     <p class="small">Website von Kimo • Levin • Livio</p>
   </footer>
 
-  <!-- Lightbox Modal (JS füllt Inhalt) -->
+  <!-- Lightbox Modal -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <button class="lightbox__close" aria-label="Schliessen">×</button>
     <figure class="lightbox__frame">
@@ -402,6 +405,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
