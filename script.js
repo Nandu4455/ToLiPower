@@ -3,10 +3,16 @@
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeToggle');
 const savedTheme = localStorage.getItem('tolipower-theme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 if (savedTheme) {
   html.setAttribute('data-theme', savedTheme);
   themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+} else {
+  html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+  themeBtn.textContent = prefersDark ? '☀️' : '🌙';
 }
+
 themeBtn.addEventListener('click', () => {
   const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   html.setAttribute('data-theme', next);
@@ -18,38 +24,39 @@ themeBtn.addEventListener('click', () => {
 const menuBtn = document.getElementById('menuToggle');
 const header = document.querySelector('.nav');
 menuBtn?.addEventListener('click', () => {
-  header.classList.toggle('nav--open');
+  const isOpen = header.classList.toggle('nav--open');
+  menuBtn.setAttribute('aria-expanded', isOpen);
 });
 
-// ===== Smooth Scroll für Anchor-Links =====
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click', e=>{
+// ===== Smooth Scroll =====
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
     const id = a.getAttribute('href').slice(1);
     if (!id) return;
     const el = document.getElementById(id);
-    if (el){
+    if (el) {
       e.preventDefault();
       header.classList.remove('nav--open');
-      el.scrollIntoView({behavior:'smooth', block:'start'});
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 });
 
 // ===== Reveal on Scroll =====
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if (entry.isIntersecting){
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
       entry.target.classList.add('is-visible');
       io.unobserve(entry.target);
     }
   });
-},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // ===== Counter Animation =====
-function animateCounter(el, to, duration=1200){
+function animateCounter(el, to, duration = 1200) {
   const t0 = performance.now();
-  function tick(t){
+  function tick(t) {
     const p = Math.min(1, (t - t0) / duration);
     const val = Math.floor(p * to);
     el.textContent = val.toLocaleString('de-CH');
@@ -58,41 +65,33 @@ function animateCounter(el, to, duration=1200){
   requestAnimationFrame(tick);
 }
 const stats = document.querySelectorAll('.stat__num');
-const statsObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
+const statsObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
       const num = parseInt(entry.target.dataset.count || '0', 10);
       animateCounter(entry.target, num);
       statsObserver.unobserve(entry.target);
     }
   });
-},{threshold:0.5});
-stats.forEach(el=> statsObserver.observe(el));
+}, { threshold: 0.5 });
+stats.forEach(el => statsObserver.observe(el));
 
-// ===== Skeleton-Loading: entferne Overlay, wenn Bild geladen =====
+// ===== Scroll-to-Top Button =====
+const scrollBtn = document.getElementById('scrollTopBtn');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    scrollBtn.classList.add('show');
+  } else {
+    scrollBtn.classList.remove('show');
+  }
+});
+scrollBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ===== Skeleton Loading =====
 document.querySelectorAll('.skeleton img').forEach(img => {
   if (img.complete) img.parentElement.classList.add('loaded');
   img.addEventListener('load', () => img.parentElement.classList.add('loaded'));
 });
-
-// ===== Parallax-Effekt auf Hero-Bild (deaktiviert bei reduced motion) =====
-const heroImg = document.querySelector('.hero__image img');
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let rafId = null;
-if (!prefersReduced && heroImg){
-  window.addEventListener('scroll', ()=>{
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(()=>{
-      const y = window.scrollY;
-      heroImg.style.transform = `scale(1.02) translateY(${Math.min(36, y*0.04)}px)`;
-    });
-  });
-}
-
-// ===== Fake Kontakt-Submit (Frontend-Demo) =====
-const sendBtn = document.getElementById('sendBtn');
-const statusEl = document.querySelector('.form__status');
-sendBtn?.addEventListener('click', ()=>{
-  statusEl.textContent = 'Sende …';
-  setTimeout(()=>{ statusEl.textContent = 'Danke! Wir melden uns in Kürze.'; }, 800);
-});
+``
