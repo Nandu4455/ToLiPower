@@ -5,14 +5,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ToLi Power – Natur & Energie</title>
-  <meta name="description" content="ToLi Power – Natur & Energie: Vision, Technologien (Solar, Wind, Wasser, Speicher), Karte mit CSV-Daten, Roadmap, Kontakt.">
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="icon" href="/bilder/hero.png" type="image/png">
-  <meta name="color-scheme" content="dark light">
-  <meta property="og:title" content="ToLi Power – Natur & Energie">
-  <meta property="og:description" content="Moderne, performante Single-Page mit Dark‑Mode, Karte & CSV‑Join, KPI‑Animationen und A11y.">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Vision, Technologien (Solar, Wind, Wasser, Speicher), interaktive Karte mit CSV-Daten, Roadmap, Kontakt.">
+  <meta name="color-scheme" content="dark light" />
+  <link rel="icon" href="/bilder/hero.png" type="image/png" />
+  <link rel="preload" href="/style.css" as="style" />
+  <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
@@ -27,7 +24,7 @@
   <!-- Header / Navigation -->
   <header class="nav" role="banner">
     <div class="nav__inner">
-      <a class="brand" href="#top" aria-label="ToLi Power – Start">
+      <a href="#top" class="brand" aria-label="ToLi Power – Startseite">
         <span class="brand__logo">ToLi</span><span class="brand__accent">Power</span>
       </a>
 
@@ -105,7 +102,7 @@
         </div>
 
         <figure class="hero__image skeleton">
-          <img src="/bilder/hero.png" alt="Fotorealistisches Energiefeld: PV, Wind und Speichercontainer" />
+          <img src="/bilder/hero.png" alt="Energie‑Hero" loading="lazy" />
           <figcaption class="sr-only">Energie‑Hero</figcaption>
         </figure>
       </div>
@@ -153,8 +150,8 @@
       <h2>Technologie & Innovation</h2>
       <div class="cards">
         <article class="card tilt">
-          <a href="/solar.html" class="card__link" aria-label="Mehr über Solarenergie">
-            <img class="card__img" src="/bilder/solar.png" alt="Solar‑Symbol / PV" loading="lazy">
+          <a class="card__link" href="/solar.html">
+            <img class="card__img" src="/bilder/solar.png" alt="Solarenergie" />
             <div class="card__body">
               <h3>Solarenergie</h3>
               <p>Photovoltaik & BIPV – Details, Vorteile, Kennzahlen.</p>
@@ -163,8 +160,8 @@
         </article>
 
         <article class="card tilt">
-          <a href="/wind.html" class="card__link" aria-label="Mehr über Windenergie">
-            <img class="card__img" src="/bilder/wind.png" alt="Wind‑Symbol" loading="lazy">
+          <a class="card__link" href="/wind.html">
+            <img class="card__img" src="/bilder/wind.png" alt="Windenergie" />
             <div class="card__body">
               <h3>Windenergie</h3>
               <p>Onshore/Offshore, Hybrid und Netzintegration.</p>
@@ -173,8 +170,8 @@
         </article>
 
         <article class="card tilt">
-          <a href="/wasser.html" class="card__link" aria-label="Mehr über Wasserenergie">
-            <img class="card__img" src="/bilder/wasser.png" alt="Wasser‑Symbol" loading="lazy">
+          <a class="card__link" href="/wasser.html">
+            <img class="card__img" src="/bilder/wasser.png" alt="Wasserenergie" />
             <div class="card__body">
               <h3>Wasserenergie</h3>
               <p>Lauf‑, Speicher‑ und Kleinwasserkraft.</p>
@@ -183,8 +180,8 @@
         </article>
 
         <article class="card tilt">
-          <a href="/speicher.html" class="card__link" aria-label="Mehr über Speicher">
-            <img class="card__img" src="/bilder/speicher.png" alt="Batteriespeicher‑Symbol" loading="lazy">
+          <a class="card__link" href="/speicher.html">
+            <img class="card__img" src="/bilder/speicher.png" alt="Speicher" />
             <div class="card__body">
               <h3>Speicher</h3>
               <p>Heimspeicher, BESS‑Container, Pumpspeicher.</p>
@@ -275,7 +272,9 @@
     <!-- Interaktive Karte -->
     <section id="karte" class="section reveal">
       <h2>Karte – Gemeinden & Technologien</h2>
-      <div id="map" class="map" aria-label="Interaktive Karte: 20 Gemeinden" data-svg="/bilder/tolimap.svg" data-csv="/daten/energie.csv"></div>
+      <div id="map" class="map" aria-label="Interaktive Karte: 20 Gemeinden"
+           data-svg="/bilder/tolimap.svg"
+           data-csv="/daten/energie.csv"></div>
       <div id="tooltip" role="tooltip" class="tooltip" hidden></div>
     </section>
 
