@@ -7,9 +7,13 @@
   <title>ToLi Power – Natur & Energie</title>
   <meta name="description" content="Vision, Technologien (Solar, Wind, Wasser, Speicher), interaktive Karte mit CSV-Daten, Roadmap, Kontakt.">
   <meta name="color-scheme" content="dark light" />
-  <link rel="icon" href="/bilder/hero.png" type="image/png" />
-  <link rel="preload" href="/style.css" as="style" />
-  <link rel="stylesheet" href="/style.css" />
+
+  <!-- Styles -->
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css">
+
+  <!-- Favicon (optional: ersetze durch dein Logo) -->
+  <link rel="icon" href="/bilder/solar.png" type="image/png">
 </head>
 
 <body>
@@ -24,7 +28,7 @@
   <!-- Header / Navigation -->
   <header class="nav" role="banner">
     <div class="nav__inner">
-      <a href="#top" class="brand" aria-label="ToLi Power – Startseite">
+      <a href="#top" class="brand" aria-label="ToLi Power – Start">
         <span class="brand__logo">ToLi</span><span class="brand__accent">Power</span>
       </a>
 
@@ -102,7 +106,7 @@
         </div>
 
         <figure class="hero__image skeleton">
-          <img src="/bilder/hero.png" alt="Energie‑Hero" loading="lazy" />
+          <img src="/bilder/hero.png" alt="Energie-Visual" loading="lazy">
           <figcaption class="sr-only">Energie‑Hero</figcaption>
         </figure>
       </div>
@@ -151,7 +155,7 @@
       <div class="cards">
         <article class="card tilt">
           <a class="card__link" href="/solar.html">
-            <img class="card__img" src="/bilder/solar.png" alt="Solarenergie" />
+            <img class="card__img" src="/bilder/solar.png" alt="Solarenergie">
             <div class="card__body">
               <h3>Solarenergie</h3>
               <p>Photovoltaik & BIPV – Details, Vorteile, Kennzahlen.</p>
@@ -161,7 +165,7 @@
 
         <article class="card tilt">
           <a class="card__link" href="/wind.html">
-            <img class="card__img" src="/bilder/wind.png" alt="Windenergie" />
+            <img class="card__img" src="/bilder/wind.png" alt="Windenergie">
             <div class="card__body">
               <h3>Windenergie</h3>
               <p>Onshore/Offshore, Hybrid und Netzintegration.</p>
@@ -171,7 +175,7 @@
 
         <article class="card tilt">
           <a class="card__link" href="/wasser.html">
-            <img class="card__img" src="/bilder/wasser.png" alt="Wasserenergie" />
+            <img class="card__img" src="/bilder/wasser.png" alt="Wasserenergie">
             <div class="card__body">
               <h3>Wasserenergie</h3>
               <p>Lauf‑, Speicher‑ und Kleinwasserkraft.</p>
@@ -181,7 +185,7 @@
 
         <article class="card tilt">
           <a class="card__link" href="/speicher.html">
-            <img class="card__img" src="/bilder/speicher.png" alt="Speicher" />
+            <img class="card__img" src="/bilder/speicher.png" alt="Speicherlösungen">
             <div class="card__body">
               <h3>Speicher</h3>
               <p>Heimspeicher, BESS‑Container, Pumpspeicher.</p>
@@ -281,18 +285,31 @@
     <!-- Daten-Widgets -->
     <section id="daten" class="section reveal">
       <h2>Daten</h2>
+
       <div class="widgets">
-        <div class="gauge" style="--value:75">
-          <div class="gauge__num">75%</div>
+        <!-- Gauge 1 -->
+        <div class="gauge">
+          <div class="gauge__ring" style="--value:76">
+            <span class="gauge__num">76%</span>
+          </div>
           <div class="gauge__label">Erneuerbar</div>
         </div>
-        <div class="gauge" style="--value:40">
-          <div class="gauge__num">40%</div>
+
+        <!-- Gauge 2 -->
+        <div class="gauge">
+          <div class="gauge__ring" style="--value:40">
+            <span class="gauge__num">40%</span>
+          </div>
           <div class="gauge__label">Netzausbau</div>
         </div>
+
+        <!-- Bar -->
         <div class="bar">
           <div class="bar__label">Speicherabdeckung</div>
-          <div class="bar__track"><div class="bar__fill" style="width:62%"></div></div>
+          <div class="bar__track" data-value="62">
+            <div class="bar__fill" style="width:62%"></div>
+            <div class="bar__value">62%</div>
+          </div>
         </div>
       </div>
     </section>
@@ -337,6 +354,7 @@
     <small>© <span id="year"></span> ToLi Power</small>
   </footer>
 
+  <!-- Scripts -->
   <script src="/script.js" defer></script>
 </body>
 </html>
