@@ -105,7 +105,7 @@
       const rect = heroImg.getBoundingClientRect();
       const vh = window.innerHeight || document.documentElement.clientHeight;
       const ratio = 1 - Math.min(Math.max((rect.top + rect.height) / (vh + rect.height), 0), 1);
-      heroImg.style.transform = `translateY(${ratio * 8}px)`; // subtle
+      heroImg.style.transform = `translateY(${ratio * 8}px)`; // subtil
     };
     onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
   }
@@ -139,7 +139,6 @@
   // ---------- [ROADMAP] Progress & Dot ----------
   const numberline = document.querySelector('.numberline');
   if (numberline) {
-    const track = numberline.querySelector('.numberline__track');
     const progress = numberline.querySelector('.numberline__progress');
     const dot = numberline.querySelector('.numberline__dot');
     const labels = Array.from(numberline.querySelectorAll('.numberline__labels li'));
@@ -149,24 +148,20 @@
       const vh = window.innerHeight || document.documentElement.clientHeight;
       const visible = 1 - Math.min(Math.max((rect.top + 100) / (vh + rect.height), 0), 1); // scroll context
       const pct = Math.round(visible * 100);
-      progress.style.width = `${pct}%`;
-      dot.style.left = `${pct}%`;
-      labels.forEach(li => {
-        const pos = parseInt(li.getAttribute('data-pos'), 10) || 0;
-        li.classList.toggle('active', pct >= pos);
-      });
+      if (progress) progress.style.width = `${pct}%`;
+      if (dot) dot.style.left = `${pct}%`;
+      labels.forEach(li => li.classList.toggle('active', pct >= (parseInt(li.dataset.pos || '0', 10))));
     };
     update();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
   }
 
-  // ---------- [MAP] SVG + CSV Join ----------
+  // ---------- [MAP] SVG + CSV Join (FIX: Fokus-Rahmen via CSS entfernt) ----------
   const mapHost = document.getElementById('map');
   const tooltip = document.getElementById('tooltip');
 
   const parseCSV = (text) => {
-    // Simple split (ohne Kommas in Feldern)
     const lines = text.trim().split(/\r?\n/);
     const header = lines.shift().split(',').map(s => s.trim());
     return lines.map(line => {
@@ -200,7 +195,7 @@
       const rows = parseCSV(csvText);
       const dataMap = new Map();
       rows.forEach(r => {
-        const bfs = String(r.bfs).trim();
+        const bfs = String(r.bfs || '').trim();
         const solar = +r.solar_count || 0;
         const wind = +r.wind_count || 0;
         const water = +r.water_count || 0;
@@ -215,8 +210,10 @@
       // Interaktion
       const areas = svg.querySelectorAll('[data-bfs_nummer]');
       areas.forEach(area => {
-        const bfs = String(area.getAttribute('data-bfs_nummer')).trim();
+        const bfs = String(area.getAttribute('data-bfs_nummer') || '').trim();
         const info = dataMap.get(bfs);
+
+        // Keyboard-A11y
         area.setAttribute('tabindex', '0');
         area.setAttribute('role', 'button');
 
@@ -237,6 +234,7 @@
 
         area.addEventListener('click', activate);
         area.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
+
         document.addEventListener('scroll', hideTip, { passive: true });
         window.addEventListener('resize', hideTip);
         svg.addEventListener('click', (e) => { if (!e.target.closest('[data-bfs_nummer]')) deactivate(); });
@@ -246,8 +244,7 @@
     });
   }
 
-  // ---------- [DATA] Gauges & Bars ----------
-  // Optional: leichte Variation
+  // ---------- [DATA] Gauges & Bars (Zahlen sichtbar, optional leicht variieren) ----------
   const bars = document.querySelectorAll('.bar__fill');
   const gauges = document.querySelectorAll('.gauge');
   const tickData = () => {
@@ -265,7 +262,7 @@
       b.style.width = `${nw}%`;
     });
   };
-  // Deaktivieren? -> einfach nächsten Timer auskommentieren
+  // Entferne die nächste Zeile, wenn du keine Variationen willst:
   const intervalId = window.setInterval(tickData, 5000);
 
   // ---------- [CONTACT] Form Handling ----------
@@ -307,3 +304,4 @@
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
 })();
+
