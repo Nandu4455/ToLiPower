@@ -11,8 +11,7 @@
 }
 :root[data-theme="light"]{
   --bg:#f7fafc; --surface:#fff; --glass:rgba(0,0,0,.06);
-  --text:#111827; --muted:#566074;
-  --primary:#0c9a6b; --primary-2:#0a74c0; --accent:#0fb874; --ring:#1a8be3;
+  --text:#111827; --muted:#566074; --primary:#0c9a6b; --primary-2:#0a74c0; --accent:#0fb874; --ring:#1a8be3;
   --shadow:0 1px 2px rgba(0,0,0,.08), 0 10px 22px rgba(0,0,0,.08);
 }
 
@@ -21,11 +20,24 @@ html.contrast *{outline-color:var(--ring)!important}
 body{
   margin:0; color:var(--text);
   font-family:system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+
+  /* ============ Glatter Seitenhintergrund (ohne harte Naht) ============ */
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(180deg, #0b1220 0%, #0d1422 50%, #0b1220 100%),
+    radial-gradient(1000px 700px at 8% -10%, rgba(15,47,88,.55) 0%, transparent 60%),
+    radial-gradient(1100px 800px at 110% 120%, rgba(7,78,65,.55) 0%, transparent 60%);
+  background-blend-mode: soft-light, normal, normal;
+}
+
+/* leichte weiche Überlagerung gegen Banding */
+body::before{
+  content:""; position:fixed; inset:-20%;
+  pointer-events:none; z-index:0;
   background:
-    radial-gradient(1200px 800px at 10% 0%, #0d1931 0%, transparent 60%),
-    radial-gradient(1200px 800px at 100% 100%, #0c332d 0%, transparent 60%),
-    var(--bg);
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    radial-gradient(60% 60% at 15% 10%, rgba(255,255,255,.06), transparent 60%),
+    radial-gradient(70% 70% at 85% 90%, rgba(122,245,154,.06), transparent 60%);
+  filter: blur(40px);
 }
 
 /* Visually hidden (Figcaption nur für Screenreader) */
@@ -36,7 +48,7 @@ body{
 }
 
 /* Blobs */
-.blob,.blob--2{position:fixed;z-index:0;filter:blur(60px);opacity:.5;pointer-events:none;
+.blob,.blob--2{position:fixed;z-index:0;filter:blur(60px);opacity:.45;pointer-events:none;
   width:40vmax;height:40vmax;border-radius:50%;
   background:radial-gradient(circle at 30% 30%,#1f9e80 0%,transparent 60%);
   animation:float 18s ease-in-out infinite}
@@ -84,12 +96,18 @@ p{line-height:1.6}
 .fx-headline__accent{position:relative;color:var(--primary);text-shadow:0 0 24px color-mix(in oklab,var(--primary),white 20%)}
 .fx-headline__accent::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:linear-gradient(90deg,var(--primary),var(--primary-2));transform:scaleX(0);transform-origin:left;animation:sweep 1.2s .3s forwards}
 @keyframes sweep{to{transform:scaleX(1)}}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 20px}
+
+/* Chips (BUGFIX: keine List-Punkte) */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 20px;list-style:none;padding-left:0}
 .chip{font-size:12px;padding:6px 10px;border-radius:999px;background:var(--glass);color:var(--text);border:1px solid rgba(255,255,255,.08)}
+
+/* Stats */
 .stats{display:flex;gap:16px;flex-wrap:wrap}
 .stat{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;min-width:140px;box-shadow:var(--shadow)}
 .stat__num{font-size:28px;font-weight:800}
 .stat__label{color:var(--muted);font-size:12px}
+
+/* Hero image */
 .hero__image{position:relative;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
 .hero__image img{width:100%;height:auto;display:block;transform:translateY(0);transition:transform .3s ease}
 
@@ -106,8 +124,7 @@ p{line-height:1.6}
 @media (max-width:720px){.cards{grid-template-columns:1fr}}
 .card{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transform:translateZ(0)}
 .card__link{display:block;color:var(--text);text-decoration:none}
-/* Fix: Keine violetten :visited-States bei Card-Links */
-.card__link:visited{color:var(--text)}
+.card__link:visited{color:var(--text)} /* Fix: keine violetten visited-Links */
 .card__img{width:100%;height:160px;object-fit:cover;display:block}
 .card__body{padding:14px}
 .card.tilt:hover{transform:perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-2px);transition:transform .2s ease}
@@ -126,21 +143,20 @@ p{line-height:1.6}
 .ticks li{position:relative;padding-left:22px;margin:8px 0}
 .ticks li::before{content:"✔";position:absolute;left:0;color:var(--accent)}
 
-/* Impact KPI – **Rotation AUS** (global) */
+/* Impact KPI – Rotation AUS (global) */
 .impact__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 @media (max-width:980px){.impact__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:720px){.impact__grid{grid-template-columns:1fr}}
-.impact__kpi{position:relative;background:var(--glass);border-radius:var(--radius);padding:22px;text-align:center;box-shadow:var(--shadow);overflow:hidden}
-/* Deaktiviert die drehende conic-Border (global) */
-.impact__kpi::after{content:none!important}
+.impact__kpi{position:relative;background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:22px;text-align:center;box-shadow:var(--shadow);overflow:hidden}
+.impact__kpi::after{content:none!important} /* drehender Border deaktiviert */
 .kpi__num{font-size:34px;font-weight:800}
 .kpi__label{color:var(--muted);font-size:12px}
+.kpi__title{font-weight:800;margin-bottom:6px}
 
 /* Daten-KPIs verwenden dieselben Boxen */
 .data__grid{} /* keine Extra-Styles nötig */
 
-/* Politik Highlight */
-.section--highlight{background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+/* Politik-Alt-Stil entfernt -> neue Boxen bereits oben */
 
 /* Roadmap – ruhige Liste */
 .roadmap-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
@@ -156,6 +172,15 @@ p{line-height:1.6}
 .map [data-bfs_nummer]:focus-visible{outline:none;stroke:var(--accent);filter:drop-shadow(0 0 10px rgba(122,245,154,.35))}
 .tooltip{position:fixed;z-index:100;background:color-mix(in oklab,var(--surface),transparent 6%);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);padding:10px 12px;border-radius:10px;box-shadow:var(--shadow);max-width:320px;font-size:13px}
 .tooltip[hidden]{display:none!important}
+
+/* Breadcrumbs (Detailseiten) – Glas-Look statt violett */
+.breadcrumb{margin:12px 0 20px;font-size:14px;color:var(--muted)}
+.breadcrumb ol{list-style:decimal;padding-left:18px;display:grid;gap:6px}
+.breadcrumb a,.breadcrumb a:visited{
+  color:color-mix(in oklab,var(--text),var(--primary) 30%);
+  text-decoration:none;padding:2px 6px;border-radius:8px;
+  background:var(--glass);border:1px solid rgba(255,255,255,.08)
+}
 
 /* Buttons & forms */
 button,input,textarea{font:inherit}
@@ -176,3 +201,4 @@ button:focus-visible,a:focus-visible,.card:focus-visible{outline:3px solid var(-
   .hero{padding-top:56px}
   .nav__tools button{padding:8px 10px}
 }
+``
