@@ -22,6 +22,8 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Favicon -->
   <link rel="icon" href="bilder/favicon.png" type="image/png" />
 </head>
 <body>
@@ -138,16 +140,107 @@
     </div>
   </section>
 
-  <!-- Region, Ziele, Politik, Vision2050, Kontakt, Footer -->
-  <!-- (Diese Abschnitte bleiben wie in deinem Original, nur Bilder auf .webp und lazy loading anpassen) -->
+  <!-- Regionale Stärke -->
+  <section class="section section--alt reveal" id="region" aria-labelledby="region-title">
+    <h2 id="region-title">Regionale Stärke</h2>
+    <p class="section__lead">Lokale Projekte schaffen Jobs, halten die Wertschöpfung in der Region und verringern Import‑Abhängigkeiten.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <h3>Lokale Entwicklung</h3>
+        <p>Gemeinden, Schulen & Betriebe planen gemeinsam und profitieren gemeinsam.</p>
+      </div>
+      <div class="pillar">
+        <h3>Bildung & Akzeptanz</h3>
+        <p>Information, Transparenz & Beteiligung erhöhen die gesellschaftliche Unterstützung.</p>
+      </div>
+      <div class="pillar">
+        <h3>Netz & Speicher</h3>
+        <p>Ausbau von Netzen, Mikrogrids & Speichern für Stabilität und Flexibilität.</p>
+      </div>
+    </div>
+  </section>
 
+  <!-- Unsere Ziele -->
+  <section class="section reveal" id="ziele" aria-labelledby="ziele-title">
+    <h2 id="ziele-title">Unsere Ziele</h2>
+    <div class="goals grid grid--4">
+      <div class="goal">
+        <h3>Erneuerbare ausbauen</h3>
+        <p>PV auf Dächern + Freiflächen, Wind an geeigneten Standorten, Wasserkraft modernisieren.</p>
+      </div>
+      <div class="goal">
+        <h3>CO₂ reduzieren</h3>
+        <p>Fossile Brennstoffe substituieren und Effizienzpotenziale heben.</p>
+      </div>
+      <div class="goal">
+        <h3>Wirtschaft stärken</h3>
+        <p>Regionale Wertschöpfungsketten & qualifizierte Arbeitsplätze schaffen.</p>
+      </div>
+      <div class="goal">
+        <h3>Infrastruktur sichern</h3>
+        <p>Intelligente Netze, Speicherkapazitäten & Resilienz gegen Engpässe.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Politische Forderungen -->
+  <section class="section section--highlight reveal" id="politik" aria-labelledby="politik-title">
+    <h2 id="politik-title">Politische Forderungen</h2>
+    <ul class="bullets bullets--check">
+      <li>Gezielte Förderungen & Investitionssicherheit</li>
+      <li>Schnelle, transparente Bewilligungsverfahren</li>
+      <li>Netzausbau & Digitalisierung priorisieren</li>
+      <li>Bildungsinitiativen & Forschung stärken</li>
+    </ul>
+    <p class="note">Rahmenbedingungen beschleunigen die Energiewende und erhöhen die regionale Wettbewerbsfähigkeit.</p>
+  </section>
+
+  <!-- Vision 2050 -->
+  <section class="section reveal" id="vision2050" aria-labelledby="vision2050-title">
+    <h2 id="vision2050-title">Langfristige Vision – Energieautonomie bis 2050</h2>
+    <ol class="timeline">
+      <li>
+        <time>2026–2030</time>
+        <p>PV‑Ausbau auf Dächern, erste Quartierspeicher & Smart‑Meter‑Rollout.</p>
+      </li>
+      <li>
+        <time>2031–2040</time>
+        <p>Wind & Wasser modernisieren, Sektorkopplung (Wärme, Mobilität) skaliert.</p>
+      </li>
+      <li>
+        <time>2041–2050</time>
+        <p>Breiter Einsatz von Speichern, flexiblen Tarifen & regionalen Energiegemeinschaften.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- Kontakt -->
+  <section class="section reveal" id="kontakt" aria-labelledby="kontakt-title">
+    <h2 id="kontakt-title">Kontakt</h2>
+    <form class="contact" onsubmit="return false" aria-label="Kontaktformular">
+      <div class="contact__row">
+        <label>
+          <span>Name</span>
+          <input type="text" name="name" placeholder="Vor- und Nachname" required />
+        </label>
+        <label>
+          <span>E‑Mail</span>
+          <input type="email" name="email" placeholder="name@beispiel.ch" required />
+        </label>
+      </div>
+      <label>
+        <span>Nachricht</span>
+        <textarea name="message" rows="4" placeholder="Worum geht es?" required></textarea>
+      </label>
+      <div class="contact__actions">
+        <button class="btn btn--primary" id="sendBtn">Nachricht senden</button>
+        <span class="form__status" role="status" aria-live="polite"></span>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer -->
   <footer class="footer" role="contentinfo">
     <p>© 2026 ToLi Power – Natur & Energie</p>
     <p class="small">Website von Kimo • Levin • Livio</p>
-  </footer>
-
-  <script src="script.js" defer></script>
-</body>
-</html>
-``
-
+  </
