@@ -44,9 +44,7 @@
       document.body.style.overflow = 'hidden';
     };
     menuToggle.addEventListener('click', () => mobileMenu.hidden ? openMenu() : closeMenu());
-    mobileMenu.addEventListener('click', (e) => {
-      if (e.target.tagName === 'A') closeMenu();
-    });
+    mobileMenu.addEventListener('click', (e) => { if (e.target.tagName === 'A') closeMenu(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
   }
 
@@ -61,11 +59,9 @@
       entries.forEach(entry => {
         const id = entry.target.getAttribute('id');
         const link = menuLinks.find(a => a.getAttribute('href') === `#${id}`);
-        if (link) {
-          if (entry.isIntersecting) {
-            menuLinks.forEach(l => l.classList.remove('is-active'));
-            link.classList.add('is-active');
-          }
+        if (link && entry.isIntersecting) {
+          menuLinks.forEach(l => l.classList.remove('is-active'));
+          link.classList.add('is-active');
         }
       });
     }, { rootMargin: '-40% 0px -55% 0px', threshold: [0, 1] });
@@ -85,7 +81,6 @@
     }, { threshold: 0.15 });
     reveals.forEach(el => io.observe(el));
   } else {
-    // Fallback
     reveals.forEach(el => el.classList.add('is-visible'));
   }
 
@@ -157,7 +152,7 @@
     window.addEventListener('resize', update);
   }
 
-  // ---------- [MAP] SVG + CSV Join (FIX: Fokus-Rahmen via CSS entfernt) ----------
+  // ---------- [MAP] SVG + CSV Join ----------
   const mapHost = document.getElementById('map');
   const tooltip = document.getElementById('tooltip');
 
@@ -244,26 +239,45 @@
     });
   }
 
-  // ---------- [DATA] Gauges & Bars (Zahlen sichtbar, optional leicht variieren) ----------
-  const bars = document.querySelectorAll('.bar__fill');
+  // ---------- [DATA] Gauges & Bars ----------
+  // Zentrierte Zahlen aus der CSS-Variable --value übernehmen
   const gauges = document.querySelectorAll('.gauge');
-  const tickData = () => {
+  const bars = document.querySelectorAll('.bar__track');
+
+  const refreshWidgets = () => {
     gauges.forEach(g => {
       const v = parseFloat(getComputedStyle(g).getPropertyValue('--value')) || 0;
-      const d = (Math.random() * 2 - 1); // +-1
-      const nv = Math.max(0, Math.min(100, v + d));
-      g.style.setProperty('--value', nv);
-      const num = g.querySelector('.gauge__num'); if (num) num.textContent = `${Math.round(nv)}%`;
+      const num = g.querySelector('.gauge__num');
+      if (num) num.textContent = `${Math.round(v)}%`;
     });
-    bars.forEach(b => {
-      const w = parseFloat(b.style.width) || 50;
-      const d = (Math.random() * 2 - 1);
-      const nw = Math.max(0, Math.min(100, w + d));
-      b.style.width = `${nw}%`;
+    bars.forEach(t => {
+      const fill = t.querySelector('.bar__fill');
+      const label = t.querySelector('.bar__value');
+      if (fill && label) {
+        const w = parseFloat(fill.style.width) || 0;
+        label.textContent = `${Math.round(w)}%`;
+      }
     });
   };
-  // Entferne die nächste Zeile, wenn du keine Variationen willst:
-  const intervalId = window.setInterval(tickData, 5000);
+  refreshWidgets();
+
+  // Optional leichte Variation (Demo); entferne die Zeilen, wenn statisch gewünscht
+  const intervalId = window.setInterval(() => {
+    gauges.forEach(g => {
+      const v = parseFloat(getComputedStyle(g).getPropertyValue('--value')) || 0;
+      const nv = Math.max(0, Math.min(100, v + (Math.random()*2 - 1)));
+      g.style.setProperty('--value', nv);
+    });
+    bars.forEach(t => {
+      const fill = t.querySelector('.bar__fill');
+      if (fill) {
+        const w = parseFloat(fill.style.width) || 0;
+        const nw = Math.max(0, Math.min(100, w + (Math.random()*2 - 1)));
+        fill.style.width = `${nw}%`;
+      }
+    });
+    refreshWidgets();
+  }, 5000);
 
   // ---------- [CONTACT] Form Handling ----------
   const form = document.getElementById('contactForm');
@@ -275,15 +289,9 @@
       try {
         const formData = new FormData(form);
         const res = await fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
-        if (res.ok) {
-          if (status) status.textContent = 'Danke! Wir melden uns.';
-          form.reset();
-        } else {
-          if (status) status.textContent = 'Fehler beim Senden. Bitte später erneut versuchen.';
-        }
-      } catch {
-        if (status) status.textContent = 'Netzwerkfehler. Bitte später erneut.';
-      }
+        if (res.ok) { if (status) status.textContent = 'Danke! Wir melden uns.'; form.reset(); }
+        else { if (status) status.textContent = 'Fehler beim Senden. Bitte später erneut versuchen.'; }
+      } catch { if (status) status.textContent = 'Netzwerkfehler. Bitte später erneut.'; }
     });
   }
 
