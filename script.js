@@ -1,333 +1,309 @@
 
-/* ===== Theme & Contrast Toggle (Auto-Dark beim ersten Laden) ===== */
-const html = document.documentElement;
-const themeBtn = document.getElementById('themeToggle');
-const contrastBtn = document.getElementById('contrastToggle');
-const savedTheme = localStorage.getItem('tolipower-theme');
-const savedContrast = localStorage.getItem('tolipower-contrast');
+/* ============================================================
+   ToLi Power – Interaktionen & Logik (HTML/CSS/JS, kein Framework)
+   ============================================================ */
 
-if (savedTheme) {
-  html.setAttribute('data-theme', savedTheme);
-  if (themeBtn) themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-} else {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-  if (themeBtn) themeBtn.textContent = prefersDark ? '☀️' : '🌙';
-}
-if (savedContrast === 'on') { html.classList.add('contrast'); }
-
-themeBtn?.addEventListener('click', () => {
-  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  localStorage.setItem('tolipower-theme', next);
-  themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
-});
-contrastBtn?.addEventListener('click', () => {
-  html.classList.toggle('contrast');
-  localStorage.setItem('tolipower-contrast', html.classList.contains('contrast') ? 'on' : 'off');
-});
-
-/* ===== Mobile Menü ===== */
-const menuBtn = document.getElementById('menuToggle');
-const header = document.querySelector('.nav');
-menuBtn?.addEventListener('click', () => header.classList.toggle('nav--open'));
-
-/* ===== Smooth Scroll + Scrollspy ===== */
-const spyLinks = [...document.querySelectorAll('.nav__links a')];
-spyLinks.forEach(a=>{
-  const href = a.getAttribute('href') ?? '';
-  if (href.startsWith('#')){
-    a.classList.add('spy');
-    a.addEventListener('click', e=>{
-      const id = href.slice(1);
-      const el = document.getElementById(id);
-      if (el){
-        e.preventDefault();
-        header.classList.remove('nav--open');
-        el.scrollIntoView({behavior:'smooth', block:'start'});
-      }
-    });
-  }
-});
-const sections = spyLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-const spy = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if (e.isIntersecting){
-      const id = `#${e.target.id}`;
-      spyLinks.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === id));
-    }
-  });
-},{ rootMargin: '-45% 0px -50% 0px', threshold: 0.01 });
-sections.forEach(s => spy.observe(s));
-
-/* ===== Reveal on Scroll ===== */
-const revealIO = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if (entry.isIntersecting){
-      entry.target.classList.add('is-visible');
-      revealIO.unobserve(entry.target);
-    }
-  });
-},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=> revealIO.observe(el));
-
-/* ===== Counter-Animation (Hero + Impact) ===== */
-function animateCounter(el, to, duration=1300){
-  const t0 = performance.now();
-  function tick(t){
-    const p = Math.min(1, (t - t0) / duration);
-    const val = Math.floor(p * to);
-    el.textContent = val.toLocaleString('de-CH');
-    if (p < 1) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
-function initCounters(){
-  const counters = document.querySelectorAll('.stat__num, .kpi__num');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        const num = parseInt(entry.target.dataset.count ?? '0', 10);
-        animateCounter(entry.target, num);
-        io.unobserve(entry.target);
-      }
-    });
-  },{threshold:0.5});
-  counters.forEach(el=>{
-    io.observe(el);
-    const r = el.getBoundingClientRect();
-    const inView = r.top >= 0 && r.bottom <= (window.innerHeight ?? document.documentElement.clientHeight);
-    if (inView){
-      const num = parseInt(el.dataset.count ?? '0', 10);
-      animateCounter(el, num);
-      io.unobserve(el);
-    }
-  });
-}
-window.addEventListener('DOMContentLoaded', initCounters);
-
-/* ===== Skeleton -> Overlay entfernen, wenn Bilder geladen ===== */
-document.querySelectorAll('.skeleton img').forEach(img=>{
-  const parent = img.parentElement;
-  const done = () => parent.classList.add('loaded');
-  if (img.complete) done(); else img.addEventListener('load', done);
-});
-
-/* ===== Back to Top ===== */
-const toTop = document.getElementById('toTop');
-window.addEventListener('scroll', () => {
-  toTop.classList.toggle('is-show', (window.scrollY ?? document.documentElement.scrollTop) > 600);
-},{passive:true});
-toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-/* ===== Parallax Hero (respect reduced motion) ===== */
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const heroImg = document.querySelector('.hero__image img');
-let rafId = null;
-if (!prefersReduced && heroImg){
-  window.addEventListener('scroll', ()=>{
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(()=>{
-      const y = window.scrollY;
-      heroImg.style.transform = `scale(1.02) translateY(${Math.min(36, y*0.04)}px)`;
-    });
-  });
-}
-
-/* ===== Kontakt (Formspree) – Statusanzeige ===== */
-const form = document.getElementById('contactForm');
-const formStatus = document.getElementById('formStatus');
-form?.addEventListener('submit', () => {
-  if (formStatus) {
-    formStatus.textContent = 'Senden …';
-    setTimeout(() => formStatus.textContent = 'Danke! Wir melden uns.', 1200);
-  }
-});
-
-/* ===== Roadmap: Fortschritt folgt dem Scroll-Kontext ===== */
-(function(){
-  const section = document.getElementById('roadmap');
-  const progress = document.querySelector('.numberline__progress');
-  const dot = document.querySelector('.numberline__dot');
-  const labels = document.querySelectorAll('.numberline__labels li');
-  if (!section || !progress || !dot) return;
-
-  function update(){
-    const rect = section.getBoundingClientRect();
-    const vh = Math.max(document.documentElement.clientHeight, window.innerHeight ?? 0);
-    const start = rect.top - vh*0.65;
-    const end = rect.bottom - vh*0.35;
-    const p = Math.min(1, Math.max(0, (vh*0.5 - start) / (end - start)));
-    const pct = p * 100;
-    progress.style.width = `${pct}%`;
-    dot.style.left = `${pct}%`;
-    labels.forEach(l=>{
-      const pos = parseFloat(l.dataset.pos ?? '0');
-      l.style.color = (p >= pos) ? 'var(--text)' : 'var(--muted)';
-    });
-  }
-  update();
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-})();
-
-/* ===== Galerie Lightbox ===== */
-(function(){
-  const lb = document.getElementById('lightbox');
-  const frame = lb?.querySelector('.lightbox__frame img');
-  const caption = lb?.querySelector('.lightbox__caption');
-  const closeBtn = lb?.querySelector('.lightbox__close');
-  if (!lb || !frame || !caption || !closeBtn) return;
-  function open(src, title){
-    frame.src = src; frame.alt = title ?? '';
-    caption.textContent = title ?? '';
-    lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false');
-  }
-  function close(){
-    lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true');
-    frame.src = ''; caption.textContent = '';
-  }
-  document.querySelectorAll('.gallery .item').forEach(a=>{
-    a.addEventListener('click', e=>{
-      e.preventDefault();
-      open(a.getAttribute('href'), a.getAttribute('data-title'));
-    });
-  });
-  closeBtn.addEventListener('click', close);
-  lb.addEventListener('click', (e)=>{ if(e.target === lb) close(); });
-  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
-})();
-
-/* ===== Interaktive Karte – SVG laden + CSV-Join + Tooltip (wie vorher) ===== */
 (() => {
-  const container = document.getElementById('tolimap-container');
-  if (!container || !container.dataset.src) return;
+  // ---------- [INIT] Theme & Contrast ----------
+  const root = document.documentElement;
+  const themeKey = 'tolipower-theme';
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const savedTheme = localStorage.getItem(themeKey);
+  root.setAttribute('data-theme', savedTheme || (prefersDark ? 'dark' : 'light'));
 
-  const energyUrl = '/daten/energie.csv';
-  const energyByBfs = new Map();
+  const themeToggle = document.getElementById('themeToggle');
+  const contrastToggle = document.getElementById('contrastToggle');
 
-  function parseCSV(text){
-    const lines = text.trim().split(/\r?\n/);
-    const header = lines.shift().split(',');
-    const col = (name) => header.indexOf(name);
-    const idx = {
-      bfs: col('bfs'),
-      name: col('name'),
-      solar: col('solar_count'),
-      wind: col('wind_count'),
-      water: col('water_count'),
-      majority: col('majority')
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem(themeKey, next);
+      themeToggle.setAttribute('aria-pressed', String(next === 'dark'));
+    });
+  }
+  if (contrastToggle) {
+    contrastToggle.addEventListener('click', () => {
+      const isContrast = root.classList.toggle('contrast');
+      contrastToggle.setAttribute('aria-pressed', String(isContrast));
+    });
+  }
+
+  // ---------- [NAV] Mobile Menu ----------
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (menuToggle && mobileMenu) {
+    const closeMenu = () => {
+      mobileMenu.hidden = true;
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
     };
-    for (const line of lines){
-      if (!line.trim()) continue;
-      const parts = line.split(',');
-      const bfs   = (parts[idx.bfs]      || '').trim();
-      if (!bfs) continue;
-      const name  = (parts[idx.name]     || '').trim();
-      const solar = Number((parts[idx.solar] || '').trim() || 0);
-      const wind  = Number((parts[idx.wind]  || '').trim() || 0);
-      const water = Number((parts[idx.water] || '').trim() || 0);
-      let maj     = (parts[idx.majority] || '').trim();
-      if (!maj){
-        const max = Math.max(solar, wind, water);
-        maj = (max === wind) ? 'wind' : (max === water) ? 'wasser' : 'solar';
-      }
-      energyByBfs.set(bfs, { name, solar, wind, water, majority: maj });
-    }
+    const openMenu = () => {
+      mobileMenu.hidden = false;
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    menuToggle.addEventListener('click', () => mobileMenu.hidden ? openMenu() : closeMenu());
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') closeMenu();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
   }
 
-  // Tooltip helpers
-  const tip = document.getElementById('mapTip');
-  function showTip(text, x, y){
-    if (!tip) return;
-    tip.textContent = text;
-    tip.style.left = `${x}px`;
-    tip.style.top  = `${y}px`;
-    tip.classList.add('is-show');
-    tip.setAttribute('aria-hidden','false');
-  }
-  function hideTip(){
-    if (!tip) return;
-    tip.classList.remove('is-show');
-    tip.setAttribute('aria-hidden','true');
-  }
+  // ---------- [SPY] Scrollspy & Reveal ----------
+  const menuLinks = Array.from(document.querySelectorAll('.nav__links a[href^="#"]'));
+  const sections = menuLinks
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
 
-  // Erst CSV, dann SVG laden
-  Promise.all([
-    fetch(energyUrl, { cache: 'no-store' }).then(r => r.ok ? r.text() : Promise.reject('CSV nicht gefunden')).then(parseCSV),
-    fetch(container.dataset.src, { cache: 'no-store' }).then(r => r.ok ? r.text() : Promise.reject('SVG nicht gefunden'))
-  ])
-  .then(([, svgText]) => {
-    container.innerHTML = svgText;
-
-    const svg = container.querySelector('svg');
-    if (!svg) throw new Error('Kein <svg> im geladenen Dokument');
-
-    svg.classList.add('map');
-    if (!svg.getAttribute('role')) svg.setAttribute('role', 'img');
-    if (!svg.getAttribute('aria-label') && !svg.querySelector('title')) {
-      svg.setAttribute('aria-label', 'ToLi Power – Gemeinden im Toggenburg & Linthgebiet');
-    }
-
-    const paths = svg.querySelectorAll('path[id]');
-    if (!paths.length) {
-      console.warn('Keine Pfade mit id gefunden – prüfe dein SVG (id="Gemeindename" + data-bfs_nummer="...").');
-      return;
-    }
-
-    let active = null;
-    function select(el){
-      if (active === el) { el.classList.remove('is-active'); active = null; return; }
-      if (active) active.classList.remove('is-active');
-      el.classList.add('is-active'); active = el;
-    }
-
-    paths.forEach(p => {
-      // A11y
-      p.setAttribute('tabindex', '0');
-      p.setAttribute('role', 'button');
-
-      const gName = p.id || 'Gemeinde';
-      const bfs   = (p.getAttribute('data-bfs_nummer') || '').trim();
-      const stats = bfs && energyByBfs.get(bfs);
-      const solar = stats?.solar ?? 0;
-      const wind  = stats?.wind  ?? 0;
-      const water = stats?.water ?? 0;
-      const maj   = stats?.majority ?? ((() => {
-        const max = Math.max(solar, wind, water);
-        return (max === wind) ? 'wind' : (max === water) ? 'wasser' : 'solar';
-      })());
-
-      // aria-label mit Stats
-      p.setAttribute('aria-label', `${gName} – Solar: ${solar} • Wind: ${wind} • Wasser: ${water} • Mehrheit: ${maj}`);
-      p.dataset.type = maj;
-
-      // Events
-      p.addEventListener('click', () => select(p));
-      p.addEventListener('mousemove', e => {
-        showTip(`${gName} — Solar: ${solar} • Wind: ${wind} • Wasser: ${water} • Mehrheit: ${maj}`, e.clientX, e.clientY);
-      });
-      p.addEventListener('mouseleave', hideTip);
-      p.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          select(p);
+  if (sections.length && 'IntersectionObserver' in window) {
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        const link = menuLinks.find(a => a.getAttribute('href') === `#${id}`);
+        if (link) {
+          if (entry.isIntersecting) {
+            menuLinks.forEach(l => l.classList.remove('is-active'));
+            link.classList.add('is-active');
+          }
         }
       });
-    });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: [0, 1] });
+    sections.forEach(s => spy.observe(s));
+  }
 
-    // Klick außerhalb: Auswahl + Tooltip schließen
-    document.addEventListener('click', (e) => {
-      const inside = svg.contains(e.target);
-      if (!inside) {
-        hideTip();
-        if (active) { active.classList.remove('is-active'); active = null; }
+  // Reveal animations
+  const reveals = document.querySelectorAll('.reveal');
+  if (reveals.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    // Fallback
+    reveals.forEach(el => el.classList.add('is-visible'));
+  }
+
+  // ---------- [HERO] Skeleton, Parallax, Counters ----------
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Skeleton -> remove on load
+  document.querySelectorAll('.skeleton img').forEach(img => {
+    if (img.complete) img.parentElement.classList.add('loaded');
+    img.addEventListener('load', () => img.parentElement.classList.add('loaded'), { once: true });
+  });
+
+  // Parallax-lite
+  const heroImg = document.querySelector('.hero__image img');
+  if (heroImg && !prefersReduced) {
+    const onScroll = () => {
+      const rect = heroImg.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const ratio = 1 - Math.min(Math.max((rect.top + rect.height) / (vh + rect.height), 0), 1);
+      heroImg.style.transform = `translateY(${ratio * 8}px)`; // subtle
+    };
+    onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // Counter animation (hero + impact)
+  const nums = document.querySelectorAll('[data-count]');
+  if (nums.length && 'IntersectionObserver' in window) {
+    const once = new WeakSet();
+    const ioNum = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !once.has(entry.target)) {
+          once.add(entry.target);
+          const el = entry.target;
+          const end = parseInt(el.getAttribute('data-count'), 10) || 0;
+          const start = 0;
+          const dur = 900 + Math.min(end * 10, 1400);
+          const t0 = performance.now();
+          const step = (t) => {
+            const p = Math.min((t - t0) / dur, 1);
+            const val = Math.floor(start + (end - start) * (1 - Math.pow(1 - p, 3)));
+            el.textContent = val;
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+      });
+    }, { threshold: 0.4 });
+    nums.forEach(n => ioNum.observe(n));
+  }
+
+  // ---------- [ROADMAP] Progress & Dot ----------
+  const numberline = document.querySelector('.numberline');
+  if (numberline) {
+    const track = numberline.querySelector('.numberline__track');
+    const progress = numberline.querySelector('.numberline__progress');
+    const dot = numberline.querySelector('.numberline__dot');
+    const labels = Array.from(numberline.querySelectorAll('.numberline__labels li'));
+
+    const update = () => {
+      const rect = numberline.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const visible = 1 - Math.min(Math.max((rect.top + 100) / (vh + rect.height), 0), 1); // scroll context
+      const pct = Math.round(visible * 100);
+      progress.style.width = `${pct}%`;
+      dot.style.left = `${pct}%`;
+      labels.forEach(li => {
+        const pos = parseInt(li.getAttribute('data-pos'), 10) || 0;
+        li.classList.toggle('active', pct >= pos);
+      });
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+  }
+
+  // ---------- [MAP] SVG + CSV Join ----------
+  const mapHost = document.getElementById('map');
+  const tooltip = document.getElementById('tooltip');
+
+  const parseCSV = (text) => {
+    // Simple split (ohne Kommas in Feldern)
+    const lines = text.trim().split(/\r?\n/);
+    const header = lines.shift().split(',').map(s => s.trim());
+    return lines.map(line => {
+      const parts = line.split(',').map(s => s.trim());
+      const row = {};
+      header.forEach((h, i) => row[h] = parts[i]);
+      return row;
+    });
+  };
+
+  const hideTip = () => { if (tooltip) tooltip.hidden = true; };
+  const showTip = (html, x, y) => {
+    if (!tooltip) return;
+    tooltip.innerHTML = html;
+    tooltip.style.left = `${x + 14}px`;
+    tooltip.style.top = `${y + 14}px`;
+    tooltip.hidden = false;
+  };
+
+  if (mapHost && mapHost.dataset.svg && mapHost.dataset.csv) {
+    Promise.all([
+      fetch(mapHost.dataset.svg).then(r => r.text()),
+      fetch(mapHost.dataset.csv).then(r => r.text())
+    ]).then(([svgText, csvText]) => {
+      // Inline SVG
+      mapHost.innerHTML = svgText;
+      const svg = mapHost.querySelector('svg');
+      if (!svg) return;
+
+      // CSV -> Map<BFS, data>
+      const rows = parseCSV(csvText);
+      const dataMap = new Map();
+      rows.forEach(r => {
+        const bfs = String(r.bfs).trim();
+        const solar = +r.solar_count || 0;
+        const wind = +r.wind_count || 0;
+        const water = +r.water_count || 0;
+        let majority = (r.majority || '').trim();
+        if (!majority) {
+          const m = Math.max(solar, wind, water);
+          majority = m === solar ? 'Solar' : m === wind ? 'Wind' : 'Wasser';
+        }
+        dataMap.set(bfs, { name: r.name, solar, wind, water, majority });
+      });
+
+      // Interaktion
+      const areas = svg.querySelectorAll('[data-bfs_nummer]');
+      areas.forEach(area => {
+        const bfs = String(area.getAttribute('data-bfs_nummer')).trim();
+        const info = dataMap.get(bfs);
+        area.setAttribute('tabindex', '0');
+        area.setAttribute('role', 'button');
+
+        if (info) {
+          const label = `${info.name} — Solar: ${info.solar} • Wind: ${info.wind} • Wasser: ${info.water} • Mehrheit: ${info.majority}`;
+          area.setAttribute('aria-label', label);
+
+          const onEnter = (x, y) => showTip(label, x, y);
+          area.addEventListener('mousemove', (e) => onEnter(e.clientX, e.clientY));
+          area.addEventListener('mouseenter', (e) => onEnter(e.clientX || 0, e.clientY || 0));
+        }
+
+        const activate = () => {
+          svg.querySelectorAll('.is-active').forEach(a => a.classList.remove('is-active'));
+          area.classList.add('is-active');
+        };
+        const deactivate = () => { area.classList.remove('is-active'); hideTip(); };
+
+        area.addEventListener('click', activate);
+        area.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
+        document.addEventListener('scroll', hideTip, { passive: true });
+        window.addEventListener('resize', hideTip);
+        svg.addEventListener('click', (e) => { if (!e.target.closest('[data-bfs_nummer]')) deactivate(); });
+      });
+    }).catch(err => {
+      console.warn('Karte/CSV konnten nicht geladen werden:', err);
+    });
+  }
+
+  // ---------- [DATA] Gauges & Bars ----------
+  // Optional: leichte Variation
+  const bars = document.querySelectorAll('.bar__fill');
+  const gauges = document.querySelectorAll('.gauge');
+  const tickData = () => {
+    gauges.forEach(g => {
+      const v = parseFloat(getComputedStyle(g).getPropertyValue('--value')) || 0;
+      const d = (Math.random() * 2 - 1); // +-1
+      const nv = Math.max(0, Math.min(100, v + d));
+      g.style.setProperty('--value', nv);
+      const num = g.querySelector('.gauge__num'); if (num) num.textContent = `${Math.round(nv)}%`;
+    });
+    bars.forEach(b => {
+      const w = parseFloat(b.style.width) || 50;
+      const d = (Math.random() * 2 - 1);
+      const nw = Math.max(0, Math.min(100, w + d));
+      b.style.width = `${nw}%`;
+    });
+  };
+  // Deaktivieren? -> einfach nächsten Timer auskommentieren
+  const intervalId = window.setInterval(tickData, 5000);
+
+  // ---------- [CONTACT] Form Handling ----------
+  const form = document.getElementById('contactForm');
+  if (form) {
+    const status = document.getElementById('formStatus');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (status) status.textContent = 'Senden…';
+      try {
+        const formData = new FormData(form);
+        const res = await fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+        if (res.ok) {
+          if (status) status.textContent = 'Danke! Wir melden uns.';
+          form.reset();
+        } else {
+          if (status) status.textContent = 'Fehler beim Senden. Bitte später erneut versuchen.';
+        }
+      } catch {
+        if (status) status.textContent = 'Netzwerkfehler. Bitte später erneut.';
       }
     });
+  }
 
-    // Scroll/Resize -> Tooltip ausblenden
-    window.addEventListener('scroll', hideTip, { passive: true });
-    window.addEventListener('resize',  hideTip);
-  })
-  .catch(err => console.error('[Karte] Fehler:', err));
+  // ---------- [MISC] Back-to-top, Footer year ----------
+  const toTop = document.querySelector('.toTop');
+  const setTopVis = () => { if (!toTop) return; toTop.style.display = (window.scrollY > 600 ? 'inline-flex' : 'none'); };
+  setTopVis();
+  window.addEventListener('scroll', setTopVis, { passive: true });
+  if (toTop) {
+    toTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      const opt = { top: 0, behavior: (prefersReduced ? 'auto' : 'smooth') };
+      window.scrollTo(opt);
+    });
+  }
+
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
 })();
