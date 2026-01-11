@@ -105,7 +105,9 @@ p{line-height:1.6}
 @media (max-width:980px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:720px){.cards{grid-template-columns:1fr}}
 .card{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transform:translateZ(0)}
-.card__link{display:block;color:inherit;text-decoration:none}
+.card__link{display:block;color:var(--text);text-decoration:none}
+/* Fix: Keine violetten :visited-States bei Card-Links */
+.card__link:visited{color:var(--text)}
 .card__img{width:100%;height:160px;object-fit:cover;display:block}
 .card__body{padding:14px}
 .card.tilt:hover{transform:perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-2px);transition:transform .2s ease}
@@ -124,19 +126,18 @@ p{line-height:1.6}
 .ticks li{position:relative;padding-left:22px;margin:8px 0}
 .ticks li::before{content:"✔";position:absolute;left:0;color:var(--accent)}
 
-/* Impact KPI (mit animiertem Rand) */
+/* Impact KPI – **Rotation AUS** (global) */
 .impact__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 @media (max-width:980px){.impact__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:720px){.impact__grid{grid-template-columns:1fr}}
 .impact__kpi{position:relative;background:var(--glass);border-radius:var(--radius);padding:22px;text-align:center;box-shadow:var(--shadow);overflow:hidden}
-.impact__kpi::after{content:"";position:absolute;inset:-2px;border-radius:inherit;background:conic-gradient(from 0deg,var(--primary),var(--primary-2),var(--accent),var(--primary));mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:2px;animation:borderSpin 8s linear infinite}
-@keyframes borderSpin{to{transform:rotate(360deg)}}
+/* Deaktiviert die drehende conic-Border (global) */
+.impact__kpi::after{content:none!important}
 .kpi__num{font-size:34px;font-weight:800}
 .kpi__label{color:var(--muted);font-size:12px}
 
-/* Daten-KPIs im Impact-Stil – ohne animierten Rand */
-.data__grid{} /* nutzt dieselbe Grid-Definition wie .impact__grid */
-.impact__kpi--static::after{content:none!important}
+/* Daten-KPIs verwenden dieselben Boxen */
+.data__grid{} /* keine Extra-Styles nötig */
 
 /* Politik Highlight */
 .section--highlight{background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
