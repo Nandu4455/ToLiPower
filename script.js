@@ -50,9 +50,7 @@
 
   // ---------- [SPY] Scrollspy & Reveal ----------
   const menuLinks = Array.from(document.querySelectorAll('.nav__links a[href^="#"]'));
-  const sections = menuLinks
-    .map(a => document.querySelector(a.getAttribute('href')))
-    .filter(Boolean);
+  const sections = menuLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
 
   if (sections.length && 'IntersectionObserver' in window) {
     const spy = new IntersectionObserver((entries) => {
@@ -73,10 +71,7 @@
   if (reveals.length && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-visible');
-          obs.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
       });
     }, { threshold: 0.15 });
     reveals.forEach(el => io.observe(el));
@@ -87,25 +82,23 @@
   // ---------- [HERO] Skeleton, Parallax, Counters ----------
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Skeleton -> remove on load
   document.querySelectorAll('.skeleton img').forEach(img => {
     if (img.complete) img.parentElement.classList.add('loaded');
     img.addEventListener('load', () => img.parentElement.classList.add('loaded'), { once: true });
   });
 
-  // Parallax-lite
   const heroImg = document.querySelector('.hero__image img');
   if (heroImg && !prefersReduced) {
     const onScroll = () => {
       const rect = heroImg.getBoundingClientRect();
       const vh = window.innerHeight || document.documentElement.clientHeight;
       const ratio = 1 - Math.min(Math.max((rect.top + rect.height) / (vh + rect.height), 0), 1);
-      heroImg.style.transform = `translateY(${ratio * 8}px)`; // subtil
+      heroImg.style.transform = `translateY(${ratio * 8}px)`;
     };
     onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  // Counter animation (hero + impact)
+  // Counters
   const nums = document.querySelectorAll('[data-count]');
   if (nums.length && 'IntersectionObserver' in window) {
     const once = new WeakSet();
@@ -129,27 +122,6 @@
       });
     }, { threshold: 0.4 });
     nums.forEach(n => ioNum.observe(n));
-  }
-
-  // ---------- [ROADMAP] Progress & Dot ----------
-  const numberline = document.querySelector('.numberline');
-  if (numberline) {
-    const progress = numberline.querySelector('.numberline__progress');
-    const dot = numberline.querySelector('.numberline__dot');
-    const labels = Array.from(numberline.querySelectorAll('.numberline__labels li'));
-
-    const update = () => {
-      const rect = numberline.getBoundingClientRect();
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      const visible = 1 - Math.min(Math.max((rect.top + 100) / (vh + rect.height), 0), 1); // scroll context
-      const pct = Math.round(visible * 100);
-      if (progress) progress.style.width = `${pct}%`;
-      if (dot) dot.style.left = `${pct}%`;
-      labels.forEach(li => li.classList.toggle('active', pct >= (parseInt(li.dataset.pos || '0', 10))));
-    };
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
   }
 
   // ---------- [MAP] SVG + CSV Join ----------
@@ -181,12 +153,10 @@
       fetch(mapHost.dataset.svg).then(r => r.text()),
       fetch(mapHost.dataset.csv).then(r => r.text())
     ]).then(([svgText, csvText]) => {
-      // Inline SVG
       mapHost.innerHTML = svgText;
       const svg = mapHost.querySelector('svg');
       if (!svg) return;
 
-      // CSV -> Map<BFS, data>
       const rows = parseCSV(csvText);
       const dataMap = new Map();
       rows.forEach(r => {
@@ -202,13 +172,11 @@
         dataMap.set(bfs, { name: r.name, solar, wind, water, majority });
       });
 
-      // Interaktion
       const areas = svg.querySelectorAll('[data-bfs_nummer]');
       areas.forEach(area => {
         const bfs = String(area.getAttribute('data-bfs_nummer') || '').trim();
         const info = dataMap.get(bfs);
 
-        // Keyboard-A11y
         area.setAttribute('tabindex', '0');
         area.setAttribute('role', 'button');
 
@@ -239,47 +207,42 @@
     });
   }
 
-  // ---------- [DATA] Gauges & Bars ----------
-  // Zentrierte Zahlen aus der CSS-Variable --value übernehmen
-  const gauges = document.querySelectorAll('.gauge');
-  const bars = document.querySelectorAll('.bar__track');
+  // ---------- [DATA] Neues Layout: Donuts + Meter ----------
+  const donuts = document.querySelectorAll('.donut');
+  const meters = document.querySelectorAll('.meter');
 
-  const refreshWidgets = () => {
-    gauges.forEach(g => {
-      const v = parseFloat(getComputedStyle(g).getPropertyValue('--value')) || 0;
-      const num = g.querySelector('.gauge__num');
+  const refreshData = () => {
+    donuts.forEach(d => {
+      const v = parseFloat(getComputedStyle(d).getPropertyValue('--value')) || 0;
+      const num = d.querySelector('.donut__num');
       if (num) num.textContent = `${Math.round(v)}%`;
     });
-    bars.forEach(t => {
-      const fill = t.querySelector('.bar__fill');
-      const label = t.querySelector('.bar__value');
-      if (fill && label) {
-        const w = parseFloat(fill.style.width) || 0;
-        label.textContent = `${Math.round(w)}%`;
-      }
+    meters.forEach(m => {
+      const v = parseFloat(getComputedStyle(m).getPropertyValue('--value')) || 0;
+      const fill = m.querySelector('.meter__fill');
+      const bubble = m.querySelector('.meter__bubble');
+      if (fill) fill.style.width = `${v}%`;
+      if (bubble) bubble.textContent = `${Math.round(v)}%`;
     });
   };
-  refreshWidgets();
+  refreshData();
 
-  // Optional leichte Variation (Demo); entferne die Zeilen, wenn statisch gewünscht
+  // Optional leichte Demo‑Variation
   const intervalId = window.setInterval(() => {
-    gauges.forEach(g => {
-      const v = parseFloat(getComputedStyle(g).getPropertyValue('--value')) || 0;
+    donuts.forEach(d => {
+      const v = parseFloat(getComputedStyle(d).getPropertyValue('--value')) || 0;
       const nv = Math.max(0, Math.min(100, v + (Math.random()*2 - 1)));
-      g.style.setProperty('--value', nv);
+      d.style.setProperty('--value', nv);
     });
-    bars.forEach(t => {
-      const fill = t.querySelector('.bar__fill');
-      if (fill) {
-        const w = parseFloat(fill.style.width) || 0;
-        const nw = Math.max(0, Math.min(100, w + (Math.random()*2 - 1)));
-        fill.style.width = `${nw}%`;
-      }
+    meters.forEach(m => {
+      const v = parseFloat(getComputedStyle(m).getPropertyValue('--value')) || 0;
+      const nv = Math.max(0, Math.min(100, v + (Math.random()*2 - 1)));
+      m.style.setProperty('--value', nv);
     });
-    refreshWidgets();
+    refreshData();
   }, 5000);
 
-  // ---------- [CONTACT] Form Handling ----------
+  // ---------- [CONTACT] Form ----------
   const form = document.getElementById('contactForm');
   if (form) {
     const status = document.getElementById('formStatus');
@@ -295,20 +258,18 @@
     });
   }
 
-  // ---------- [MISC] Back-to-top, Footer year ----------
+  // ---------- [MISC] Back-to-top & Year ----------
   const toTop = document.querySelector('.toTop');
   const setTopVis = () => { if (!toTop) return; toTop.style.display = (window.scrollY > 600 ? 'inline-flex' : 'none'); };
-  setTopVis();
-  window.addEventListener('scroll', setTopVis, { passive: true });
+  setTopVis(); window.addEventListener('scroll', setTopVis, { passive: true });
   if (toTop) {
     toTop.addEventListener('click', (e) => {
       e.preventDefault();
-      const opt = { top: 0, behavior: (prefersReduced ? 'auto' : 'smooth') };
-      window.scrollTo(opt);
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
     });
   }
 
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
-
 })();
