@@ -1,5 +1,5 @@
 
-// ===== Theme & Contrast Toggle (mit Auto-Dark beim ersten Laden) =====
+/* ===== Theme & Contrast Toggle (Auto-Dark beim ersten Laden) ===== */
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeToggle');
 const contrastBtn = document.getElementById('contrastToggle');
@@ -27,12 +27,12 @@ contrastBtn?.addEventListener('click', () => {
   localStorage.setItem('tolipower-contrast', html.classList.contains('contrast') ? 'on' : 'off');
 });
 
-// ===== Mobile Menü =====
+/* ===== Mobile Menü ===== */
 const menuBtn = document.getElementById('menuToggle');
 const header = document.querySelector('.nav');
 menuBtn?.addEventListener('click', () => header.classList.toggle('nav--open'));
 
-// ===== Smooth Scroll + Scrollspy =====
+/* ===== Smooth Scroll + Scrollspy ===== */
 const spyLinks = [...document.querySelectorAll('.nav__links a')];
 spyLinks.forEach(a=>{
   const href = a.getAttribute('href') ?? '';
@@ -60,7 +60,7 @@ const spy = new IntersectionObserver((entries)=>{
 },{ rootMargin: '-45% 0px -50% 0px', threshold: 0.01 });
 sections.forEach(s => spy.observe(s));
 
-// ===== Reveal on Scroll =====
+/* ===== Reveal on Scroll ===== */
 const revealIO = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if (entry.isIntersecting){
@@ -71,7 +71,7 @@ const revealIO = new IntersectionObserver((entries)=>{
 },{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=> revealIO.observe(el));
 
-// ===== Counters (Hero + Impact) =====
+/* ===== Counter-Animation (Hero + Impact) ===== */
 function animateCounter(el, to, duration=1300){
   const t0 = performance.now();
   function tick(t){
@@ -106,21 +106,21 @@ function initCounters(){
 }
 window.addEventListener('DOMContentLoaded', initCounters);
 
-// ===== Skeleton -> remove overlay when images loaded =====
+/* ===== Skeleton -> Overlay entfernen, wenn Bilder geladen ===== */
 document.querySelectorAll('.skeleton img').forEach(img=>{
   const parent = img.parentElement;
   const done = () => parent.classList.add('loaded');
   if (img.complete) done(); else img.addEventListener('load', done);
 });
 
-// ===== Back to Top =====
+/* ===== Back to Top ===== */
 const toTop = document.getElementById('toTop');
 window.addEventListener('scroll', () => {
   toTop.classList.toggle('is-show', (window.scrollY ?? document.documentElement.scrollTop) > 600);
 },{passive:true});
 toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-// ===== Parallax Hero (respect reduced motion) =====
+/* ===== Parallax Hero (respect reduced motion) ===== */
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const heroImg = document.querySelector('.hero__image img');
 let rafId = null;
@@ -134,33 +134,17 @@ if (!prefersReduced && heroImg){
   });
 }
 
-// ===== Kontakt (Formspree) – Senden via Fetch =====
+/* ===== Kontakt (Formspree) – Statusanzeige ===== */
 const form = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
-form?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  if (formStatus) formStatus.textContent = 'Sende …';
-  const data = new FormData(form);
-  try {
-    const res = await fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-    if (res.ok) {
-      if (formStatus) formStatus.textContent = 'Danke! Wir melden uns in Kürze.';
-      form.reset();
-    } else {
-      const err = await res.json().catch(() => ({}));
-      const msg = err?.errors?.[0]?.message ?? 'Fehler beim Senden. Bitte später erneut versuchen.';
-      if (formStatus) formStatus.textContent = msg;
-    }
-  } catch {
-    if (formStatus) formStatus.textContent = 'Netzwerkfehler. Bitte später erneut versuchen.';
+form?.addEventListener('submit', () => {
+  if (formStatus) {
+    formStatus.textContent = 'Senden …';
+    setTimeout(() => formStatus.textContent = 'Danke! Wir melden uns.', 1200);
   }
 });
 
-// ===== Roadmap Zahlenstrahl: Fortschritt folgt Scroll (wie vorher) =====
+/* ===== Roadmap: Fortschritt folgt dem Scroll-Kontext ===== */
 (function(){
   const section = document.getElementById('roadmap');
   const progress = document.querySelector('.numberline__progress');
@@ -187,7 +171,7 @@ form?.addEventListener('submit', async (e) => {
   window.addEventListener('resize', update);
 })();
 
-// ===== Galerie Lightbox =====
+/* ===== Galerie Lightbox ===== */
 (function(){
   const lb = document.getElementById('lightbox');
   const frame = lb?.querySelector('.lightbox__frame img');
@@ -214,82 +198,136 @@ form?.addEventListener('submit', async (e) => {
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
 })();
 
-// ===== Interaktive Karte (Demo): Tooltips + Filter + Tastatur =====
-(function(){
-  const svg = document.querySelector('.map');
-  const areas = [...document.querySelectorAll('.map .area')];
+/* ===== Interaktive Karte – SVG laden + CSV-Join + Tooltip (wie vorher) ===== */
+(() => {
+  const container = document.getElementById('tolimap-container');
+  if (!container || !container.dataset.src) return;
+
+  const energyUrl = '/daten/energie.csv';
+  const energyByBfs = new Map();
+
+  function parseCSV(text){
+    const lines = text.trim().split(/\r?\n/);
+    const header = lines.shift().split(',');
+    const col = (name) => header.indexOf(name);
+    const idx = {
+      bfs: col('bfs'),
+      name: col('name'),
+      solar: col('solar_count'),
+      wind: col('wind_count'),
+      water: col('water_count'),
+      majority: col('majority')
+    };
+    for (const line of lines){
+      if (!line.trim()) continue;
+      const parts = line.split(',');
+      const bfs   = (parts[idx.bfs]      || '').trim();
+      if (!bfs) continue;
+      const name  = (parts[idx.name]     || '').trim();
+      const solar = Number((parts[idx.solar] || '').trim() || 0);
+      const wind  = Number((parts[idx.wind]  || '').trim() || 0);
+      const water = Number((parts[idx.water] || '').trim() || 0);
+      let maj     = (parts[idx.majority] || '').trim();
+      if (!maj){
+        const max = Math.max(solar, wind, water);
+        maj = (max === wind) ? 'wind' : (max === water) ? 'wasser' : 'solar';
+      }
+      energyByBfs.set(bfs, { name, solar, wind, water, majority: maj });
+    }
+  }
+
+  // Tooltip helpers
   const tip = document.getElementById('mapTip');
-  const tipName = tip?.querySelector('.maptip__name');
-  const tipMeta = tip?.querySelector('.maptip__meta');
-  const filters = [...document.querySelectorAll('.filters input[name="filter"]')];
-  if (!svg || !tip) return;
-  function showTip(el, clientX, clientY){
-    if (!tipName || !tipMeta) return;
-    tipName.textContent = el.dataset.name ?? 'Projekt';
-    tipMeta.textContent = el.dataset.output ?? '';
-    tip.style.left = `${clientX}px`;
-    tip.style.top = `${clientY}px`;
+  function showTip(text, x, y){
+    if (!tip) return;
+    tip.textContent = text;
+    tip.style.left = `${x}px`;
+    tip.style.top  = `${y}px`;
+    tip.classList.add('is-show');
     tip.setAttribute('aria-hidden','false');
   }
-  function hideTip(){ tip.setAttribute('aria-hidden','true'); }
-  areas.forEach(el=>{
-    el.addEventListener('mousemove', e=> showTip(el, e.clientX, e.clientY));
-    el.addEventListener('mouseenter', e=> showTip(el, e.clientX, e.clientY));
-    el.addEventListener('mouseleave', hideTip);
-    el.addEventListener('focus', ()=>{
-      const rect = svg.getBoundingClientRect();
-      showTip(el, rect.left + rect.width/2, rect.top + 40);
+  function hideTip(){
+    if (!tip) return;
+    tip.classList.remove('is-show');
+    tip.setAttribute('aria-hidden','true');
+  }
+
+  // Erst CSV, dann SVG laden
+  Promise.all([
+    fetch(energyUrl, { cache: 'no-store' }).then(r => r.ok ? r.text() : Promise.reject('CSV nicht gefunden')).then(parseCSV),
+    fetch(container.dataset.src, { cache: 'no-store' }).then(r => r.ok ? r.text() : Promise.reject('SVG nicht gefunden'))
+  ])
+  .then(([, svgText]) => {
+    container.innerHTML = svgText;
+
+    const svg = container.querySelector('svg');
+    if (!svg) throw new Error('Kein <svg> im geladenen Dokument');
+
+    svg.classList.add('map');
+    if (!svg.getAttribute('role')) svg.setAttribute('role', 'img');
+    if (!svg.getAttribute('aria-label') && !svg.querySelector('title')) {
+      svg.setAttribute('aria-label', 'ToLi Power – Gemeinden im Toggenburg & Linthgebiet');
+    }
+
+    const paths = svg.querySelectorAll('path[id]');
+    if (!paths.length) {
+      console.warn('Keine Pfade mit id gefunden – prüfe dein SVG (id="Gemeindename" + data-bfs_nummer="...").');
+      return;
+    }
+
+    let active = null;
+    function select(el){
+      if (active === el) { el.classList.remove('is-active'); active = null; return; }
+      if (active) active.classList.remove('is-active');
+      el.classList.add('is-active'); active = el;
+    }
+
+    paths.forEach(p => {
+      // A11y
+      p.setAttribute('tabindex', '0');
+      p.setAttribute('role', 'button');
+
+      const gName = p.id || 'Gemeinde';
+      const bfs   = (p.getAttribute('data-bfs_nummer') || '').trim();
+      const stats = bfs && energyByBfs.get(bfs);
+      const solar = stats?.solar ?? 0;
+      const wind  = stats?.wind  ?? 0;
+      const water = stats?.water ?? 0;
+      const maj   = stats?.majority ?? ((() => {
+        const max = Math.max(solar, wind, water);
+        return (max === wind) ? 'wind' : (max === water) ? 'wasser' : 'solar';
+      })());
+
+      // aria-label mit Stats
+      p.setAttribute('aria-label', `${gName} – Solar: ${solar} • Wind: ${wind} • Wasser: ${water} • Mehrheit: ${maj}`);
+      p.dataset.type = maj;
+
+      // Events
+      p.addEventListener('click', () => select(p));
+      p.addEventListener('mousemove', e => {
+        showTip(`${gName} — Solar: ${solar} • Wind: ${wind} • Wasser: ${water} • Mehrheit: ${maj}`, e.clientX, e.clientY);
+      });
+      p.addEventListener('mouseleave', hideTip);
+      p.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          select(p);
+        }
+      });
     });
-    el.addEventListener('blur', hideTip);
-    el.addEventListener('keydown', e=>{
-      if (e.key === 'Enter' || e.key === ' '){
-        alert(`${el.dataset.name}\n${el.dataset.output}`); // späte: echte Detailseite
-        e.preventDefault();
+
+    // Klick außerhalb: Auswahl + Tooltip schließen
+    document.addEventListener('click', (e) => {
+      const inside = svg.contains(e.target);
+      if (!inside) {
+        hideTip();
+        if (active) { active.classList.remove('is-active'); active = null; }
       }
     });
-  });
-  function applyFilters(){
-    const active = filters.filter(f=>f.checked).map(f=>f.value);
-    areas.forEach(el=>{
-      const on = active.includes(el.dataset.type);
-      el.style.opacity = on ? '1' : '0.18';
-      el.style.pointerEvents = on ? 'auto' : 'none';
-    });
-  }
-  filters.forEach(f=> f.addEventListener('change', applyFilters));
-  applyFilters();
+
+    // Scroll/Resize -> Tooltip ausblenden
+    window.addEventListener('scroll', hideTip, { passive: true });
+    window.addEventListener('resize',  hideTip);
+  })
+  .catch(err => console.error('[Karte] Fehler:', err));
 })();
-
-// ===== Live-Widgets (Demo): zufällige Updates =====
-(function(){
-  function updateGauges(){
-    document.querySelectorAll('.gauge__ring').forEach(r=>{
-      const base = parseInt(r.dataset.value ?? '50', 10);
-      const jitter = Math.max(0, Math.min(100, base + (Math.random()*16 - 8)));
-      r.style.setProperty('--value', jitter);
-      const num = r.querySelector('.gauge__num');
-      if (num) num.textContent = `${Math.round(jitter)}%`;
-    });
-  }
-  function updateBars(){
-    document.querySelectorAll('.bar__fill').forEach(f=>{
-      const w = Math.max(5, Math.min(95, Math.random()*100));
-      f.style.width = `${Math.round(w)}%`;
-      const label = f.closest('.widget')?.querySelector('.bar__label');
-      if (label) label.textContent = `${Math.round(w)}%`;
-    });
-  }
-  updateGauges(); updateBars();
-  setInterval(()=>{ updateGauges(); updateBars(); }, 5000);
-})();
-
-// ===== Year in Footer =====
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// ===== PWA: Service Worker registrieren (optional) =====
-if ('serviceWorker' in navigator){
-  window.addEventListener('load', ()=>{
-    navigator.serviceWorker.register('/service-worker.js')
-      .catch(err => console.warn('SW Registrierung fehlgeschlagen:', err));
-  });
-}
