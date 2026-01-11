@@ -202,7 +202,7 @@
       </ul>
     </section>
 
-    <!-- Roadmap (Vision entfernt, nur geplante Punkte) -->
+    <!-- Roadmap (Vision entfernt, ruhige Liste) -->
     <section id="roadmap" class="section reveal">
       <h2>Roadmap</h2>
       <ul class="roadmap-list">
@@ -221,36 +221,21 @@
       <div id="tooltip" role="tooltip" class="tooltip" hidden></div>
     </section>
 
-    <!-- Daten-Widgets – NEUES LAYOUT -->
+    <!-- Daten – einheitliche KPI-Boxen (ohne Drehanimation) -->
     <section id="daten" class="section reveal">
       <h2>Daten</h2>
-
-      <div class="data-grid">
-        <!-- Donut 1 -->
-        <div class="donut" style="--value:74">
-          <div class="donut__ring"></div>
-          <div class="donut__center">
-            <div class="donut__num">74%</div>
-            <div class="donut__label">Erneuerbar</div>
-          </div>
+      <div class="impact__grid data__grid">
+        <div class="impact__kpi impact__kpi--static">
+          <div class="kpi__num">74%</div>
+          <div class="kpi__label">Erneuerbar</div>
         </div>
-
-        <!-- Donut 2 -->
-        <div class="donut" style="--value:38">
-          <div class="donut__ring"></div>
-          <div class="donut__center">
-            <div class="donut__num">38%</div>
-            <div class="donut__label">Netzausbau</div>
-          </div>
+        <div class="impact__kpi impact__kpi--static">
+          <div class="kpi__num">38%</div>
+          <div class="kpi__label">Netzausbau</div>
         </div>
-
-        <!-- Meter (mit Bubble) -->
-        <div class="meter" style="--value:62">
-          <div class="meter__label">Speicherabdeckung</div>
-          <div class="meter__track">
-            <div class="meter__fill"></div>
-            <div class="meter__bubble">62%</div>
-          </div>
+        <div class="impact__kpi impact__kpi--static">
+          <div class="kpi__num">62%</div>
+          <div class="kpi__label">Speicherabdeckung</div>
         </div>
       </div>
     </section>
