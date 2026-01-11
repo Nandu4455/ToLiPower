@@ -4,7 +4,7 @@
    ============================================================ */
 
 (() => {
-  // ---------- [INIT] Theme & Contrast ----------
+  // ---------- [INIT] Theme ----------
   const root = document.documentElement;
   const themeKey = 'tolipower-theme';
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -12,20 +12,12 @@
   root.setAttribute('data-theme', savedTheme || (prefersDark ? 'dark' : 'light'));
 
   const themeToggle = document.getElementById('themeToggle');
-  const contrastToggle = document.getElementById('contrastToggle');
-
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       localStorage.setItem(themeKey, next);
       themeToggle.setAttribute('aria-pressed', String(next === 'dark'));
-    });
-  }
-  if (contrastToggle) {
-    contrastToggle.addEventListener('click', () => {
-      const isContrast = root.classList.toggle('contrast');
-      contrastToggle.setAttribute('aria-pressed', String(isContrast));
     });
   }
 
@@ -157,7 +149,7 @@
       fetch(mapHost.dataset.svg).then(r => r.text()),
       fetch(mapHost.dataset.csv).then(r => r.text())
     ]).then(([svgText, csvText]) => {
-      // Inline SVG einsetzen
+      // Inline SVG
       mapHost.innerHTML = svgText;
       const svg = mapHost.querySelector('svg');
       if (!svg) return;
