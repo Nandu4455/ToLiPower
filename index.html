@@ -23,13 +23,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
 
-  <!-- Performance: Hero-Bild vorladen -->
+  <!-- Performance: Hero vorladen -->
   <link rel="preload" as="image" href="/bilder/hero.png" imagesrcset="/bilder/hero.png 1x">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/style.css" />
 
-  <!-- PWA -->
+  <!-- PWA (optional, funktioniert auch ohne) -->
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
@@ -53,11 +53,11 @@
   <a class="skip-link" href="#kontakt">Direkt zum Kontakt</a>
   <a class="skip-link" href="#karte">Direkt zur Karte</a>
 
-  <!-- Deko-Gradients -->
+  <!-- Hintergrund-Deko -->
   <div class="blob blob--1" aria-hidden="true"></div>
   <div class="blob blob--2" aria-hidden="true"></div>
 
-  <!-- ===== Navigation (Scrollspy + Kontrastmodus) ===== -->
+  <!-- ===== Navigation ===== -->
   <header class="nav" role="banner">
     <a class="brand" href="#start" aria-label="Startseite">
       <span class="brand__logo">ToLi</span><span class="brand__accent">Power</span>
@@ -255,7 +255,6 @@
         <a class="item" href="/bilder/hero.png" data-title="Landschaft"><img src="/bilder/hero.png" alt="Landschaft" loading="lazy"></a>
         <a class="item" href="/bilder/solar.png" data-title="Solarpark E"><img src="/bilder/solar.png" alt="Solarpark E" loading="lazy"></a>
       </div>
-
       <p class="note">Detailseiten:
         <a href="/projekt-solarpark.html">Solarpark A</a> ·
         <a href="/projekt-windfeld.html">Windfeld B</a> ·
@@ -264,29 +263,25 @@
       </p>
     </section>
 
-    <!-- ===== Interaktive Karte (SVG + Filter) ===== -->
+    <!-- ===== Interaktive Karte (20 Gemeinden, anklickbar) ===== -->
+    <section class="section reveal" id="karte" aria-labelledby="karte-title">
+      <h2 id="karte-title">Interaktive Karte</h2>
 
-<!-- ===== Interaktive Karte (20 Gemeinden, anklickbar) ===== -->
-<section class="section reveal" id="karte" aria-labelledby="karte-title">
-  <h2 id="karte-title">Interaktive Karte</h2>
+      <div class="mapwrap" role="region" aria-label="Karte der 20 Gemeinden">
+        <!-- Das SVG wird zur Laufzeit inline hereingeladen -->
+        <div id="tolimap-container" data-src="/bilder/tolimap.svg"></div>
 
-  <div class="mapwrap" role="region" aria-label="Karte der 20 Gemeinden">
-    <!-- Das SVG wird zur Laufzeit inline hereingeladen -->
-    <div id="tolimap-container" data-src="/bilder/tolimap.svg"></div>
+        <!-- Tooltip (wird vom Script befüllt) -->
+        <div id="mapTip" class="maptip" role="tooltip" aria-hidden="true"></div>
+      </div>
 
-    <!-- Tooltip (optional, wird vom Script befüllt) -->
-    <div id="mapTip" class="maptip" role="tooltip" aria-hidden="true"></div>
-  </div>
+      <p class="note">Tipp: Mit <kbd>Tab</kbd> fokussieren, <kbd>Enter</kbd> oder <kbd>Space</kbd> aktivieren.</p>
+    </section>
 
-  <p class="note">Tipp: Mit <kbd>Tab</kbd> fokussieren, <kbd>Enter</kbd> oder <kbd>Space</kbd> aktivieren.</p>
-</section>
-``
-
-
-    <!-- ===== Daten-Widgets (conic-gradient) ===== -->
+    <!-- ===== Daten-Widgets ===== -->
     <section class="section reveal" id="daten" aria-labelledby="daten-title">
       <h2 id="daten-title">Live‑Daten (Demo)</h2>
-      <p class="section__lead">Die Werte werden client‑seitig simuliert (Demo). Für echte Kennzahlen einfach eine API nennen – ich binde sie an.</p>
+      <p class="section__lead">Die Werte werden client‑seitig simuliert (Demo). Für echte Kennzahlen einfach eine API nennen – wir binden sie an.</p>
 
       <div class="widgets grid grid--4">
         <article class="widget gauge" aria-label="Erzeugung heute">
@@ -340,7 +335,7 @@
       <a class="btn btn--primary pulse" href="#kontakt">Projekt anfragen</a>
     </section>
 
-    <!-- ===== Kontakt (Formspree live) ===== -->
+    <!-- ===== Kontakt ===== -->
     <section class="section reveal" id="kontakt" aria-labelledby="kontakt-title">
       <h2 id="kontakt-title">Kontakt</h2>
       <form id="contactForm" action="https://formspree.io/f/mlggrvvk" method="POST" aria-label="Kontaktformular">
@@ -397,4 +392,3 @@
   <script src="/script.js" defer></script>
 </body>
 </html>
-
