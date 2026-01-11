@@ -324,3 +324,56 @@ body{
   background: var(--glass); backdrop-filter: blur(10px);
   border:1px solid rgba(255,255,255,.12); border-radius:var(--radius); padding:.9rem;
 }
+
+
+/* ===== Karte: 20 Gemeinden (anklickbar) ===== */
+.mapwrap { position: relative; }
+.map { width: 100%; height: auto; border-radius: var(--radius, 12px);
+       background: color-mix(in oklab,var(--surface,#0f171a),transparent 6%);
+       border: 1px solid rgba(255,255,255,.12); box-shadow: var(--shadow, 0 10px 30px rgba(0,0,0,.30)); }
+
+/* Gemeindeflächen – Grundzustand */
+.map path[id]{
+  fill: color-mix(in oklab, var(--surface, #0f171a), transparent 85%);
+  stroke: rgba(255,255,255,.25);
+  transition: fill .18s ease, stroke .18s ease, stroke-width .18s ease, filter .18s ease;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Hover / Tastatur-Fokus */
+.map path[id]:hover,
+.map path[id]:focus-visible{
+  stroke: var(--accent, #6ae3ff);
+  stroke-width: 1.6;
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--accent, #6ae3ff), transparent 60%));
+}
+
+/* Aktiv (angeklickt) */
+.map path[id].is-active{
+  fill: color-mix(in oklab, var(--accent, #6ae3ff), transparent 72%);
+  stroke: var(--accent, #6ae3ff);
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 10px color-mix(in oklab, var(--accent, #6ae3ff), transparent 50%));
+}
+
+/* Light-Theme: etwas dunklere Kontur im Grundzustand */
+:root[data-theme="light"] .map path[id]{
+  stroke: color-mix(in oklab, #000, transparent 70%);
+}
+
+/* Tooltip (optional) */
+.maptip{
+  position: fixed;
+  padding: .5rem .7rem;
+  font: 14px/1.4 system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  color: #fff;
+  background: rgba(0,0,0,.65);
+  border-radius: .6rem;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 10px));
+  z-index: 2000;
+  display: none;
+}
+.maptip.is-show{ display:block; }
+
