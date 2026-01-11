@@ -102,7 +102,6 @@ body{
 .card__img{width:100%;height:220px;object-fit:cover;display:block}
 .card__body{padding:1rem}
 .tilt:hover{transform:perspective(800px) rotateX(2deg) rotateY(-2deg)}
-
 .tile{background:color-mix(in oklab,var(--surface),transparent 6%);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)}
 .ticks{padding-left:1rem;margin:.6rem 0}.ticks li{list-style:"•  "}
 
@@ -116,7 +115,28 @@ body{
 @keyframes borderSpin{to{transform:rotate(360deg)}}
 .kpi__num{display:block;font-size:clamp(1.8rem,5vw,2.4rem);font-weight:800;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
 .kpi__label{color:var(--muted)}
-.impact__note{color:var(--muted);margin-top:.5rem}
+
+/* ===== Zahlenstrahl / Roadmap ===== */
+.numberline{position:relative;margin:1rem 0 2rem;height:14px}
+.numberline__track{
+  position:absolute;left:0;right:0;top:50%;height:4px;transform:translateY(-50%);
+  background:linear-gradient(90deg, color-mix(in oklab,var(--surface),transparent 20%), color-mix(in oklab,var(--surface),transparent 5%));
+  border-radius:999px;
+}
+.numberline__progress{
+  position:absolute;left:0;top:50%;height:6px;transform:translateY(-50%);
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  border-radius:999px; box-shadow:0 0 12px color-mix(in oklab,var(--primary),transparent 20%);
+}
+.numberline__dot{
+  position:absolute;left:0;top:50%;width:18px;height:18px;transform:translate(-50%,-50%);
+  border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 22px color-mix(in oklab,var(--accent),transparent 30%);
+}
+.numberline__labels{position:absolute;left:0;right:0;top:calc(100% + .5rem);display:flex;justify-content:space-between;padding:0;margin:0;list-style:none}
+.numberline__labels li{color:var(--muted);font-weight:700}
+@media (max-width:720px){.numberline__labels li{font-size:.95rem}}
 
 /* ===== FAQ, Team, CTA ===== */
 .faq{background:color-mix(in oklab,var(--surface),transparent 6%);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:.9rem;margin:.6rem 0}
@@ -126,6 +146,8 @@ body{
 .avatar{width:72px;height:72px;margin:0 auto .6rem;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--primary),var(--accent));color:#072014;font-weight:900}
 .cta{padding:clamp(2rem,5vw,4rem) 22px;margin:1.5rem 22px;border-radius:var(--radius);
   background:linear-gradient(135deg, color-mix(in oklab,var(--primary),transparent 30%), color-mix(in oklab,var(--accent),transparent 40%))}
+.pulse{animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
 
 /* ===== Kontakt, Footer, ToTop ===== */
 .contact{max-width:760px}
