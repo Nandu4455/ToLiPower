@@ -1,0 +1,19 @@
+
+{
+  "name": "ToLi Power",
+  "short_name": "ToLiPower",
+  "description": "Natur & Energie – Solar, Wind, Wasser, Speicher, Smart Grids.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b1113",
+  "theme_color": "#29c26a",
+  "icons": [
+    {
+      "src": "/bilder/hero.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
