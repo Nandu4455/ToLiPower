@@ -265,48 +265,23 @@
     </section>
 
     <!-- ===== Interaktive Karte (SVG + Filter) ===== -->
-    <section class="section reveal" id="karte" aria-labelledby="karte-title">
-      <h2 id="karte-title">Interaktive Karte</h2>
 
-      <!-- Filter -->
-      <fieldset class="filters" aria-label="Projekte filtern">
-        <legend class="visually-hidden">Filter</legend>
-        <label><input type="checkbox" name="filter" value="solar" checked> Solar</label>
-        <label><input type="checkbox" name="filter" value="wind" checked> Wind</label>
-        <label><input type="checkbox" name="filter" value="wasser" checked> Wasser</label>
-        <label><input type="checkbox" name="filter" value="speicher" checked> Speicher</label>
-      </fieldset>
+<!-- ===== Interaktive Karte (20 Gemeinden, anklickbar) ===== -->
+<section class="section reveal" id="karte" aria-labelledby="karte-title">
+  <h2 id="karte-title">Interaktive Karte</h2>
 
-      <!-- Beispielhafte Karte (Platzhalter) -->
-      <div class="mapwrap" role="region" aria-label="Karte der Projekte">
-        <svg class="map" viewBox="0 0 600 340" role="img" aria-labelledby="map-title">
-          <title id="map-title">Regionale Projekte – interaktive Karte</title>
+  <div class="mapwrap" role="region" aria-label="Karte der 20 Gemeinden">
+    <!-- Das SVG wird zur Laufzeit inline hereingeladen -->
+    <div id="tolimap-container" data-src="/bilder/tolimap.svg"></div>
 
-          <g class="area" tabindex="0" data-type="solar" data-name="Gemeinde Alpha" data-output="5.4 GWh/a" aria-label="Gemeinde Alpha (Solar)">
-            <rect x="40" y="60" width="120" height="80" rx="10" ry="10" />
-          </g>
-          <g class="area" tabindex="0" data-type="wind" data-name="Gemeinde Beta" data-output="12 Turbinen" aria-label="Gemeinde Beta (Wind)">
-            <rect x="190" y="40" width="120" height="90" rx="10" ry="10" />
-          </g>
-          <g class="area" tabindex="0" data-type="wasser" data-name="Gemeinde Gamma" data-output="Speichersee" aria-label="Gemeinde Gamma (Wasser)">
-            <rect x="340" y="70" width="120" height="100" rx="10" ry="10" />
-          </g>
-          <g class="area" tabindex="0" data-type="speicher" data-name="Gemeinde Delta" data-output="BESS 8 MW" aria-label="Gemeinde Delta (Speicher)">
-            <rect x="140" y="170" width="140" height="110" rx="10" ry="10" />
-          </g>
-          <g class="area" tabindex="0" data-type="solar" data-name="Gemeinde Epsilon" data-output="Dachanlagen" aria-label="Gemeinde Epsilon (Solar)">
-            <rect x="320" y="200" width="160" height="100" rx="10" ry="10" />
-          </g>
-        </svg>
+    <!-- Tooltip (optional, wird vom Script befüllt) -->
+    <div id="mapTip" class="maptip" role="tooltip" aria-hidden="true"></div>
+  </div>
 
-        <!-- Tooltip -->
-        <div id="mapTip" class="maptip" role="tooltip" aria-hidden="true">
-          <div class="maptip__name"></div>
-          <div class="maptip__meta"></div>
-        </div>
-      </div>
-      <p class="note">Tipp: Mit Tab kannst du die Flächen ansteuern, Enter öffnet Details (Demo‑Alert).</p>
-    </section>
+  <p class="note">Tipp: Mit <kbd>Tab</kbd> fokussieren, <kbd>Enter</kbd> oder <kbd>Space</kbd> aktivieren.</p>
+</section>
+``
+
 
     <!-- ===== Daten-Widgets (conic-gradient) ===== -->
     <section class="section reveal" id="daten" aria-labelledby="daten-title">
@@ -422,3 +397,4 @@
   <script src="/script.js" defer></script>
 </body>
 </html>
+
