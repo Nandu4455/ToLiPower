@@ -15,48 +15,25 @@
   <meta property="og:description" content="Profit & Nachhaltigkeit mit Solar, Wind, Wasser und Speicher – Energieautonomie mit Smart Grids." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://tolipower.vercel.app/" />
-  <meta property="og:image" content="https://tolipower.vercel.app/bilder/hero.png" />
+  <meta property="og:image" content="/bilder/hero.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap"
-    rel="stylesheet"
-  >
-
-  <!-- Performance: Hero-Bild vorladen -->
-  <link rel="preload" as="image" href="/bilder/hero.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/style.css" />
-
-  <!-- PWA (optional) -->
-  <link rel="manifest" href="/manifest.webmanifest">
-  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.png">
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"ToLi Power",
-    "url":"https://tolipower.vercel.app/",
-    "logo":"https://tolipower.vercel.app/icons/icon-512.png"
-  }
-  </script>
 </head>
 <body>
 
-  <!-- Skip-Links (A11y) -->
+  <!-- Skip-Links -->
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
   <a class="skip-link" href="#kontakt">Direkt zum Kontakt</a>
   <a class="skip-link" href="#karte">Direkt zur Karte</a>
 
-  <!-- Deko-Gradients -->
+  <!-- Hintergrund-Deko -->
   <div class="blob blob--1" aria-hidden="true"></div>
   <div class="blob blob--2" aria-hidden="true"></div>
 
@@ -91,7 +68,7 @@
     </div>
   </header>
 
-  <!-- Wellen-Divider -->
+  <!-- Divider -->
   <svg class="divider divider--top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0,64 C240,0 480,0 720,64 C960,128 1200,128 1440,64 L1440,80 L0,80 Z" fill="currentColor" opacity=".07"></path>
   </svg>
@@ -118,24 +95,26 @@
           <a class="btn btn--secondary" href="#kontakt">Kontakt</a>
         </div>
 
+        <!-- Statisch (ohne Counter-Animation, wie vorher) -->
         <div class="stats">
           <div class="stat">
-            <span class="stat__num" data-count="120">0</span>
+            <span class="stat__num">120</span>
             <span class="stat__label">gemeinsame Projekte</span>
           </div>
           <div class="stat">
-            <span class="stat__num" data-count="48">0</span>
+            <span class="stat__num">48</span>
             <span class="stat__label">Gemeinden vernetzt</span>
           </div>
           <div class="stat">
-            <span class="stat__num" data-count="85">0</span>
+            <span class="stat__num">85</span>
             <span class="stat__label">kt CO₂ eingespart / Jahr</span>
           </div>
         </div>
       </div>
 
-      <figure class="hero__image skeleton">
-        <img src="/bilder/hero.png" alt="Erneuerbare Energien: heroisches Landschaftsbild" loading="eager" decoding="async" fetchpriority="high">
+      <!-- Bild-Format wie vorher: einfache <img>, keine zusätzlichen Attribute -->
+      <figure class="hero__image">
+        <img src="/bilder/hero.png" alt="Erneuerbare Energien: heroisches Landschaftsbild">
       </figure>
     </section>
 
@@ -151,8 +130,10 @@
           <li><strong>Resilient:</strong> regionale Versorgungssicherheit &amp; Netzstabilität</li>
         </ul>
       </div>
-      <figure class="section__media skeleton">
-        <img src="/bilder/speicher.png" alt="Moderner Batteriespeicher (BESS) im Freien" loading="lazy">
+
+      <!-- Bild-Format wie vorher: einfache <img> -->
+      <figure class="section__media">
+        <img src="/bilder/speicher.png" alt="Moderner Batteriespeicher (BESS) im Freien">
       </figure>
     </section>
 
@@ -162,23 +143,23 @@
       <p class="section__lead">Solar‑, Wind‑ und Wasserkraft — ergänzt durch Speicher und smarte Steuerung — bilden eine <em>zukunftssichere</em>, umweltfreundliche Energieversorgung.</p>
 
       <div class="grid grid--4">
-        <article class="card tilt">
-          <img class="card__img" src="/bilder/solar.png" alt="Solarenergie (PV‑Module)" loading="lazy">
+        <article class="card">
+          <img class="card__img" src="/bilder/solar.png" alt="Solarenergie (PV‑Module)">
           <div class="card__body"><h3>Solarenergie</h3><p>PV‑Module auf Dächern &amp; Freiflächen – mit Lastmanagement und Heimspeichern.</p></div>
         </article>
 
-        <article class="card tilt">
-          <img class="card__img" src="/bilder/wind.png" alt="Windenergie (Windräder)" loading="lazy">
+        <article class="card">
+          <img class="card__img" src="/bilder/wind.png" alt="Windenergie (Windräder)">
           <div class="card__body"><h3>Windenergie</h3><p>Onshore‑Turbinen mit hoher Flächenleistung – stabilisiert durch Speicherverbünde.</p></div>
         </article>
 
-        <article class="card tilt">
-          <img class="card__img" src="/bilder/wasser.png" alt="Wasserkraft (Stausee/Laufwasser)" loading="lazy">
+        <article class="card">
+          <img class="card__img" src="/bilder/wasser.png" alt="Wasserkraft (Stausee/Laufwasser)">
           <div class="card__body"><h3>Wasserkraft</h3><p>Verlässliche Grundlast: Laufwasser &amp; Speicherseen sichern das Gesamtsystem.</p></div>
         </article>
 
-        <article class="card tilt">
-          <img class="card__img" src="/bilder/speicher.png" alt="Speicherlösungen (BESS)" loading="lazy">
+        <article class="card">
+          <img class="card__img" src="/bilder/speicher.png" alt="Speicherlösungen (BESS)">
           <div class="card__body"><h3>Speicherlösungen</h3><p>BESS erhöhen Flexibilität &amp; Netzstabilität – Energie, wenn sie gebraucht wird.</p></div>
         </article>
       </div>
@@ -194,14 +175,14 @@
       </div>
     </section>
 
-    <!-- ===== Impact ===== -->
+    <!-- ===== Impact (wie vorher: statisch, ohne Counter) ===== -->
     <section class="section reveal" id="impact" aria-labelledby="impact-title">
       <h2 id="impact-title">Unser Impact</h2>
       <div class="impact">
-        <div class="impact__kpi"><span class="kpi__num" data-count="320">0</span><span class="kpi__label">GWh Jahresproduktion</span></div>
-        <div class="impact__kpi"><span class="kpi__num" data-count="62">0</span><span class="kpi__label">% erneuerbarer Anteil</span></div>
-        <div class="impact__kpi"><span class="kpi__num" data-count="35">0</span><span class="kpi__label">MW installierte Speicher</span></div>
-        <div class="impact__kpi"><span class="kpi__num" data-count="5400">0</span><span class="kpi__label">t CO₂ vermieden</span></div>
+        <div class="impact__kpi"><span class="kpi__num">320</span><span class="kpi__label">GWh Jahresproduktion</span></div>
+        <div class="impact__kpi"><span class="kpi__num">62</span><span class="kpi__label">% erneuerbarer Anteil</span></div>
+        <div class="impact__kpi"><span class="kpi__num">35</span><span class="kpi__label">MW installierte Speicher</span></div>
+        <div class="impact__kpi"><span class="kpi__num">5400</span><span class="kpi__label">t CO₂ vermieden</span></div>
       </div>
     </section>
 
@@ -226,7 +207,7 @@
       </ol>
     </section>
 
-    <!-- ===== Roadmap ===== -->
+    <!-- ===== Roadmap (Zahlenstrahl: Animation wie vorher) ===== -->
     <section class="section section--alt reveal" id="roadmap" aria-labelledby="roadmap-title">
       <h2 id="roadmap-title">Zahlenstrahl – Roadmap 2026–2050</h2>
       <div class="numberline" aria-label="Zeitplan 2026 bis 2050">
@@ -251,20 +232,13 @@
     <section class="section reveal" id="projekte" aria-labelledby="proj-title">
       <h2 id="proj-title">Projekte</h2>
       <div class="gallery grid grid--3">
-        <a class="item" href="/bilder/solar.png" data-title="Solarpark A"><img src="/bilder/solar.png" alt="Solarpark A" loading="lazy"></a>
-        <a class="item" href="/bilder/wind.png" data-title="Windfeld B"><img src="/bilder/wind.png" alt="Windfeld B" loading="lazy"></a>
-        <a class="item" href="/bilder/wasser.png" data-title="Wasserkraft C"><img src="/bilder/wasser.png" alt="Wasserkraft C" loading="lazy"></a>
-        <a class="item" href="/bilder/speicher.png" data-title="BESS D"><img src="/bilder/speicher.png" alt="Batteriespeicher D" loading="lazy"></a>
-        <a class="item" href="/bilder/hero.png" data-title="Landschaft"><img src="/bilder/hero.png" alt="Landschaft" loading="lazy"></a>
-        <a class="item" href="/bilder/solar.png" data-title="Solarpark E"><img src="/bilder/solar.png" alt="Solarpark E" loading="lazy"></a>
+        <a class="item" href="/bilder/solar.png" data-title="Solarpark A"><img src="/bilder/solar.png" alt="Solarpark A"></a>
+        <a class="item" href="/bilder/wind.png" data-title="Windfeld B"><img src="/bilder/wind.png" alt="Windfeld B"></a>
+        <a class="item" href="/bilder/wasser.png" data-title="Wasserkraft C"><img src="/bilder/wasser.png" alt="Wasserkraft C"></a>
+        <a class="item" href="/bilder/speicher.png" data-title="BESS D"><img src="/bilder/speicher.png" alt="Batteriespeicher D"></a>
+        <a class="item" href="/bilder/hero.png" data-title="Landschaft"><img src="/bilder/hero.png" alt="Landschaft"></a>
+        <a class="item" href="/bilder/solar.png" data-title="Solarpark E"><img src="/bilder/solar.png" alt="Solarpark E"></a>
       </div>
-
-      <p class="note">Detailseiten:
-        <a href="/projekt-solarpark.html">Solarpark A</a> ·
-        <a href="/projekt-windfeld.html">Windfeld B</a> ·
-        <a href="/projekt-wasserkraft.html">Wasserkraft C</a> ·
-        <a href="/projekt-speicher.html">BESS D</a>
-      </p>
     </section>
 
     <!-- ===== Interaktive Karte ===== -->
@@ -272,7 +246,7 @@
       <h2 id="karte-title">Interaktive Karte</h2>
 
       <div class="mapwrap" role="region" aria-label="Karte der 20 Gemeinden">
-        <!-- SVG wird inline hereingeladen -->
+        <!-- SVG wird zur Laufzeit inline hereingeladen -->
         <div id="tolimap-container" data-src="/bilder/tolimap.svg"></div>
 
         <!-- Tooltip für Stats -->
@@ -282,21 +256,19 @@
       <p class="note">Tipp: Mit <kbd>Tab</kbd> fokussieren, <kbd>Enter</kbd> oder <kbd>Space</kbd> aktivieren.</p>
     </section>
 
-    <!-- ===== Daten-Widgets ===== -->
+    <!-- ===== Daten (ohne Demo-Text) ===== -->
     <section class="section reveal" id="daten" aria-labelledby="daten-title">
-      <h2 id="daten-title">Live‑Daten (Demo)</h2>
-      <p class="section__lead">Die Werte werden client‑seitig simuliert (Demo). Für echte Kennzahlen einfach eine API nennen – wir binden sie an.</p>
-
+      <h2 id="daten-title">Daten</h2>
       <div class="widgets grid grid--4">
         <article class="widget gauge" aria-label="Erzeugung heute">
           <h3>Erzeugt heute</h3>
-          <div class="gauge__ring" data-value="68"><span class="gauge__num">68%</span></div>
+          <div class="gauge__ring" style="--val:68; --ang:122.4deg"><span class="gauge__num">68%</span></div>
           <p class="widget__sub">Solar/Wind/Wasser</p>
         </article>
 
         <article class="widget gauge" aria-label="Verbrauch heute">
           <h3>Verbraucht heute</h3>
-          <div class="gauge__ring" data-value="54"><span class="gauge__num">54%</span></div>
+          <div class="gauge__ring" style="--val:54; --ang:97.2deg"><span class="gauge__num">54%</span></div>
           <p class="widget__sub">Haushalte &amp; Betriebe</p>
         </article>
 
@@ -372,6 +344,13 @@
       </form>
     </section>
 
+    <!-- Attribution / Quellenhinweis (optional) -->
+    <section class="section" aria-label="Datenhinweis">
+      <small>
+        Gemeindegrenzen: © swisstopo / BFS – swissBOUNDARIES3D &nbsp;|&nbsp;
+        Kennzahlen (Solar/Wind/Wasser): plausibel modelliert für ein Schulprojekt.
+      </small>
+    </section>
   </main>
 
   <!-- Back to Top -->
@@ -396,4 +375,3 @@
   <script src="/script.js" defer></script>
 </body>
 </html>
-
