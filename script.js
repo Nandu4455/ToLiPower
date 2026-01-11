@@ -50,7 +50,9 @@
 
   // ---------- [SPY] Scrollspy & Reveal ----------
   const menuLinks = Array.from(document.querySelectorAll('.nav__links a[href^="#"]'));
-  const sections = menuLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const sections = menuLinks
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
 
   if (sections.length && 'IntersectionObserver' in window) {
     const spy = new IntersectionObserver((entries) => {
@@ -82,23 +84,25 @@
   // ---------- [HERO] Skeleton, Parallax, Counters ----------
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Skeleton -> remove on load
   document.querySelectorAll('.skeleton img').forEach(img => {
     if (img.complete) img.parentElement.classList.add('loaded');
     img.addEventListener('load', () => img.parentElement.classList.add('loaded'), { once: true });
   });
 
+  // Parallax-lite
   const heroImg = document.querySelector('.hero__image img');
   if (heroImg && !prefersReduced) {
     const onScroll = () => {
       const rect = heroImg.getBoundingClientRect();
       const vh = window.innerHeight || document.documentElement.clientHeight;
       const ratio = 1 - Math.min(Math.max((rect.top + rect.height) / (vh + rect.height), 0), 1);
-      heroImg.style.transform = `translateY(${ratio * 8}px)`;
+      heroImg.style.transform = `translateY(${ratio * 8}px)`; // subtil
     };
     onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  // Counters
+  // Counter animation (hero + impact)
   const nums = document.querySelectorAll('[data-count]');
   if (nums.length && 'IntersectionObserver' in window) {
     const once = new WeakSet();
@@ -153,10 +157,12 @@
       fetch(mapHost.dataset.svg).then(r => r.text()),
       fetch(mapHost.dataset.csv).then(r => r.text())
     ]).then(([svgText, csvText]) => {
+      // Inline SVG einsetzen
       mapHost.innerHTML = svgText;
       const svg = mapHost.querySelector('svg');
       if (!svg) return;
 
+      // CSV -> Map<BFS, data>
       const rows = parseCSV(csvText);
       const dataMap = new Map();
       rows.forEach(r => {
@@ -172,11 +178,13 @@
         dataMap.set(bfs, { name: r.name, solar, wind, water, majority });
       });
 
+      // Interaktion
       const areas = svg.querySelectorAll('[data-bfs_nummer]');
       areas.forEach(area => {
         const bfs = String(area.getAttribute('data-bfs_nummer') || '').trim();
         const info = dataMap.get(bfs);
 
+        // Keyboard-A11y
         area.setAttribute('tabindex', '0');
         area.setAttribute('role', 'button');
 
@@ -206,41 +214,6 @@
       console.warn('Karte/CSV konnten nicht geladen werden:', err);
     });
   }
-
-  // ---------- [DATA] Neues Layout: Donuts + Meter ----------
-  const donuts = document.querySelectorAll('.donut');
-  const meters = document.querySelectorAll('.meter');
-
-  const refreshData = () => {
-    donuts.forEach(d => {
-      const v = parseFloat(getComputedStyle(d).getPropertyValue('--value')) || 0;
-      const num = d.querySelector('.donut__num');
-      if (num) num.textContent = `${Math.round(v)}%`;
-    });
-    meters.forEach(m => {
-      const v = parseFloat(getComputedStyle(m).getPropertyValue('--value')) || 0;
-      const fill = m.querySelector('.meter__fill');
-      const bubble = m.querySelector('.meter__bubble');
-      if (fill) fill.style.width = `${v}%`;
-      if (bubble) bubble.textContent = `${Math.round(v)}%`;
-    });
-  };
-  refreshData();
-
-  // Optional leichte Demo‑Variation
-  const intervalId = window.setInterval(() => {
-    donuts.forEach(d => {
-      const v = parseFloat(getComputedStyle(d).getPropertyValue('--value')) || 0;
-      const nv = Math.max(0, Math.min(100, v + (Math.random()*2 - 1)));
-      d.style.setProperty('--value', nv);
-    });
-    meters.forEach(m => {
-      const v = parseFloat(getComputedStyle(m).getPropertyValue('--value')) || 0;
-      const nv = Math.max(0, Math.min(100, v + (Math.random()*2 - 1)));
-      m.style.setProperty('--value', nv);
-    });
-    refreshData();
-  }, 5000);
 
   // ---------- [CONTACT] Form ----------
   const form = document.getElementById('contactForm');
