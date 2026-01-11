@@ -1,9 +1,9 @@
 
-/* ============== Helpers ============== */
+/* ========= Helper ========= */
 const $  = (s, r=document)=>r.querySelector(s);
 const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
 
-/* ============== Nav: mobile menu / scrollspy / theme / contrast ============== */
+/* ========= Nav / Menu / Theme / Contrast / Scrollspy ========= */
 (() => {
   const menuBtn = $('#menuToggle');
   const links   = $('.nav__links');
@@ -43,51 +43,39 @@ const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
   }
 })();
 
-/* ============== Counters ============== */
+/* ========= Roadmap Zahlenstrahl – Animation wie vorher (einmalig beim Sichtbarwerden) ========= */
 (() => {
-  const counters = $$('[data-count]');
-  const io = new IntersectionObserver(es => {
-    es.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target;
-      const target = Number(el.dataset.count || 0);
-      let cur = 0;
-      const step = Math.max(1, Math.round(target/60));
-      const int = setInterval(() => {
-        cur += step;
-        if (cur >= target){ cur = target; clearInterval(int); }
-        el.textContent = cur.toString();
-      }, 18);
-      io.unobserve(el);
+  const wrap     = $('#roadmap');
+  const track    = $('.numberline__track', wrap);
+  const progress = $('.numberline__progress', wrap);
+  const dot      = $('.numberline__dot', wrap);
+  if (!wrap || !track || !progress || !dot) return;
+
+  let played = false;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!played && e.isIntersecting) {
+        animateOnce();
+        played = true;
+        io.disconnect();
+      }
     });
-  }, {threshold:.7});
-  counters.forEach(c => io.observe(c));
-})();
+  }, {threshold: .4});
 
-/* ============== Numberline (Roadmap) ============== */
-(() => {
-  const track = $('.numberline__track');
-  const progress = $('.numberline__progress');
-  const dot = $('.numberline__dot');
-  if (!track || !progress || !dot) return;
+  io.observe(wrap);
 
-  function setPos(ratio){
-    ratio = Math.max(0, Math.min(1, ratio));
-    const width = track.getBoundingClientRect().width;
-    const x = width * ratio;
-    progress.style.width = `${x}px`;
-    dot.style.left = `calc(${x}px - 9px)`;
+  function animateOnce(){
+    const w = track.getBoundingClientRect().width;
+    // animiere auf 100% in 2.5s (CSS-Transition in style.css)
+    requestAnimationFrame(() => {
+      progress.style.width = w + 'px';
+      dot.style.left = (w - 9) + 'px';
+    });
   }
-  // Demo-Animation
-  let t = 0, dir = 1;
-  setInterval(() => {
-    t += 0.02 * dir;
-    if (t >= 1) dir = -1; else if (t <= 0) dir = 1;
-    setPos(t);
-  }, 120);
 })();
 
-/* ============== Gallery Lightbox ============== */
+/* ========= Lightbox Galerie ========= */
 (() => {
   const lb = $('#lightbox'), frame = $('.lightbox__frame img', lb), cap = $('.lightbox__caption', lb), close = $('.lightbox__close', lb);
   if (!lb) return;
@@ -105,7 +93,7 @@ const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
 })();
 
-/* ============== Back to Top + Footer Jahr ============== */
+/* ========= Back to Top + Jahr ========= */
 (() => {
   const btn = $('#toTop');
   if (btn){
@@ -118,7 +106,7 @@ const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
   if (y) y.textContent = new Date().getFullYear();
 })();
 
-/* ============== Kontakt: Statusanzeige ============== */
+/* ========= Kontakt: Statusanzeige ========= */
 (() => {
   const form = $('#contactForm'), status = $('#formStatus');
   if (!form || !status) return;
@@ -128,7 +116,7 @@ const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
   });
 })();
 
-/* ============== Reveal on Scroll ============== */
+/* ========= Reveal on Scroll ========= */
 (() => {
   const revs = $$('.reveal');
   const io = new IntersectionObserver(es => {
@@ -137,22 +125,10 @@ const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
   revs.forEach(el => io.observe(el));
 })();
 
-/* ============== Widgets Demo (optional) ============== */
-(() => {
-  const rings = $$('.gauge__ring');
-  rings.forEach(r => {
-    const v = Number(r.dataset.value || 0);
-    r.style.setProperty('--val', v);
-    r.style.setProperty('--ang', `${v*1.8}deg`);
-    const num = $('.gauge__num', r);
-    if (num) num.textContent = `${v}%`;
-  });
-})();
-
-/* ============== Interaktive Karte – SVG laden + CSV-Join + Tooltip ============== */
+/* ========= Interaktive Karte – SVG laden + CSV-Join + Tooltip ========= */
 (() => {
   const container = $('#tolimap-container');
-  const tip = $('#mapTip');
+  const tip       = $('#mapTip');
   const energyUrl = '/daten/energie.csv';
   if (!container) return;
 
@@ -273,3 +249,4 @@ const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
   })
   .catch(err => console.error('[Karte] Fehler:', err));
 })();
+
