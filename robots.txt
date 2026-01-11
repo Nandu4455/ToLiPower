@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tolipower.vercel.app/sitemap.xml
