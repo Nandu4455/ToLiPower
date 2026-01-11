@@ -20,16 +20,19 @@ const header = document.querySelector('.nav');
 menuBtn?.addEventListener('click', () => header.classList.toggle('nav--open'));
 
 // ===== Smooth Scroll =====
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click', e=>{
-    const id = a.getAttribute('href').slice(1);
-    const el = document.getElementById(id);
-    if (el){
-      e.preventDefault();
-      header.classList.remove('nav--open');
-      el.scrollIntoView({behavior:'smooth', block:'start'});
-    }
-  });
+document.querySelectorAll('.nav__links a, .hero__cta a, .cta a').forEach(a=>{
+  if (a.getAttribute('href')?.startsWith('#')) {
+    a.classList.add('spy');
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el){
+        e.preventDefault();
+        header.classList.remove('nav--open');
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  }
 });
 
 // ===== Staggered Headline (Zeichenweise) =====
@@ -57,17 +60,17 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 })();
 
 // ===== Reveal on Scroll =====
-const io = new IntersectionObserver((entries)=>{
+const revealIO = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if (entry.isIntersecting){
       entry.target.classList.add('is-visible');
-      io.unobserve(entry.target);
+      revealIO.unobserve(entry.target);
     }
   });
 },{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+document.querySelectorAll('.reveal').forEach(el=> revealIO.observe(el));
 
-// ===== Hero Counters & Impact KPIs =====
+// ===== Counter Animation (Start zuverlässig, auch bei Page-Load sichtbar) =====
 function animateCounter(el, to, duration=1300){
   const start = 0; const t0 = performance.now();
   function tick(t){
@@ -78,21 +81,34 @@ function animateCounter(el, to, duration=1300){
   }
   requestAnimationFrame(tick);
 }
-const counters = document.querySelectorAll('.stat__num, .kpi__num');
-const counterIO = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      const num = parseInt(entry.target.dataset.count || '0', 10);
-      animateCounter(entry.target, num);
-      counterIO.unobserve(entry.target);
+function initCounters(){
+  const counters = document.querySelectorAll('.stat__num, .kpi__num');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const num = parseInt(entry.target.dataset.count || '0', 10);
+        animateCounter(entry.target, num);
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.5});
+  counters.forEach(el=>{
+    io.observe(el);
+    // Sofort starten, wenn Element bereits sichtbar (z. B. kleine Displays)
+    const rect = el.getBoundingClientRect();
+    const inView = rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
+    if (inView) {
+      const num = parseInt(el.dataset.count || '0', 10);
+      animateCounter(el, num);
+      io.unobserve(el);
     }
   });
-},{threshold:0.5});
-counters.forEach(el=> counterIO.observe(el));
+}
+window.addEventListener('DOMContentLoaded', initCounters);
 
 // ===== Scrollspy =====
 const spyLinks = [...document.querySelectorAll('.nav__links .spy')];
-const sections = spyLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const spySections = spyLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
 const spy = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
     if (e.isIntersecting){
@@ -101,9 +117,9 @@ const spy = new IntersectionObserver((entries)=>{
     }
   });
 },{ rootMargin: '-45% 0px -50% 0px', threshold: 0.01 });
-sections.forEach(s => spy.observe(s));
+spySections.forEach(s => spy.observe(s));
 
-// ===== Skeleton -> remove overlay when images loaded =====
+// ===== Skeleton remove when images loaded =====
 document.querySelectorAll('.skeleton img').forEach(img=>{
   const parent = img.parentElement;
   const done = () => parent.classList.add('loaded');
@@ -141,3 +157,32 @@ sendBtn?.addEventListener('click', ()=>{
 
 // ===== Year in Footer =====
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// ===== Roadmap Zahlenstrahl: Fortschritt folgt dem Scroll innerhalb der Sektion =====
+(function(){
+  const section = document.getElementById('roadmap');
+  const progress = document.querySelector('.numberline__progress');
+  const dot = document.querySelector('.numberline__dot');
+  const labels = document.querySelectorAll('.numberline__labels li');
+  if (!section || !progress || !dot) return;
+
+  function update(){
+    const rect = section.getBoundingClientRect();
+    const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const start = rect.top - vh*0.6;   // Startpunkt der Animation
+    const end   = rect.bottom - vh*0.4; // Endpunkt
+    const p = Math.min(1, Math.max(0, (vh*0.5 - start) / (end - start))); // 0..1
+    const pct = p * 100;
+    progress.style.width = `${pct}%`;
+    dot.style.left = `${pct}%`;
+
+    // Labels subtil highlighten, wenn passiert
+    labels.forEach(l=>{
+      const pos = parseFloat(l.dataset.pos || '0');
+      l.style.color = (p >= pos) ? 'var(--text)' : 'var(--muted)';
+    });
+  }
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+})();
