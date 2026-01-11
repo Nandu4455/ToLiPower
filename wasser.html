@@ -1,0 +1,142 @@
+
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wasserenergie – ToLi Power</title>
+  <meta name="description" content="Laufwasser, Speicherkraft und Kleinwasserkraft – Technologien und Nutzen.">
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/bilder/wasser.png" type="image/png">
+</head>
+<body>
+  <a class="skip" href="#main">Zum Inhalt springen</a>
+  <a class="skip" href="#kontakt">Zum Kontakt springen</a>
+
+  <header class="nav" role="banner">
+    <div class="nav__inner">
+      <a href="/index.html" class="brand" aria-label="ToLi Power – Startseite">
+        <span class="brand__logo">ToLi</span><span class="brand__accent">Power</span>
+      </a>
+      <nav aria-label="Hauptnavigation">
+        <ul class="nav__links">
+          <li><a href="/index.html#vision">Vision</a></li>
+          <li><a href="/index.html#tech" class="is-active">Technologie</a></li>
+          <li><a href="/index.html#usecases">Use‑Cases</a></li>
+          <li><a href="/index.html#impact">Impact</a></li>
+          <li><a href="/index.html#politik">Politik</a></li>
+          <li><a href="/index.html#vision2050">Vision 2050</a></li>
+          <li><a href="/index.html#roadmap">Roadmap</a></li>
+          <li><a href="/index.html#karte">Karte</a></li>
+          <li><a href="/index.html#daten">Daten</a></li>
+          <li><a href="/index.html#faq">FAQ</a></li>
+          <li><a href="/index.html#team">Team</a></li>
+          <li><a href="/index.html#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <div class="nav__tools">
+        <button id="contrastToggle" aria-pressed="false" aria-label="Kontrastmodus umschalten">Kontrast</button>
+        <button id="themeToggle" aria-pressed="true" aria-label="Theme umschalten">Dark/Light</button>
+        <button id="menuToggle" class="only-mobile" aria-controls="mobileMenu" aria-expanded="false" aria-label="Menü öffnen">Menü</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <nav class="breadcrumb" aria-label="Brotkrumen">
+      <ol>
+        <li><a href="/index.html">Start</a></li>
+        <li><a href="/index.html#tech">Technologie & Innovation</a></li>
+        <li aria-current="page">Wasserenergie</li>
+      </ol>
+    </nav>
+
+    <section class="hero reveal">
+      <div class="hero__grid">
+        <div class="hero__content">
+          <h1 class="fx-headline">Wasserenergie <span class="fx-headline__accent">— konstant und flexibel</span></h1>
+          <p class="muted">Laufwasserkraft, Speicherkraftwerke und Kleinwasserkraft für regionale Versorgung.</p>
+          <ul class="chips" aria-label="Kategorien">
+            <li class="chip">Erneuerbar</li>
+            <li class="chip">Grundlast</li>
+            <li class="chip">Speicherbar</li>
+          </ul>
+        </div>
+        <figure class="hero__image skeleton">
+          <img src="/bilder/wasser_banner.png" alt="Wasserkraftwerk mit Auslauf" loading="lazy" />
+          <figcaption class="sr-only">Wasserkraftwerk mit Auslauf</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="box box--prose reveal">
+      <h2>Technologien</h2>
+      <div class="cards">
+        <article class="card">
+          <img class="card__img" src="/bilder/wasser_laufwasser.png" alt="Laufwasserkraft">
+          <div class="card__body">
+            <h3>Laufwasser</h3>
+            <p>Kontinuierliche Erzeugung entlang von Flüssen; geringe Speicherkapazität.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card__img" src="/bilder/wasser_speicher.png" alt="Speicherkraftwerk">
+          <div class="card__body">
+            <h3>Speicherkraft</h3>
+            <p>Flexibel steuerbar; ideal zur Spitzenlastdeckung.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card__img" src="/bilder/wasser_klein.png" alt="Kleinwasserkraft">
+          <div class="card__body">
+            <h3>Kleinwasserkraft</h3>
+            <p>Dezentrale Anlagen an kleinen Gewässern; kurze Genehmigungswege.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="faq" class="reveal">
+      <h2>FAQ – Wasser</h2>
+      <details>
+        <summary>Wie sieht die Ökobilanz aus?</summary>
+        <p>Sehr gut; ökologische Durchgängigkeit wird durch Fischaufstiege verbessert.</p>
+      </details>
+      <details>
+        <summary>Kann ich Wasserenergie privat nutzen?</summary>
+        <p>Kleinanlagen sind möglich, aber stark genehmigungspflichtig und standortabhängig.</p>
+      </details>
+    </section>
+
+    <section id="kontakt" class="reveal">
+      <h2>Kontakt</h2>
+      <form id="contactForm" action="https://formspree.io/f/xyz" method="POST">
+        <label>Dein Name <input name="name" required></label>
+        <label>E‑Mail <input name="email" type="email" required></label>
+        <label>Nachricht <textarea name="message" required>Ich interessiere mich für Wasserenergie…</textarea></label>
+        <button type="submit">Senden</button>
+        <p id="formStatus" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="vision" hidden></section>
+    <section id="tech" hidden></section>
+    <section id="usecases" hidden></section>
+    <section id="impact" hidden></section>
+    <section id="politik" hidden></section>
+    <section id="vision2050" hidden></section>
+    <section id="roadmap" hidden></section>
+    <section id="karte" hidden></section>
+    <section id="daten" hidden></section>
+    <section id="team" hidden></section>
+  </main>
+
+  <button class="toTop" aria-label="Nach oben">▲</button>
+  <footer class="footer">
+    <small>© <span id="year"></span> ToLi Power</small>
+  </footer>
+
+  <script src="/script.js" defer></script>
+</body>
+</html>

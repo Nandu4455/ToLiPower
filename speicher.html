@@ -1,0 +1,142 @@
+
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speicher – ToLi Power</title>
+  <meta name="description" content="Batteriespeicher‑Systeme (BESS), Heimspeicher und Pumpspeicher – Einsatz und Nutzen.">
+  <link rel="preload" href="/style.css" as="style">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/bilder/speicher.png" type="image/png">
+</head>
+<body>
+  <a class="skip" href="#main">Zum Inhalt springen</a>
+  <a class="skip" href="#kontakt">Zum Kontakt springen</a>
+
+  <header class="nav" role="banner">
+    <div class="nav__inner">
+      <a href="/index.html" class="brand" aria-label="ToLi Power – Startseite">
+        <span class="brand__logo">ToLi</span><span class="brand__accent">Power</span>
+      </a>
+      <nav aria-label="Hauptnavigation">
+        <ul class="nav__links">
+          <li><a href="/index.html#vision">Vision</a></li>
+          <li><a href="/index.html#tech" class="is-active">Technologie</a></li>
+          <li><a href="/index.html#usecases">Use‑Cases</a></li>
+          <li><a href="/index.html#impact">Impact</a></li>
+          <li><a href="/index.html#politik">Politik</a></li>
+          <li><a href="/index.html#vision2050">Vision 2050</a></li>
+          <li><a href="/index.html#roadmap">Roadmap</a></li>
+          <li><a href="/index.html#karte">Karte</a></li>
+          <li><a href="/index.html#daten">Daten</a></li>
+          <li><a href="/index.html#faq">FAQ</a></li>
+          <li><a href="/index.html#team">Team</a></li>
+          <li><a href="/index.html#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <div class="nav__tools">
+        <button id="contrastToggle" aria-pressed="false" aria-label="Kontrastmodus umschalten">Kontrast</button>
+        <button id="themeToggle" aria-pressed="true" aria-label="Theme umschalten">Dark/Light</button>
+        <button id="menuToggle" class="only-mobile" aria-controls="mobileMenu" aria-expanded="false" aria-label="Menü öffnen">Menü</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <nav class="breadcrumb" aria-label="Brotkrumen">
+      <ol>
+        <li><a href="/index.html">Start</a></li>
+        <li><a href="/index.html#tech">Technologie & Innovation</a></li>
+        <li aria-current="page">Speicher</li>
+      </ol>
+    </nav>
+
+    <section class="hero reveal">
+      <div class="hero__grid">
+        <div class="hero__content">
+          <h1 class="fx-headline">Speicher <span class="fx-headline__accent">— smart und skalierbar</span></h1>
+          <p class="muted">Batteriespeicher‑Systeme (BESS) vom Heimspeicher bis zu Containerlösungen.</p>
+          <ul class="chips" aria-label="Kategorien">
+            <li class="chip">Flexibilität</li>
+            <li class="chip">Netzdienlich</li>
+            <li class="chip">Eigenverbrauch</li>
+          </ul>
+        </div>
+        <figure class="hero__image skeleton">
+          <img src="/bilder/speicher_banner.png" alt="Container‑BESS mit Transformator" loading="lazy" />
+          <figcaption class="sr-only">Container‑BESS mit Transformator</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="box box--prose reveal">
+      <h2>Systeme</h2>
+      <div class="cards">
+        <article class="card">
+          <img class="card__img" src="/bilder/speicher_home.png" alt="Heimspeicher im Technikraum">
+          <div class="card__body">
+            <h3>Heimspeicher</h3>
+            <p>3–15 kWh, optimiert für PV‑Eigenverbrauch und Notstrom.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card__img" src="/bilder/speicher_bess.png" alt="BESS‑Containeranlage">
+          <div class="card__body">
+            <h3>BESS‑Container</h3>
+            <p>100 kWh bis mehrere MWh; Regelenergie, Peak‑Shaving und Microgrids.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card__img" src="/bilder/speicher_pump.png" alt="Pumpspeicherkraftwerk">
+          <div class="card__body">
+            <h3>Pumpspeicher</h3>
+            <p>Großspeicher mit Wasser; sehr hohe Leistung und Speicherzeit.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="faq" class="reveal">
+      <h2>FAQ – Speicher</h2>
+      <details>
+        <summary>Wie sicher sind Lithium‑Systeme?</summary>
+        <p>Moderne BMS und Brandschutzkonzepte reduzieren Risiken erheblich.</p>
+      </details>
+      <details>
+        <summary>Kann ich V2G nutzen?</summary>
+        <p>Vehicle‑to‑Grid setzt kompatible Fahrzeuge und Netzbetreiber‑Freigaben voraus.</p>
+      </details>
+    </section>
+
+    <section id="kontakt" class="reveal">
+      <h2>Kontakt</h2>
+      <form id="contactForm" action="https://formspree.io/f/xyz" method="POST">
+        <label>Dein Name <input name="name" required></label>
+        <label>E‑Mail <input name="email" type="email" required></label>
+        <label>Nachricht <textarea name="message" required>Ich interessiere mich für Speicherlösungen…</textarea></label>
+        <button type="submit">Senden</button>
+        <p id="formStatus" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="vision" hidden></section>
+    <section id="tech" hidden></section>
+    <section id="usecases" hidden></section>
+    <section id="impact" hidden></section>
+    <section id="politik" hidden></section>
+    <section id="vision2050" hidden></section>
+    <section id="roadmap" hidden></section>
+    <section id="karte" hidden></section>
+    <section id="daten" hidden></section>
+    <section id="team" hidden></section>
+  </main>
+
+  <button class="toTop" aria-label="Nach oben">▲</button>
+  <footer class="footer">
+    <small>© <span id="year"></span> ToLi Power</small>
+  </footer>
+
+  <script src="/script.js" defer></script>
+</body>
+</html>
