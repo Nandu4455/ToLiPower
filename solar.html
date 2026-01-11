@@ -2,23 +2,20 @@
 <!doctype html>
 <html lang="de" data-theme="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Solarenergie – ToLi Power</title>
-  <meta name="description" content="ToLi Power erklärt Solarenergie: Technologien, Einsatzfälle, Wirtschaftlichkeit, A11y-konforme Details.">
-  <link rel="preload" href="/style.css" as="style">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="icon" href="/bilder/solar.png" type="image/png">
-  <meta property="og:title" content="Solarenergie – ToLi Power">
-  <meta property="og:description" content="Technologien, Vorteile/Nachteile, Kennzahlen und Praxisbeispiele zur Solarenergie.">
-  <meta property="og:type" content="website">
+  <meta name="description" content="ToLi Power erklärt Solarenergie: Dach-PV, Freifläche und BIPV – Einsatzfälle und Kennzahlen." />
+  <link rel="preload" href="/style.css" as="style" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/bilder/solar.png" type="image/png" />
 </head>
 <body>
   <!-- Skip-Links -->
   <a class="skip" href="#main">Zum Inhalt springen</a>
   <a class="skip" href="#kontakt">Zum Kontakt springen</a>
 
-  <!-- Gemeinsame Navigation (identisch wie auf der Startseite) -->
+  <!-- Header / Navigation (ohne Kontrast-Button, ohne Vision) -->
   <header class="nav" role="banner">
     <div class="nav__inner">
       <a href="/index.html" class="brand" aria-label="ToLi Power – Startseite">
@@ -26,12 +23,10 @@
       </a>
       <nav aria-label="Hauptnavigation">
         <ul class="nav__links">
-          <li><a href="/index.html#vision">Vision</a></li>
           <li><a href="/index.html#tech" class="is-active">Technologie</a></li>
           <li><a href="/index.html#usecases">Use‑Cases</a></li>
           <li><a href="/index.html#impact">Impact</a></li>
           <li><a href="/index.html#politik">Politik</a></li>
-          <li><a href="/index.html#vision2050">Vision 2050</a></li>
           <li><a href="/index.html#roadmap">Roadmap</a></li>
           <li><a href="/index.html#karte">Karte</a></li>
           <li><a href="/index.html#daten">Daten</a></li>
@@ -41,7 +36,6 @@
         </ul>
       </nav>
       <div class="nav__tools">
-        <button id="contrastToggle" aria-pressed="false" aria-label="Kontrastmodus umschalten">Kontrast</button>
         <button id="themeToggle" aria-pressed="true" aria-label="Theme umschalten">Dark/Light</button>
         <button id="menuToggle" class="only-mobile" aria-controls="mobileMenu" aria-expanded="false" aria-label="Menü öffnen">Menü</button>
       </div>
@@ -49,22 +43,21 @@
   </header>
 
   <main id="main" class="container">
-
-    <!-- Brotkrumen-Navigation -->
+    <!-- Breadcrumb -->
     <nav class="breadcrumb" aria-label="Brotkrumen">
       <ol>
         <li><a href="/index.html">Start</a></li>
-        <li><a href="/index.html#tech">Technologie & Innovation</a></li>
+        <li><a href="/index.html#tech">Technologie &amp; Innovation</a></li>
         <li aria-current="page">Solarenergie</li>
       </ol>
     </nav>
 
-    <!-- HERO-Banner zur Seite -->
+    <!-- Hero -->
     <section class="hero reveal">
       <div class="hero__grid">
         <div class="hero__content">
           <h1 class="fx-headline">Solarenergie <span class="fx-headline__accent">— für die Zukunft</span></h1>
-          <p class="muted">Photovoltaik (PV) und gebäudeintegrierte PV (BIPV) für Dächer, Fassaden und Freiflächen im Toggenburg–Linthgebiet.</p>
+          <p class="muted">Photovoltaik (PV) und gebäudeintegrierte PV (BIPV) für Dächer, Fassaden und Freiflächen.</p>
           <ul class="chips" aria-label="Kategorien">
             <li class="chip">Erneuerbar</li>
             <li class="chip">Smart‑Grid</li>
@@ -72,61 +65,37 @@
           </ul>
         </div>
         <figure class="hero__image skeleton">
-          <img src="/bilder/solar_banner.png" alt="Solarpark mit PV‑Modulen bei Sonnenuntergang" loading="lazy" />
-          <figcaption class="sr-only">Solarpark mit PV‑Modulen bei Sonnenuntergang</figcaption>
+          <img src="/bilder/solar_banner.png" alt="Solarpark mit PV‑Modulen bei Abendlicht" loading="lazy" />
+          <figcaption class="sr-only">Solarpark mit PV‑Modulen bei Abendlicht</figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- Überblick -->
-    <section class="box box--prose reveal">
-      <h2>Überblick</h2>
-      <p>Solarenergie wandelt Sonnenlicht mittels Photovoltaik direkt in elektrische Energie um. Moderne Wechselrichter, Leistungsoptimierer und Monitoring integrieren PV‑Anlagen sicher ins Netz.</p>
-      <div class="bullets bullets--boxed">
-        <div>
-          <h3>Wirtschaftlich</h3>
-          <ul class="ticks">
-            <li>Sinkende Modulpreise, hohe Lebensdauer (25–30 Jahre)</li>
-            <li>Eigenverbrauch senkt Stromkosten</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Ökologisch</h3>
-          <ul class="ticks">
-            <li>Keine direkten Emissionen im Betrieb</li>
-            <li>Geringer Flächenverbrauch bei Dach‑PV</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Resilient</h3>
-          <ul class="ticks">
-            <li>Dezentrale Erzeugung, kombinierbar mit Speicher</li>
-            <li>Lastspitzen via Smart‑Steuerung glätten</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <!-- Technologien -->
-    <section class="reveal">
+    <section class="box box--prose reveal">
       <h2>Technologien</h2>
       <div class="cards">
+        <!-- Dach-PV -->
         <article class="card">
-          <img class="card__img" src="/bilder/solar_rooftop.png" alt="Dach‑PV auf Wohnhaus">
+          <img class="card__img" src="/bilder/solar_rooftop.png" alt="Dach‑PV auf Wohnhaus" />
           <div class="card__body">
             <h3>Dach‑PV</h3>
             <p>Module auf Schräg‑ oder Flachdächern, optimal für Eigenverbrauch.</p>
           </div>
         </article>
+
+        <!-- Freifläche -->
         <article class="card">
-          <img class="card__img" src="/bilder/solar_utility.png" alt="Freiflächen‑Solarpark">
+          <img class="card__img" src="/bilder/solar_utility.png" alt="Freiflächen‑Solarpark" />
           <div class="card__body">
             <h3>Freifläche</h3>
             <p>Große Parks mit String‑ oder Zentralwechselrichtern für Netz‑Einspeisung.</p>
           </div>
         </article>
+
+        <!-- BIPV -->
         <article class="card">
-          <img class="card__img" src="/bilder/solar_bipv.png" alt="Gebäudeintegrierte PV‑Fassade">
+          <img class="card__img" src="/bilder/solar_bipv.png" alt="Gebäudeintegrierte PV‑Fassade" />
           <div class="card__body">
             <h3>BIPV</h3>
             <p>In Fassaden und Dächer integrierte Module mit architektonischem Mehrwert.</p>
@@ -135,27 +104,8 @@
       </div>
     </section>
 
-    <!-- Praxisbeispiele -->
+    <!-- FAQ -->
     <section class="reveal">
-      <h2>Praxis & Use‑Cases</h2>
-      <ul class="tiles">
-        <li class="tile glow">
-          <h3>Haushalt</h3>
-          <p>Eigenverbrauch mit Batteriespeicher; Überschüsse für Wärmepumpe/Ladestation.</p>
-        </li>
-        <li class="tile glow">
-          <h3>Gewerbe</h3>
-          <p>Lastspitzenmanagement, PV‑Carports und Monitoring via API.</p>
-        </li>
-        <li class="tile glow">
-          <h3>Kommunen</h3>
-          <p>Schul‑/Gemeindedächer, Agri‑PV und Bürgerstrom‑Modelle.</p>
-        </li>
-      </ul>
-    </section>
-
-    <!-- FAQ Kurz -->
-    <section id="faq" class="reveal">
       <h2>FAQ – Solar</h2>
       <details>
         <summary>Was passiert bei Bewölkung?</summary>
@@ -167,7 +117,7 @@
       </details>
     </section>
 
-    <!-- Kontakt (gemeinsam) -->
+    <!-- Kontakt -->
     <section id="kontakt" class="reveal">
       <h2>Kontakt</h2>
       <form id="contactForm" action="https://formspree.io/f/xyz" method="POST">
@@ -179,18 +129,15 @@
       </form>
     </section>
 
-    <!-- Unsichtbare Platzhalter‑Sektionen, damit Scrollspy/JS fehlerfrei bleiben -->
-    <section id="vision" hidden></section>
+    <!-- Platzhalter-IDs (hidden), falls dein JS darauf hört -->
     <section id="tech" hidden></section>
     <section id="usecases" hidden></section>
     <section id="impact" hidden></section>
     <section id="politik" hidden></section>
-    <section id="vision2050" hidden></section>
     <section id="roadmap" hidden></section>
     <section id="karte" hidden></section>
     <section id="daten" hidden></section>
     <section id="team" hidden></section>
-
   </main>
 
   <button class="toTop" aria-label="Nach oben">▲</button>
