@@ -118,7 +118,7 @@ p{line-height:1.6}
 .skeleton.loaded img{opacity:1;transition:opacity .4s ease}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-/* Cards & Tiles */
+/* Cards &amp; Tiles */
 .cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 @media (max-width:980px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:720px){.cards{grid-template-columns:1fr}}
@@ -135,7 +135,7 @@ p{line-height:1.6}
 .tile{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
 .tile.glow:hover{box-shadow:0 0 0 1px var(--accent),0 12px 30px rgba(0,0,0,.35)}
 
-/* Prose & bullets */
+/* Prose &amp; bullets */
 .box{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
 .bullets.bullets--boxed{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
 @media (max-width:980px){.bullets.bullets--boxed{grid-template-columns:1fr}}
@@ -182,13 +182,13 @@ p{line-height:1.6}
   background:var(--glass);border:1px solid rgba(255,255,255,.08)
 }
 
-/* Buttons & forms */
+/* Buttons &amp; forms */
 button,input,textarea{font:inherit}
 input,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:color-mix(in oklab,var(--surface),transparent 6%);color:var(--text)}
 button{background:linear-gradient(90deg,var(--primary),var(--primary-2));color:#0b1020;border:none;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}
 button:focus-visible,a:focus-visible,.card:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
 
-/* Back-to-top & Footer */
+/* Back-to-top &amp; Footer */
 .toTop{position:fixed;right:16px;bottom:16px;display:none;padding:10px 12px;border-radius:999px;background:var(--glass);border:1px solid rgba(255,255,255,.12);color:var(--text)}
 .footer{padding:36px 16px;text-align:center;color:var(--muted)}
 
@@ -201,4 +201,33 @@ button:focus-visible,a:focus-visible,.card:focus-visible{outline:3px solid var(-
   .hero{padding-top:56px}
   .nav__tools button{padding:8px 10px}
 }
-``
+
+/* =========================
+   Team: Bild-Styles (Avatare)
+   ========================= */
+#team .impact__kpi{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+}
+
+#team .impact__kpi > img,
+#team .team-img{
+  /* Einheitliche Groesse, ohne Verzerren */
+  width: clamp(96px, 12vw, 140px);
+  height: clamp(96px, 12vw, 140px);
+  object-fit: cover;      /* schneidet zu statt zu verzerren */
+  border-radius: 50%;     /* rund; fuer eckig: 10px setzen oder entfernen */
+  display: block;
+  margin-inline: auto;
+  margin-bottom: 10px;
+
+  /* leichte Kontur + Schatten passend zum Glas-Design */
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--text) 20%, transparent),
+    0 10px 20px rgba(0,0,0,.25);
+}
+
+#team .kpi__title{ margin-top: 0; }
+#team .kpi__label{ opacity: .9; }
