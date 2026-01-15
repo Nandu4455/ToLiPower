@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ToLi Power – Natur & Energie</title>
+  <title>ToLi Power – Natur &amp; Energie</title>
   <meta name="description" content="Technologien (Solar, Wind, Wasser, Speicher), interaktive Karte mit CSV-Daten, Roadmap und Kontakt.">
   <meta name="color-scheme" content="dark light" />
   <link rel="icon" href="/bilder/hero.png" type="image/png" />
@@ -39,6 +39,7 @@
           <li><a href="#daten">Daten</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#team">Team</a></li>
+          <li><a href="#quellen">Quellen</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
         </ul>
       </nav>
@@ -61,6 +62,7 @@
         <li><a href="#daten">Daten</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#team">Team</a></li>
+        <li><a href="#quellen">Quellen</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
     </div>
@@ -72,7 +74,7 @@
       <div class="hero__grid">
         <div class="hero__content">
           <h1 class="fx-headline">
-            Natur &amp; Energie <span class="fx-headline__accent">für die Zukunft</span>
+            Natur &amp; Energie <span class="fx-headline__accent">fuer die Zukunft</span>
           </h1>
           <ul class="chips" aria-label="Kategorien">
             <li class="chip">Erneuerbar</li>
@@ -80,20 +82,23 @@
             <li class="chip">Speicher</li>
           </ul>
 
+          <!-- Projekt-Massstab fuer 20 Gemeinden -->
           <div class="stats">
             <div class="stat">
-              <div class="stat__num kpi__num" data-count="320">0</div>
+              <div class="stat__num kpi__num" data-count="5">5</div>
               <div class="stat__label">MW installierte Leistung</div>
             </div>
             <div class="stat">
-              <div class="stat__num kpi__num" data-count="500">0</div>
+              <div class="stat__num kpi__num" data-count="400">400</div>
               <div class="stat__label">intelligente Sensoren</div>
             </div>
             <div class="stat">
-              <div class="stat__num kpi__num" data-count="150">0</div>
+              <div class="stat__num kpi__num" data-count="8">8</div>
               <div class="stat__label">MWh gespeicherte Energie</div>
             </div>
           </div>
+
+          <p class="sr-only">Stand der Projekt-KPIs: Annahmen fuer 20 Gemeinden (realistische Groessenordnungen).</p>
         </div>
 
         <figure class="hero__image skeleton">
@@ -159,11 +164,11 @@
         </li>
         <li class="tile glow">
           <h3>Integration</h3>
-          <p>Lastverschiebung, Wärmepumpe, Ladeinfrastruktur.</p>
+          <p>Lastverschiebung, Waermepumpe, Ladeinfrastruktur.</p>
         </li>
         <li class="tile glow">
-          <h3>Netzstabilität</h3>
-          <p>Frequenzhaltung, Schwarzstart‑Fähigkeit (mit Speicher).</p>
+          <h3>Netzstabilitaet</h3>
+          <p>Frequenzhaltung, Schwarzstart‑Faehigkeit (mit Speicher).</p>
         </li>
       </ul>
     </section>
@@ -172,20 +177,61 @@
     <section id="impact" class="impact section reveal">
       <h2>Unser Impact</h2>
       <div class="impact__grid">
-        <div class="impact__kpi"><div class="kpi__num" data-count="75">0</div><div class="kpi__label">Anteil Erneuerbar (%)</div></div>
-        <div class="impact__kpi"><div class="kpi__num" data-count="40">0</div><div class="kpi__label">Netzausbau (%)</div></div>
-        <div class="impact__kpi"><div class="kpi__num" data-count="29">0</div><div class="kpi__label">Emissionen (Index)</div></div>
-        <div class="impact__kpi"><div class="kpi__num" data-count="68">0</div><div class="kpi__label">Zufriedenheit (%)</div></div>
+
+        <!-- Schweiz-weit belegt: 2024 Anteile Erneuerbar an der inlaendischen Produktion -->
+        <!-- Quelle: VSE Stromproduktion/‑kennzeichnung 2024 -->
+        <div class="impact__kpi">
+          <div class="kpi__num" data-count="76">76</div>
+          <div class="kpi__label">Anteil Erneuerbar CH‑Produktion 2024 (%)</div>
+        </div>
+
+        <!-- Gesetzliches Ziel neue EE ohne Wasserkraft -->
+        <!-- Quelle: ETH/EDGE-Bericht & politischer Kontext Stromgesetz (35 TWh 2035, 45 TWh 2050) -->
+        <div class="impact__kpi">
+          <div class="kpi__num" data-count="35">35</div>
+          <div class="kpi__label">Ziel neue EE bis 2035 (TWh, ohne Wasser)</div>
+        </div>
+
+        <!-- Speicherinhalt Speicherseen (max.) -->
+        <!-- Quelle: Energy‑Charts CH Speicherstände (max. ca. 8.9 TWh) -->
+        <div class="impact__kpi">
+          <div class="kpi__num" data-count="8.9">8.9</div>
+          <div class="kpi__label">Speicherinhalt Speicherseen (max., TWh)</div>
+        </div>
+
+        <!-- VSE Versorgungsindex 2050 -->
+        <!-- Quelle: VSE Stromversorgungs‑Index 2026 (Berichterstattung SRF) -->
+        <div class="impact__kpi">
+          <div class="kpi__num" data-count="69">69</div>
+          <div class="kpi__label">VSE Versorgungsindex 2050 (Punkte)</div>
+        </div>
       </div>
+      <p class="sr-only">Stand: Januar 2026. Siehe Quellen unten.</p>
     </section>
 
     <!-- Politik -->
     <section id="politik" class="section reveal">
       <h2>Politik &amp; Rahmen</h2>
       <div class="impact__grid">
-        <div class="impact__kpi impact__kpi--static"><div class="kpi__title">Planungssicherheit</div><div class="kpi__label">Klare Netzkodizes &amp; Verfahren</div></div>
-        <div class="impact__kpi impact__kpi--static"><div class="kpi__title">Förderung</div><div class="kpi__label">Speicher &amp; Sektorkopplung</div></div>
-        <div class="impact__kpi impact__kpi--static"><div class="kpi__title">Tempo</div><div class="kpi__label">Beschleunigte Genehmigungen</div></div>
+        <div class="impact__kpi impact__kpi--static">
+          <div class="kpi__title">Planungssicherheit</div>
+          <div class="kpi__label">Klare Netzkodizes &amp; Verfahren</div>
+        </div>
+        <div class="impact__kpi impact__kpi--static">
+          <div class="kpi__title">Foerderung</div>
+          <div class="kpi__label">Speicher &amp; Sektorkopplung</div>
+        </div>
+        <div class="impact__kpi impact__kpi--static">
+          <div class="kpi__title">Tempo</div>
+          <div class="kpi__label">Beschleunigte Genehmigungen</div>
+        </div>
+
+        <!-- Ergaenzt: Zielwerte neue EE -->
+        <!-- Quelle: ETH/EDGE & Stromgesetz (35/45 TWh) -->
+        <div class="impact__kpi impact__kpi--static">
+          <div class="kpi__title">Ziele neue EE</div>
+          <div class="kpi__label">35 TWh (2035), 45 TWh (2050), ohne Wasser</div>
+        </div>
       </div>
     </section>
 
@@ -194,7 +240,7 @@
       <h2>Roadmap</h2>
       <ul class="roadmap-list">
         <li><span class="year">2026–2030</span> Ausbau PV/Heimspeicher</li>
-        <li><span class="year">2030–2035</span> Hybridparks &amp; Flex‑Märkte</li>
+        <li><span class="year">2030–2035</span> Hybridparks &amp; Flex‑Maerkte</li>
         <li><span class="year">bis 2035</span> Netzdienliche Speicher in Betrieb</li>
       </ul>
     </section>
@@ -210,17 +256,47 @@
     <section id="daten" class="section reveal">
       <h2>Daten</h2>
       <div class="impact__grid data__grid">
-        <div class="impact__kpi impact__kpi--static"><div class="kpi__num">74%</div><div class="kpi__label">Erneuerbar</div></div>
-        <div class="impact__kpi impact__kpi--static"><div class="kpi__num">38%</div><div class="kpi__label">Netzausbau</div></div>
-        <div class="impact__kpi impact__kpi--static"><div class="kpi__num">62%</div><div class="kpi__label">Speicherabdeckung</div></div>
+        <!-- Inlaendische Produktion 2024 -->
+        <!-- Quelle: VSE Stromproduktion/‑kennzeichnung 2024 -->
+        <div class="impact__kpi impact__kpi--static">
+          <div class="kpi__num">75.7</div>
+          <div class="kpi__label">Inlaendische Stromproduktion 2024 (TWh)</div>
+        </div>
+
+        <!-- Wasserkraft 2024 -->
+        <!-- Quelle: VSE Stromproduktion/‑kennzeichnung 2024 -->
+        <div class="impact__kpi impact__kpi--static">
+          <div class="kpi__num">48.3</div>
+          <div class="kpi__label">Wasserkraft 2024 (TWh)</div>
+        </div>
+
+        <!-- Neue EE 2024 (PV/Wind/erneuerbar) -->
+        <!-- Quelle: VSE Stromproduktion/‑kennzeichnung 2024 -->
+        <div class="impact__kpi impact__kpi--static">
+          <div class="kpi__num">9.2</div>
+          <div class="kpi__label">Neue EE 2024 (TWh)</div>
+        </div>
       </div>
+      <p class="sr-only">Quellen: VSE 2024. Siehe Quellen unten.</p>
     </section>
 
     <!-- FAQ -->
     <section id="faq" class="section reveal">
       <h2>FAQ</h2>
-      <details><summary>Wie funktioniert der Dark‑Mode?</summary><p>Automatisch via „prefers‑color‑scheme“, manuell per Toggle; Einstellung wird gespeichert.</p></details>
-      <details><summary>Wie pflege ich CSV‑Daten?</summary><p>In <code>/daten/energie.csv</code>; Spalten: <code>bfs,name,solar_count,wind_count,water_count,majority</code>.</p></details>
+      <details>
+        <summary>Wie funktioniert der Dark‑Mode?</summary>
+        <p>Automatisch via „prefers‑color‑scheme“, manuell per Toggle; Einstellung wird gespeichert.</p>
+      </details>
+      <details>
+        <summary>Wie pflege ich CSV‑Daten?</summary>
+        <p>In <code>/daten/energie.csv</code>; Spalten: <code>bfs,name,solar_count,wind_count,water_count,majority</code>.</p>
+      </details>
+      <details>
+        <summary>Woher kommen die Zahlen?</summary>
+        <p>Schweiz‑weite Kennzahlen stammen aus VSE (Stromproduktion 2024; Energiezukunft 2050/Resultate),
+           dem BFE‑Monitoring sowie ETH/EDGE zur Zielgroesse neue EE. Den Versorgungsindex 2050 (69 Punkte) berichtet SRF. 
+           Details und Links siehe Abschnitt <a href="#quellen">Quellen</a>.</p>
+      </details>
     </section>
 
     <!-- Team mit Bildern -->
@@ -243,6 +319,38 @@
           <div class="kpi__label">Engineer</div>
         </div>
       </div>
+    </section>
+
+    <!-- Quellen -->
+    <section id="quellen" class="section reveal">
+      <h2>Quellen</h2>
+      <ul>
+        <li>
+          VSE – Stromproduktion &amp; Stromkennzeichnung 2024:
+          <a href="https://www.strom.ch/de/wissen/stromproduktion-stromkennzeichnung" target="_blank" rel="noopener">strom.ch/de/wissen/stromproduktion-stromkennzeichnung</a>
+        </li>
+        <li>
+          VSE – Energiezukunft 2050: Resultate (12 zentrale Ergebnisse):
+          <a href="https://www.strom.ch/de/energiezukunft-2050/resultate" target="_blank" rel="noopener">strom.ch/de/energiezukunft-2050/resultate</a>
+        </li>
+        <li>
+          ETH – „Woher der Strom im Jahr 2050 kommt“ (Ziele 35/45 TWh neue EE):
+          <a href="https://ethz.ch/de/news-und-veranstaltungen/eth-news/news/2025/05/woher-der-strom-im-jahr-2050-kommt.html" target="_blank" rel="noopener">ethz.ch/.../woher-der-strom-im-jahr-2050-kommt.html</a>
+        </li>
+        <li>
+          BFE – Energiestrategie 2050 Monitoring‑Bericht 2024 (Wasserkraftziel 2035):
+          <a href="https://pubdb.bfe.admin.ch/de/publication/download/11973" target="_blank" rel="noopener">pubdb.bfe.admin.ch/.../11973</a>
+        </li>
+        <li>
+          SRF – Bericht zum VSE Stromversorgungs‑Index (69 Punkte 2050):
+          <a href="https://www.srf.ch/news/wirtschaft/geht-uns-der-strom-aus-stromproduzenten-warnen-vor-versorgungsluecke-bis-2050" target="_blank" rel="noopener">srf.ch/.../versorgungsluecke-bis-2050</a>
+        </li>
+        <li>
+          Energy‑Charts – Speicherfuellstaende Schweiz (max. Speicherinhalt Speicherseen ~8.9 TWh):
+          <a href="https://energy-charts.info/charts/filling_level/chart.htm?l=de&c=CH&year=2022&stacking=stacked_absolute_area" target="_blank" rel="noopener">energy-charts.info/...filling_level...</a>
+        </li>
+      </ul>
+      <p class="sr-only">Stand der Quellen: abgerufen Januar 2026.</p>
     </section>
 
     <!-- Kontakt -->
