@@ -1,11 +1,11 @@
 
 <!doctype html>
-<html lang="de" data-theme="dark">
+<html lang="de-CH" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ToLi Power – Natur &amp; Energie</title>
-  <meta name="description" content="Technologien (Solar, Wind, Wasser, Speicher), interaktive Karte mit CSV-Daten, Roadmap und Kontakt.">
+  <meta name="description" content="Technologien (Solar, Wind, Wasser, Speicher), interaktive Karte mit CSV-Daten, Roadmap und Kontakt." />
   <meta name="color-scheme" content="dark light" />
   <link rel="icon" href="/bilder/hero.png" type="image/png" />
   <link rel="preload" href="/style.css" as="style" />
@@ -18,8 +18,8 @@
   <a class="skip" href="#kontakt">Zum Kontakt springen</a>
 
   <!-- Dekorative Blobs -->
-  <div class="blob"></div>
-  <div class="blob blob--2"></div>
+  <div class="blob" aria-hidden="true"></div>
+  <div class="blob blob--2" aria-hidden="true"></div>
 
   <!-- Header / Navigation -->
   <header class="nav" role="banner">
@@ -82,7 +82,7 @@
             <li class="chip">Speicher</li>
           </ul>
 
-          <!-- Projekt-Massstab für 20 Gemeinden -->
+          <!-- Projekt-Massstab für 20 Gemeinden (ohne ß, mit ä/ö/ü) -->
           <div class="stats">
             <div class="stat">
               <div class="stat__num kpi__num" data-count="5">5</div>
@@ -98,7 +98,7 @@
             </div>
           </div>
 
-          <p class="sr-only">Stand der Projekt-KPIs: Annahmen für 20 Gemeinden (realistische Groessenordnungen).</p>
+          <p class="sr-only">Projekt-Kennzahlen für 20 Gemeinden – realistische Grössenordnungen, ohne scharfes s.</p>
         </div>
 
         <figure class="hero__image skeleton">
@@ -144,7 +144,7 @@
 
         <article class="card tilt">
           <a class="card__link" href="/speicher.html">
-            <img class="card__img" src="/bilder/speicher.png" alt="Speicher" />
+            <img class="card__img" src="/bilder/speicher.png" alt="Speicherlösungen" />
             <div class="card__body">
               <h3>Speicher</h3>
               <p>Heimspeicher, BESS‑Container, Pumpspeicher.</p>
@@ -164,11 +164,11 @@
         </li>
         <li class="tile glow">
           <h3>Integration</h3>
-          <p>Lastverschiebung, Waermepumpe, Ladeinfrastruktur.</p>
+          <p>Lastverschiebung, Wärmepumpe, Ladeinfrastruktur.</p>
         </li>
         <li class="tile glow">
-          <h3>Netzstabilitaet</h3>
-          <p>Frequenzhaltung, Schwarzstart‑Faehigkeit (mit Speicher).</p>
+          <h3>Netzstabilität</h3>
+          <p>Frequenzhaltung, Schwarzstart‑Fähigkeit (mit Speicher).</p>
         </li>
       </ul>
     </section>
@@ -177,36 +177,25 @@
     <section id="impact" class="impact section reveal">
       <h2>Unser Impact</h2>
       <div class="impact__grid">
-
-        <!-- Schweiz-weit belegt: 2024 Anteile Erneuerbar an der inlaendischen Produktion -->
-        <!-- Quelle: VSE Stromproduktion/‑kennzeichnung 2024 -->
+        <!-- Schweiz-weit (belegt), ohne ß, mit ä/ö/ü -->
         <div class="impact__kpi">
           <div class="kpi__num" data-count="76">76</div>
           <div class="kpi__label">Anteil Erneuerbar CH‑Produktion 2024 (%)</div>
         </div>
-
-        <!-- Gesetzliches Ziel neue EE ohne Wasserkraft -->
-        <!-- Quelle: ETH/EDGE-Bericht & politischer Kontext Stromgesetz (35 TWh 2035, 45 TWh 2050) -->
         <div class="impact__kpi">
           <div class="kpi__num" data-count="35">35</div>
           <div class="kpi__label">Ziel neue EE bis 2035 (TWh, ohne Wasser)</div>
         </div>
-
-        <!-- Speicherinhalt Speicherseen (max.) -->
-        <!-- Quelle: Energy‑Charts CH Speicherstände (max. ca. 8.9 TWh) -->
         <div class="impact__kpi">
           <div class="kpi__num" data-count="8.9">8.9</div>
           <div class="kpi__label">Speicherinhalt Speicherseen (max., TWh)</div>
         </div>
-
-        <!-- VSE Versorgungsindex 2050 -->
-        <!-- Quelle: VSE Stromversorgungs‑Index 2026 (Berichterstattung SRF) -->
         <div class="impact__kpi">
           <div class="kpi__num" data-count="69">69</div>
           <div class="kpi__label">VSE Versorgungsindex 2050 (Punkte)</div>
         </div>
       </div>
-      <p class="sr-only">Stand: Januar 2026. Siehe Quellen unten.</p>
+      <p class="sr-only">Stand: 2024/2026 je nach Kennzahl. Quellen siehe unten.</p>
     </section>
 
     <!-- Politik -->
@@ -218,16 +207,13 @@
           <div class="kpi__label">Klare Netzkodizes &amp; Verfahren</div>
         </div>
         <div class="impact__kpi impact__kpi--static">
-          <div class="kpi__title">Foerderung</div>
+          <div class="kpi__title">Förderung</div>
           <div class="kpi__label">Speicher &amp; Sektorkopplung</div>
         </div>
         <div class="impact__kpi impact__kpi--static">
           <div class="kpi__title">Tempo</div>
           <div class="kpi__label">Beschleunigte Genehmigungen</div>
         </div>
-
-        <!-- Ergaenzt: Zielwerte neue EE -->
-        <!-- Quelle: ETH/EDGE & Stromgesetz (35/45 TWh) -->
         <div class="impact__kpi impact__kpi--static">
           <div class="kpi__title">Ziele neue EE</div>
           <div class="kpi__label">35 TWh (2035), 45 TWh (2050), ohne Wasser</div>
@@ -240,7 +226,7 @@
       <h2>Roadmap</h2>
       <ul class="roadmap-list">
         <li><span class="year">2026–2030</span> Ausbau PV/Heimspeicher</li>
-        <li><span class="year">2030–2035</span> Hybridparks &amp; Flex‑Maerkte</li>
+        <li><span class="year">2030–2035</span> Hybridparks &amp; Flex‑Märkte</li>
         <li><span class="year">bis 2035</span> Netzdienliche Speicher in Betrieb</li>
       </ul>
     </section>
@@ -256,125 +242,114 @@
     <section id="daten" class="section reveal">
       <h2>Daten</h2>
       <div class="impact__grid data__grid">
-        <!-- Inlaendische Produktion 2024 -->
-        <!-- Quelle: VSE Stromproduktion/‑kennzeichnung 2024 -->
         <div class="impact__kpi impact__kpi--static">
           <div class="kpi__num">75.7</div>
-          <div class="kpi__label">Inlaendische Stromproduktion 2024 (TWh)</div>
+          <div class="kpi__label">Inländische Stromproduktion 2024 (TWh)</div>
         </div>
-
-        <!-- Wasserkraft 2024 -->
-        <!-- Quelle: VSE Stromproduktion/‑kennzeichnung 2024 -->
         <div class="impact__kpi impact__kpi--static">
           <div class="kpi__num">48.3</div>
           <div class="kpi__label">Wasserkraft 2024 (TWh)</div>
         </div>
-
-        <!-- Neue EE 2024 (PV/Wind/erneuerbar) -->
-        <!-- Quelle: VSE Stromproduktion/‑kennzeichnung 2024 -->
         <div class="impact__kpi impact__kpi--static">
           <div class="kpi__num">9.2</div>
           <div class="kpi__label">Neue EE 2024 (TWh)</div>
         </div>
       </div>
-      <p class="sr-only">Quellen: VSE 2024. Siehe Quellen unten.</p>
+      <p class="sr-only">Datenquellen: VSE Stromproduktion/‑kennzeichnung 2024.</p>
     </section>
 
+    <!-- FAQ (überarbeitet mit ä/ö/ü, ohne ß) -->
+    <section id="faq" class="section reveal">
+      <h2>FAQ</h2>
 
-<!-- FAQ -->
-<section id="faq" class="section reveal">
-  <h2>FAQ</h2>
+      <details>
+        <summary>Welche Ziele gelten in der Schweiz bis 2035 und 2050?</summary>
+        <p>
+          Gemäss Stromgesetz sollen die <strong>neuen erneuerbaren Energien (ohne Wasser)</strong> bis
+          <strong>2035 rund 35 TWh</strong> und bis <strong>2050 rund 45 TWh</strong> liefern. Die
+          <strong>Wasserkraft</strong> soll bis 2035 eine mittlere Jahresproduktion von
+          <strong>37.9 TWh</strong> erreichen. Mehr dazu in den <a href="#quellen">Quellen</a>.
+        </p>
+      </details>
 
-  <details>
-    <summary>Welche Ziele gelten in der Schweiz bis 2035 und 2050?</summary>
-    <p>
-      Gemäss Stromgesetz sollen die <strong>neuen erneuerbaren Energien (ohne Wasser)</strong> bis
-      <strong>2035 rund 35 TWh</strong> und bis <strong>2050 rund 45 TWh</strong> liefern. Die
-      <strong>Wasserkraft</strong> soll bis 2035 eine mittlere Jahresproduktion von
-      <strong>37.9 TWh</strong> erreichen. Mehr dazu in den <a href="#quellen">Quellen</a>.
-    </p>
-  </details>
+      <details>
+        <summary>Warum ist der Winter für die Versorgung kritischer als der Sommer?</summary>
+        <p>
+          Im Winter ist der Verbrauch höher und die PV‑Erzeugung tiefer. Die Schweiz importiert deshalb
+          traditionell Winterstrom und stützt sich auf <strong>Speicherseen</strong>, <strong>Importe</strong>
+          und zunehmend <strong>Wind</strong>/alpine <strong>PV</strong>. Unsere Impact‑Kacheln zeigen
+          u. a. den maximalen Speicherinhalt der Speicherseen.
+        </p>
+      </details>
 
-  <details>
-    <summary>Warum ist der Winter für die Versorgung kritischer als der Sommer?</summary>
-    <p>
-      Im Winter ist der Verbrauch hoeher und die PV‑Erzeugung tiefer. Die Schweiz importiert deshalb
-      traditionell Winterstrom und stützt sich auf <strong>Speicherseen</strong>, <strong>Importe</strong>
-      und zunehmend <strong>Wind</strong>/alpine <strong>PV</strong>. Unsere Impact‑Kacheln zeigen
-      u. a. den maximalen Speicherinhalt der Speicherseen.
-    </p>
-  </details>
+      <details>
+        <summary>Wieso zeigen wir teils Prozentwerte und teils TWh?</summary>
+        <p>
+          Prozentwerte (z. B. Anteil Erneuerbar) sind gut für den schnellen Überblick. <strong>TWh</strong>
+          machen <em>Mengen</em> vergleichbar und zeigen, wie viel Energie tatsächlich erzeugt oder benötigt wird.
+          In <em>Daten</em> nutzen wir bewusst TWh, damit Entwicklungen nachvollziehbar bleiben.
+        </p>
+      </details>
 
-  <details>
-    <summary>Wieso zeigen wir teils Prozentwerte und teils TWh?</summary>
-    <p>
-      Prozentwerte (z. B. Anteil Erneuerbar) sind gut für den schnellen Ueberblick. <strong>TWh</strong>
-      machen <em>Mengen</em> vergleichbar und zeigen, wie viel Energie tatsaechlich erzeugt oder benoetigt wird.
-      In <em>Daten</em> nutzen wir bewusst TWh, damit Entwicklungen nachvollziehbar bleiben.
-    </p>
-  </details>
+      <details>
+        <summary>Wie realistisch sind die KPIs auf dieser Seite?</summary>
+        <p>
+          Die KPIs im <em>Hero</em> (z. B. 5 MW, 400 Sensoren, 8 MWh) sind <strong>Projekt‑Massstab</strong>
+          für 20 Gemeinden – als realistische Grössenordnung. Die Kennzahlen in <em>Impact</em> und
+          <em>Daten</em> sind <strong>Schweiz‑weit</strong> und beziehen sich auf öffentliche Quellen
+          (VSE/BFE/ETH). Siehe <a href="#quellen">Quellen</a>.
+        </p>
+      </details>
 
-  <details>
-    <summary>Wie realistisch sind die KPIs auf dieser Seite?</summary>
-    <p>
-      Die KPIs im <em>Hero</em> (z. B. 5 MW, 400 Sensoren, 8 MWh) sind <strong>Projekt‑Massstab</strong>
-      für 20 Gemeinden – als realistische Groessenordnung. Die Kennzahlen in <em>Impact</em> und
-      <em>Daten</em> sind <strong>Schweiz‑weit</strong> und beziehen sich auf oeffentliche Quellen
-      (VSE/BFE/ETH). Siehe <a href="#quellen">Quellen</a>.
-    </p>
-  </details>
+      <details>
+        <summary>Wie pflege ich die Kartendaten?</summary>
+        <p>
+          Bearbeite <code>/daten/energie.csv</code> mit den Spalten:
+          <code>bfs,name,solar_count,wind_count,water_count,majority</code>.
+        </p>
+        <ul>
+          <li><code>solar_count</code>: PV‑Standorte je Gemeinde (Dächer, Hallen, Gewerbe).</li>
+          <li><code>wind_count</code>: 0–2 ist aktuell realistisch.</li>
+          <li><code>water_count</code>: nur setzen, wenn Kleinwasser/Laufwasser vorhanden ist.</li>
+          <li><code>majority</code>: <code>solar</code> | <code>wind</code> | <code>water</code> für die Kartenfarbgebung.</li>
+        </ul>
+      </details>
 
-  <details>
-    <summary>Wie pflege ich die Kartendaten?</summary>
-    <p>
-      Bearbeite <code>/daten/energie.csv</code> mit den Spalten:
-      <code>bfs,name,solar_count,wind_count,water_count,majority</code>.
-      <br>Tipps:
-    </p>
-    <ul>
-      <li><code>solar_count</code>: PV‑Standorte je Gemeinde (Daecher, Hallen, Gewerbe).</li>
-      <li><code>wind_count</code>: 0–2 ist aktuell realistisch.</li>
-      <li><code>water_count</code>: nur setzen, wenn Kleinwasser/Laufwasser vorhanden ist.</li>
-      <li><code>majority</code>: <code>solar</code> | <code>wind</code> | <code>water</code> für die Kartenfarbgebung.</li>
-    </ul>
-  </details>
+      
 
+      <details>
+        <summary>Wie gehe ich mit „Netzausbau“ und „Flexibilität“ um?</summary>
+        <p>
+          Netzausbau betrifft vor allem die <strong>Verteilnetze</strong>. Flexibilität entsteht durch
+          <strong>Speicher</strong>, <strong>Lastverschiebung</strong> (z. B. Laden von E‑Autos) und
+          <strong>Steuerung</strong> (z. B. Wärmepumpen). Beides sind Voraussetzungen, damit mehr
+          Erneuerbare sicher integriert werden.
+        </p>
+      </details>
 
+      <details>
+        <summary>Was kann ich als Haushalt oder Betrieb konkret beitragen?</summary>
+        <ul>
+          <li><strong>Effizienz</strong>: Dämmung, effiziente Geräte, LED, Monitoring.</li>
+          <li><strong>PV</strong> und <strong>Eigenverbrauch</strong> erhöhen (z. B. mit Heimspeicher).</li>
+          <li><strong>Lastverschieben</strong>: E‑Auto und Warmwasser dann laden/erzeugen, wenn viel PV anliegt.</li>
+          <li><strong>Wahl Stromprodukt</strong> mit hohem Erneuerbar‑Anteil beim lokalen EVU.</li>
+        </ul>
+      </details>
 
-  <details>
-    <summary>Wie gehe ich mit „Netzausbau“ und „Flexibilitaet“ um?</summary>
-    <p>
-      Netzausbau betrifft vor allem die <strong>Verteilnetze</strong>. Flexibilitaet entsteht durch
-      <strong>Speicher</strong>, <strong>Lastverschiebung</strong> (z. B. Laden von E‑Autos) und
-      <strong>Steuerung</strong> (z. B. Waermepumpen). Beides sind Voraussetzungen, damit mehr
-      Erneuerbare sicher integriert werden.
-    </p>
-  </details>
+      <details>
+        <summary>Wie werden Kontakt‑Daten verarbeitet?</summary>
+        <p>
+          Das Formular sendet an <strong>Formspree</strong>. Bitte keine sensiblen Daten eintragen.
+          Hinweise zum Datenschutz findest du beim Form‑Anbieter. Wir speichern lokal keine Inhalte ausser
+          der optionalen Theme‑Einstellung (Dark/Light).
+        </p>
+      </details>
 
-  <details>
-    <summary>Was kann ich als Haushalt oder Betrieb konkret beitragen?</summary>
-    <ul>
-      <li><strong>Effizienz</strong>: Daemmung, effiziente Geraete, LED, Monitoring.</li>
-      <li><strong>PV</strong> und <strong>Eigenverbrauch</strong> erhoehen (z. B. mit Heimspeicher).</li>
-      <li><strong>Lastverschieben</strong>: E‑Auto und Warmwasser dann laden/erzeugen, wenn viel PV anliegt.</li>
-      <li><strong>Wahl Stromprodukt</strong> mit hohem Erneuerbar‑Anteil beim lokalen EVU.</li>
-    </ul>
-  </details>
+      <p class="sr-only">Letzte Aktualisierung der FAQ: Januar 2026</p>
+    </section>
 
-  <details>
-    <summary>Wie werden Kontakt‑Daten verarbeitet?</summary>
-    <p>
-      Das Formular sendet an <strong>Formspree</strong>. Bitte keine sensiblen Daten eintragen.
-      Hinweise zum Datenschutz findest du bei deinem Formanbieter. Wir speichern lokal keine Inhalte ausser
-      der optionalen Theme‑Einstellung (Dark/Light).
-    </p>
-  </details>
-
-  <p class="sr-only">Letzte Aktualisierung der FAQ: Januar 2026</p>
-</section>
-
-
-    <!-- Team mit Bildern -->
+    <!-- Team -->
     <section id="team" class="section reveal">
       <h2>Team</h2>
       <div class="impact__grid">
@@ -413,7 +388,7 @@
           <a href="https://ethz.ch/de/news-und-veranstaltungen/eth-news/news/2025/05/woher-der-strom-im-jahr-2050-kommt.html" target="_blank" rel="noopener">ethz.ch/.../woher-der-strom-im-jahr-2050-kommt.html</a>
         </li>
         <li>
-          BFE – Energiestrategie 2050 Monitoring‑Bericht 2024 (Wasserkraftziel 2035):
+          BFE – Energiestrategie 2050 Monitoring‑Bericht 2024 (Wasserkraft‑Ziel 2035):
           <a href="https://pubdb.bfe.admin.ch/de/publication/download/11973" target="_blank" rel="noopener">pubdb.bfe.admin.ch/.../11973</a>
         </li>
         <li>
@@ -421,8 +396,8 @@
           <a href="https://www.srf.ch/news/wirtschaft/geht-uns-der-strom-aus-stromproduzenten-warnen-vor-versorgungsluecke-bis-2050" target="_blank" rel="noopener">srf.ch/.../versorgungsluecke-bis-2050</a>
         </li>
         <li>
-          Energy‑Charts – Speicherfuellstaende Schweiz (max. Speicherinhalt Speicherseen ~8.9 TWh):
-          <a href="https://energy-charts.info/charts/filling_level/chart.htm?l=de&c=CH&year=2022&stacking=stacked_absolute_area" target="_blank" rel="noopener">energy-charts.info/...filling_level...</a>
+          Energy‑Charts – Speicherfüllstände Schweiz (max. Speicherinhalt ~8.9 TWh):
+          <a href="https://energy-charts.info/charts/filling_level/chart.htm?l=de&c=CH&year=2022&stacking=stacked_absolute_area" target="_blank" rel="noopener">energy-charts.info/.../filling_level</a>
         </li>
       </ul>
       <p class="sr-only">Stand der Quellen: abgerufen Januar 2026.</p>
@@ -452,6 +427,3 @@
   <script src="/script.js" defer></script>
 </body>
 </html>
-
-
-
