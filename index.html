@@ -280,24 +280,104 @@
       <p class="sr-only">Quellen: VSE 2024. Siehe Quellen unten.</p>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="section reveal">
-      <h2>FAQ</h2>
-      <details>
-        <summary>Wie funktioniert der Dark‑Mode?</summary>
-        <p>Automatisch via „prefers‑color‑scheme“, manuell per Toggle; Einstellung wird gespeichert.</p>
-      </details>
-      <details>
-        <summary>Wie pflege ich CSV‑Daten?</summary>
-        <p>In <code>/daten/energie.csv</code>; Spalten: <code>bfs,name,solar_count,wind_count,water_count,majority</code>.</p>
-      </details>
-      <details>
-        <summary>Woher kommen die Zahlen?</summary>
-        <p>Schweiz‑weite Kennzahlen stammen aus VSE (Stromproduktion 2024; Energiezukunft 2050/Resultate),
-           dem BFE‑Monitoring sowie ETH/EDGE zur Zielgroesse neue EE. Den Versorgungsindex 2050 (69 Punkte) berichtet SRF. 
-           Details und Links siehe Abschnitt <a href="#quellen">Quellen</a>.</p>
-      </details>
-    </section>
+
+<!-- FAQ -->
+<section id="faq" class="section reveal">
+  <h2>FAQ</h2>
+
+  <details>
+    <summary>Welche Ziele gelten in der Schweiz bis 2035 und 2050?</summary>
+    <p>
+      Gemäss Stromgesetz sollen die <strong>neuen erneuerbaren Energien (ohne Wasser)</strong> bis
+      <strong>2035 rund 35 TWh</strong> und bis <strong>2050 rund 45 TWh</strong> liefern. Die
+      <strong>Wasserkraft</strong> soll bis 2035 eine mittlere Jahresproduktion von
+      <strong>37.9 TWh</strong> erreichen. Mehr dazu in den <a href="#quellen">Quellen</a>.
+    </p>
+  </details>
+
+  <details>
+    <summary>Warum ist der Winter fuer die Versorgung kritischer als der Sommer?</summary>
+    <p>
+      Im Winter ist der Verbrauch hoeher und die PV‑Erzeugung tiefer. Die Schweiz importiert deshalb
+      traditionell Winterstrom und stützt sich auf <strong>Speicherseen</strong>, <strong>Importe</strong>
+      und zunehmend <strong>Wind</strong>/alpine <strong>PV</strong>. Unsere Impact‑Kacheln zeigen
+      u. a. den maximalen Speicherinhalt der Speicherseen.
+    </p>
+  </details>
+
+  <details>
+    <summary>Wieso zeigen wir teils Prozentwerte und teils TWh?</summary>
+    <p>
+      Prozentwerte (z. B. Anteil Erneuerbar) sind gut fuer den schnellen Ueberblick. <strong>TWh</strong>
+      machen <em>Mengen</em> vergleichbar und zeigen, wie viel Energie tatsaechlich erzeugt oder benoetigt wird.
+      In <em>Daten</em> nutzen wir bewusst TWh, damit Entwicklungen nachvollziehbar bleiben.
+    </p>
+  </details>
+
+  <details>
+    <summary>Wie realistisch sind die KPIs auf dieser Seite?</summary>
+    <p>
+      Die KPIs im <em>Hero</em> (z. B. 5 MW, 400 Sensoren, 8 MWh) sind <strong>Projekt‑Massstab</strong>
+      fuer 20 Gemeinden – als realistische Groessenordnung. Die Kennzahlen in <em>Impact</em> und
+      <em>Daten</em> sind <strong>Schweiz‑weit</strong> und beziehen sich auf oeffentliche Quellen
+      (VSE/BFE/ETH). Siehe <a href="#quellen">Quellen</a>.
+    </p>
+  </details>
+
+  <details>
+    <summary>Wie pflege ich die Kartendaten?</summary>
+    <p>
+      Bearbeite <code>/daten/energie.csv</code> mit den Spalten:
+      <code>bfs,name,solar_count,wind_count,water_count,majority</code>.
+      <br>Tipps:
+    </p>
+    <ul>
+      <li><code>solar_count</code>: PV‑Standorte je Gemeinde (Daecher, Hallen, Gewerbe).</li>
+      <li><code>wind_count</code>: 0–2 ist aktuell realistisch.</li>
+      <li><code>water_count</code>: nur setzen, wenn Kleinwasser/Laufwasser vorhanden ist.</li>
+      <li><code>majority</code>: <code>solar</code> | <code>wind</code> | <code>water</code> fuer die Kartenfarbgebung.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Wie funktioniert der Dark‑Mode auf der Seite?</summary>
+    <p>
+      Automatisch via <code>prefers-color-scheme</code> und manuell per Toggle; die Einstellung wird lokal gespeichert.
+    </p>
+  </details>
+
+  <details>
+    <summary>Wie gehe ich mit „Netzausbau“ und „Flexibilitaet“ um?</summary>
+    <p>
+      Netzausbau betrifft vor allem die <strong>Verteilnetze</strong>. Flexibilitaet entsteht durch
+      <strong>Speicher</strong>, <strong>Lastverschiebung</strong> (z. B. Laden von E‑Autos) und
+      <strong>Steuerung</strong> (z. B. Waermepumpen). Beides sind Voraussetzungen, damit mehr
+      Erneuerbare sicher integriert werden.
+    </p>
+  </details>
+
+  <details>
+    <summary>Was kann ich als Haushalt oder Betrieb konkret beitragen?</summary>
+    <ul>
+      <li><strong>Effizienz</strong>: Daemmung, effiziente Geraete, LED, Monitoring.</li>
+      <li><strong>PV</strong> und <strong>Eigenverbrauch</strong> erhoehen (z. B. mit Heimspeicher).</li>
+      <li><strong>Lastverschieben</strong>: E‑Auto und Warmwasser dann laden/erzeugen, wenn viel PV anliegt.</li>
+      <li><strong>Wahl Stromprodukt</strong> mit hohem Erneuerbar‑Anteil beim lokalen EVU.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Wie werden Kontakt‑Daten verarbeitet?</summary>
+    <p>
+      Das Formular sendet an <strong>Formspree</strong>. Bitte keine sensiblen Daten eintragen.
+      Hinweise zum Datenschutz findest du bei deinem Formanbieter. Wir speichern lokal keine Inhalte ausser
+      der optionalen Theme‑Einstellung (Dark/Light).
+    </p>
+  </details>
+
+  <p class="sr-only">Letzte Aktualisierung der FAQ: Januar 2026</p>
+</section>
+
 
     <!-- Team mit Bildern -->
     <section id="team" class="section reveal">
@@ -377,3 +457,4 @@
   <script src="/script.js" defer></script>
 </body>
 </html>
+
